@@ -7,19 +7,19 @@ const experience = [
 ];
 
 const generatePhotos = [
-  { src: "/images/about/generate-1.jpg", ratio: 278.92 / 179.36 },
-  { src: "/images/about/generate-2.jpg", ratio: 281.92 / 182.04 },
-  { src: "/images/about/generate-3.jpg", ratio: 270.11 / 175.03 },
-  { src: "/images/about/generate-4.jpg", ratio: 197.91 / 198.84 },
-  { src: "/images/about/generate-5.jpg", ratio: 173.44 / 223.34 },
+  { src: "/images/about/generate-1.jpg", ratio: 278.92 / 179.36, caption: "Caption" },
+  { src: "/images/about/generate-2.jpg", ratio: 281.92 / 182.04, caption: "Caption" },
+  { src: "/images/about/generate-3.jpg", ratio: 270.11 / 175.03, caption: "Caption" },
+  { src: "/images/about/generate-4.jpg", ratio: 197.91 / 198.84, caption: "Caption" },
+  { src: "/images/about/generate-5.jpg", ratio: 173.44 / 223.34, caption: "Caption" },
 ];
 
 const ktpPhotos = [
-  { src: "/images/about/ktp-1.jpg", ratio: 198 / 243 },
-  { src: "/images/about/ktp-2.jpg", ratio: 270 / 175 },
-  { src: "/images/about/ktp-3.jpg", ratio: 214.92 / 216.12 },
-  { src: "/images/about/ktp-4.jpg", ratio: 281.92 / 182.04 },
-  { src: "/images/about/ktp-5.jpg", ratio: 198 / 243 },
+  { src: "/images/about/ktp-1.jpg", ratio: 198 / 243, caption: "Caption" },
+  { src: "/images/about/ktp-2.jpg", ratio: 270 / 175, caption: "Caption" },
+  { src: "/images/about/ktp-3.jpg", ratio: 214.92 / 216.12, caption: "Caption" },
+  { src: "/images/about/ktp-4.jpg", ratio: 281.92 / 182.04, caption: "Caption" },
+  { src: "/images/about/ktp-5.jpg", ratio: 198 / 243, caption: "Caption" },
 ];
 
 const rotations = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "-rotate-2"];
@@ -102,12 +102,15 @@ export default function AboutPage() {
               {generatePhotos.map((photo, i) => (
                 <div
                   key={photo.src}
-                  className={`relative shrink-0 h-48 sm:h-56 bg-white p-2 pb-6 rounded-2xl shadow-md ${rotations[i % rotations.length]}`}
+                  className={`group relative shrink-0 h-48 sm:h-56 bg-white p-2 pb-6 rounded-2xl shadow-md ${rotations[i % rotations.length]}`}
                   style={{ aspectRatio: photo.ratio }}
                 >
                   <div className="relative w-full h-full rounded-lg overflow-hidden">
                     <Image src={photo.src} alt="Generate memory" fill className="object-cover" />
                   </div>
+                  <p className="absolute bottom-0.5 inset-x-0 h-5 flex items-center justify-center px-2 text-[10px] text-neutral-500 text-center truncate opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    {photo.caption}
+                  </p>
                 </div>
               ))}
             </div>
@@ -131,12 +134,15 @@ export default function AboutPage() {
               {ktpPhotos.map((photo, i) => (
                 <div
                   key={photo.src}
-                  className={`relative shrink-0 h-48 sm:h-56 bg-white p-2 pb-6 rounded-2xl shadow-md ${rotations[i % rotations.length]}`}
+                  className={`group relative shrink-0 h-48 sm:h-56 bg-white p-2 pb-6 rounded-2xl shadow-md ${rotations[i % rotations.length]}`}
                   style={{ aspectRatio: photo.ratio }}
                 >
                   <div className="relative w-full h-full rounded-lg overflow-hidden">
                     <Image src={photo.src} alt="Kappa Theta Pi memory" fill className="object-cover" />
                   </div>
+                  <p className="absolute bottom-0.5 inset-x-0 h-5 flex items-center justify-center px-2 text-[10px] text-neutral-500 text-center truncate opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    {photo.caption}
+                  </p>
                 </div>
               ))}
             </div>

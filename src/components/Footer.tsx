@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="w-full bg-olive text-white px-10 py-12 mt-auto">
-      <p className="font-sans not-italic font-normal text-white text-lg tracking-wide mb-3">
+      <p className="font-sans not-italic font-normal text-white text-2xl sm:text-3xl tracking-wide mb-3">
         ─────── *ੈ✩‧₊˚✧˖*°࿐
       </p>
       <p className="font-serif text-3xl sm:text-4xl mb-2">

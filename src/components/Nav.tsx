@@ -11,6 +11,10 @@ const links = [
   { href: "/creative", label: "creative" },
 ];
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+}
+
 export default function Nav() {
   const [hidden, setHidden] = useState(false);
   const lastY = useRef(0);
@@ -38,7 +42,7 @@ export default function Nav() {
         hidden ? "-translate-y-full" : "translate-y-0",
       ].join(" ")}
     >
-      <Link href="/" className="shrink-0">
+      <Link href="/" onClick={scrollToTop} className="shrink-0">
         <Image src="/nav-mark.png" alt="Rowen Latif" width={56} height={45} className="opacity-80" />
       </Link>
       <nav className="flex items-center gap-6 sm:gap-10 text-base text-neutral-500">
@@ -46,6 +50,7 @@ export default function Nav() {
           <Link
             key={link.href}
             href={link.href}
+            onClick={link.label === "projects" ? undefined : scrollToTop}
             className="transition-all hover:font-script hover:font-normal hover:text-olive hover:text-xl"
           >
             {link.label}

@@ -23,12 +23,15 @@ export default function Footer() {
       >
         ─────── *ੈ✩‧₊˚✧˖*°࿐
       </p>
-      <p className="font-serif text-3xl sm:text-4xl mb-2">
+      <p className="font-serif text-2xl sm:text-3xl mb-2">
         Let&apos;s keep in
-        <span className="font-script font-normal text-4xl sm:text-5xl ml-6">touch</span>!
+        <span className="font-script font-normal text-[32px] sm:text-[40px] ml-6">touch</span>!
       </p>
       <div className="flex items-center gap-2.5 text-lg mb-10">
-        <a href="mailto:latif.f@northeastern.edu" className="group inline-flex items-center">
+        <a
+          href="mailto:latif.f@northeastern.edu"
+          className={`group inline-flex items-center transition-colors ${isLight ? "hover:text-olive" : ""}`}
+        >
           <span>Email</span>
           <span className="inline-block overflow-hidden w-0 opacity-0 ml-0 group-hover:w-5 group-hover:opacity-100 group-hover:ml-1 transition-all duration-200">
             ↗
@@ -38,7 +41,7 @@ export default function Footer() {
           href="https://www.linkedin.com/in/rowen-latif/"
           target="_blank"
           rel="noopener noreferrer"
-          className="group inline-flex items-center"
+          className={`group inline-flex items-center transition-colors ${isLight ? "hover:text-olive" : ""}`}
         >
           <span>LinkedIn</span>
           <span className="inline-block w-5 ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">

@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import ProjectTransitionOverlay from "@/components/ProjectTransitionOverlay";
 
 const satoshi = localFont({
   variable: "--font-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-white text-neutral-900 font-sans">
         <CustomCursor />
+        <ProjectTransitionOverlay />
         <Nav />
         <div className="pt-20 flex flex-col flex-1">{children}</div>
         <Footer />

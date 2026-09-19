@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { setCursorLabel } from "@/components/CustomCursor";
+import { triggerProjectTransition } from "@/components/ProjectTransitionOverlay";
 
 const projects = [
   {
@@ -19,6 +20,7 @@ const projects = [
     tags: ["Dashboards", "Desktop"],
     image: "/images/card-ibm.png",
     imageBg: "bg-gradient-to-b from-sky-100 to-sky-50",
+    color: "#e0f2fe",
     cursor: "Coming soon!",
     isLogo: false,
   },
@@ -37,6 +39,7 @@ const projects = [
     tags: ["Desktop", "Shipped"],
     image: "/images/card-selfserve.png",
     imageBg: "bg-gradient-to-b from-lime-100 to-olive/20",
+    color: "#dfe8c4",
     cursor: "View now",
     isLogo: false,
   },
@@ -54,6 +57,7 @@ const projects = [
     tags: ["Mobile", "Shipped"],
     image: "/images/card-cinecircle.png",
     imageBg: "bg-gradient-to-b from-rose-100 to-rose-50",
+    color: "#ffe4e6",
     cursor: "View now",
     isLogo: false,
   },
@@ -65,6 +69,7 @@ const projects = [
     tags: ["UX Research"],
     image: "/images/perplexity-logo.png",
     imageBg: "",
+    color: "#f4f4f5",
     cursor: "Coming soon!",
     isLogo: true,
   },
@@ -79,7 +84,7 @@ export default function Home() {
             Hello, I&apos;m <span className="text-neutral-900 text-xl sm:text-2xl align-middle">. ݁₊ ୨୧˚.</span>{" "}
             <span className="font-script font-normal text-4xl sm:text-5xl align-middle">Rowen</span>
           </h1>
-          <p className="font-serif text-3xl sm:text-4xl leading-[1.15] text-neutral-800 mb-6 max-w-md">
+          <p className="font-serif text-3xl sm:text-4xl leading-[1.3] text-neutral-800 mb-6 max-w-md">
             I design products from concept to code{" "}
             <span className="text-neutral-900 text-xl sm:text-2xl">₊.</span>
           </p>
@@ -120,6 +125,12 @@ export default function Home() {
                 href={project.href}
                 onMouseEnter={() => setCursorLabel(project.cursor)}
                 onMouseLeave={() => setCursorLabel(null)}
+                onClick={(e) => {
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                  e.preventDefault();
+                  setCursorLabel(null);
+                  triggerProjectTransition(e.currentTarget, project.color, project.href);
+                }}
                 className={`group/img relative overflow-hidden rounded-xl aspect-[16/10] flex items-center justify-center ${project.imageBg}`}
               >
                 <Image

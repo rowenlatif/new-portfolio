@@ -39,12 +39,12 @@ export default function Nav() {
       <Link href="/" className="shrink-0">
         <Image src="/nav-mark.png" alt="Rowen Latif" width={56} height={45} className="opacity-80" />
       </Link>
-      <nav className="flex items-center gap-6 sm:gap-10 text-sm text-neutral-500">
+      <nav className="flex items-center gap-6 sm:gap-10 text-base text-neutral-500">
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className="transition-colors hover:font-script hover:font-normal hover:text-olive"
+            className="transition-all hover:font-script hover:font-normal hover:text-olive hover:text-xl"
           >
             {link.label}
           </Link>

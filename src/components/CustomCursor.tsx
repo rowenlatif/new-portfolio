@@ -47,7 +47,7 @@ export default function CustomCursor() {
         "bg-black text-white whitespace-nowrap",
         "transition-[width,height,border-radius,padding] duration-200 ease-out",
         label
-          ? "h-8 rounded-lg px-3.5 text-xs font-serif"
+          ? "h-10 rounded-lg px-4 text-base font-sans"
           : "h-2.5 w-2.5 rounded-full",
       ].join(" ")}
     >

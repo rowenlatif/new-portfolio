@@ -6,7 +6,7 @@ import { setCursorLabel } from "@/components/CustomCursor";
 
 const projects = [
   {
-    label: "IBM MAXIMO",
+    label: "IBM Maximo",
     href: "/ibm",
     title: (
       <>
@@ -23,7 +23,7 @@ const projects = [
     isLogo: false,
   },
   {
-    label: "SELFSERVE",
+    label: "SelfServe",
     href: "/selfserve",
     title: (
       <>
@@ -41,7 +41,7 @@ const projects = [
     isLogo: false,
   },
   {
-    label: "CINECIRCLE",
+    label: "CineCircle",
     href: "/cinecircle",
     title: (
       <>
@@ -58,7 +58,7 @@ const projects = [
     isLogo: false,
   },
   {
-    label: "PERPLEXITY",
+    label: "Perplexity",
     href: "/perplexity",
     title: <>Improving AI Adoption</>,
     description: "Coming soon!",
@@ -83,7 +83,7 @@ export default function Home() {
             I design products from concept to code{" "}
             <span className="text-neutral-900 text-xl sm:text-2xl">₊.</span>
           </p>
-          <div className="text-sm text-neutral-500 space-y-0.5">
+          <div className="text-base text-neutral-500 space-y-0.5">
             <p>creative technologist</p>
             <p>product designer @ IBM</p>
           </div>
@@ -93,7 +93,7 @@ export default function Home() {
 
       <section
         id="featured-works"
-        className="relative z-10 bg-white rounded-t-[2rem] shadow-[0_-30px_60px_-25px_rgba(0,0,0,0.15)] px-10 pt-4 pb-24"
+        className="relative z-10 bg-white rounded-t-[2rem] px-10 pt-20 pb-24"
       >
         <h2 className="font-serif text-3xl sm:text-4xl mb-6">Featured Works</h2>
         <div className="space-y-24 sm:space-y-32">

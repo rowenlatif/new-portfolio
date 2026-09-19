@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="w-full bg-olive text-white px-6 py-12 sm:px-10 lg:px-16 mt-auto">
-      <p className="font-sans not-italic font-normal text-white text-lg tracking-wide mb-8">
+    <footer className="w-full bg-olive text-white px-10 py-12 mt-auto">
+      <p className="font-sans not-italic font-normal text-white text-lg tracking-wide mb-3">
         ─────── *ੈ✩‧₊˚✧˖*°࿐
       </p>
       <p className="font-serif text-3xl sm:text-4xl mb-2">
@@ -9,12 +9,9 @@ export default function Footer() {
         <span className="font-script font-normal text-4xl sm:text-5xl ml-6">touch</span>!
       </p>
       <div className="flex items-center gap-2.5 text-lg mb-10">
-        <a
-          href="mailto:latif.f@northeastern.edu"
-          className="group inline-flex items-center"
-        >
-          <span className="transition-transform duration-200 group-hover:-translate-x-2">Email</span>
-          <span className="ml-1 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
+        <a href="mailto:latif.f@northeastern.edu" className="group inline-flex items-center">
+          <span>Email</span>
+          <span className="inline-block overflow-hidden w-0 opacity-0 ml-0 group-hover:w-5 group-hover:opacity-100 group-hover:ml-1 transition-all duration-200">
             ↗
           </span>
         </a>
@@ -24,8 +21,8 @@ export default function Footer() {
           rel="noopener noreferrer"
           className="group inline-flex items-center"
         >
-          <span className="transition-transform duration-200 group-hover:-translate-x-2">LinkedIn</span>
-          <span className="ml-1 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
+          <span>LinkedIn</span>
+          <span className="inline-block w-5 ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             ↗
           </span>
         </a>

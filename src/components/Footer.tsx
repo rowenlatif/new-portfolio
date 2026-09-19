@@ -25,7 +25,7 @@ export default function Footer() {
       </p>
       <p className="font-serif text-2xl sm:text-3xl mb-2">
         Let&apos;s keep in
-        <span className="font-script font-normal text-[32px] sm:text-[40px] ml-6">touch</span>!
+        <span className="font-script font-normal text-[30px] sm:text-[38px] ml-6">touch</span>!
       </p>
       <div className="flex items-center gap-2.5 text-lg mb-10">
         <a

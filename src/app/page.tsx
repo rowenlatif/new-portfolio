@@ -73,7 +73,7 @@ const projects = [
 export default function Home() {
   return (
     <main className="flex-1 flex flex-col">
-      <section className="sticky top-0 h-[calc(100vh-120px)] grid grid-cols-1 md:grid-cols-2 items-start px-10 pt-12 sm:pt-16 gap-10 bg-white overflow-hidden">
+      <section className="sticky top-0 grid grid-cols-1 md:grid-cols-2 items-start px-10 pt-12 sm:pt-16 pb-24 gap-10 bg-white overflow-hidden">
         <div>
           <h1 className="font-serif text-3xl sm:text-4xl leading-[1.15] mb-0.5">
             Hello, I&apos;m <span className="text-neutral-900 text-xl sm:text-2xl align-middle">. ݁₊ ୨୧˚.</span>{" "}
@@ -88,12 +88,12 @@ export default function Home() {
             <p>product designer @ IBM</p>
           </div>
         </div>
-        <div className="relative h-64 md:h-full w-full" />
+        <div className="relative h-64 md:h-96 w-full" />
       </section>
 
       <section
         id="featured-works"
-        className="relative z-10 bg-white rounded-t-[2rem] px-10 pt-20 pb-24"
+        className="relative z-10 bg-white rounded-t-[2rem] px-10 pt-20 pb-24 scroll-mt-24"
       >
         <h2 className="font-serif text-3xl sm:text-4xl mb-6">Featured Works</h2>
         <div className="space-y-24 sm:space-y-32">

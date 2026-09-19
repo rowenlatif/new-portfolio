@@ -7,19 +7,19 @@ const experience = [
 ];
 
 const generatePhotos = [
-  { src: "/images/about/generate-1.jpg", ratio: 278.92 / 179.36, caption: "Caption" },
-  { src: "/images/about/generate-2.jpg", ratio: 281.92 / 182.04, caption: "Caption" },
-  { src: "/images/about/generate-3.jpg", ratio: 270.11 / 175.03, caption: "Caption" },
-  { src: "/images/about/generate-4.jpg", ratio: 197.91 / 198.84, caption: "Caption" },
-  { src: "/images/about/generate-5.jpg", ratio: 173.44 / 223.34, caption: "Caption" },
+  { src: "/images/about/generate-1.jpg", ratio: 278.92 / 179.36, caption: "The Cinecircle Team!" },
+  { src: "/images/about/generate-2.jpg", ratio: 281.92 / 182.04, caption: "Me explaining my design process" },
+  { src: "/images/about/generate-3.jpg", ratio: 270.11 / 175.03, caption: "Our team out on retreat!" },
+  { src: "/images/about/generate-4.jpg", ratio: 197.91 / 198.84, caption: "Silly slack meetings" },
+  { src: "/images/about/generate-5.jpg", ratio: 173.44 / 223.34, caption: "Moral drinks" },
 ];
 
 const ktpPhotos = [
-  { src: "/images/about/ktp-1.jpg", ratio: 198 / 243, caption: "Caption" },
-  { src: "/images/about/ktp-2.jpg", ratio: 270 / 175, caption: "Caption" },
-  { src: "/images/about/ktp-3.jpg", ratio: 214.92 / 216.12, caption: "Caption" },
-  { src: "/images/about/ktp-4.jpg", ratio: 281.92 / 182.04, caption: "Caption" },
-  { src: "/images/about/ktp-5.jpg", ratio: 198 / 243, caption: "Caption" },
+  { src: "/images/about/ktp-1.jpg", ratio: 198 / 243, caption: "I have twins!" },
+  { src: "/images/about/ktp-2.jpg", ratio: 270 / 175, caption: "We got new letters!!" },
+  { src: "/images/about/ktp-3.jpg", ratio: 214.92 / 216.12, caption: "A very professional pic" },
+  { src: "/images/about/ktp-4.jpg", ratio: 281.92 / 182.04, caption: "Tabling for our club" },
+  { src: "/images/about/ktp-5.jpg", ratio: 198 / 243, caption: "Relaxing retreat" },
 ];
 
 const rotations = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "-rotate-2"];

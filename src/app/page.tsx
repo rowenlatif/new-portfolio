@@ -2,8 +2,39 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { setCursorLabel } from "@/components/CustomCursor";
+import { setCursorLabel, setCursorRich } from "@/components/CustomCursor";
 import { triggerProjectTransition } from "@/components/ProjectTransitionOverlay";
+
+const scattered = [
+  {
+    href: "/creative#fashion-archive",
+    src: "/images/creative/fashion-archive.png",
+    title: "Fashion Archive",
+    category: "MY STYLE DIARY",
+    className: "left-[6%] top-2 w-40 sm:w-48 -rotate-6",
+  },
+  {
+    href: "/creative#website-redesign",
+    src: "/images/creative/ktp-website.png",
+    title: "Website Redesign",
+    category: "HIGHLIGHTING KTP CULTURE",
+    className: "right-[4%] top-0 w-64 sm:w-80 rotate-3",
+  },
+  {
+    href: "/creative#merch-designs",
+    src: "/images/creative/ktp-hoodie.png",
+    title: "Merch Design",
+    category: "GRAPHIC DESIGN",
+    className: "left-[30%] bottom-0 w-32 sm:w-40 -rotate-3 z-10",
+  },
+  {
+    href: "/creative#merch-designs",
+    src: "/images/creative/ktp-tee.png",
+    title: "Merch Design",
+    category: "GRAPHIC DESIGN",
+    className: "left-[42%] bottom-4 w-32 sm:w-40 rotate-6",
+  },
+];
 
 const projects = [
   {
@@ -148,6 +179,31 @@ export default function Home() {
                 )}
               </Link>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="sticky top-0 z-20 min-h-screen isolate overflow-hidden bg-olive/95 backdrop-blur-md border-t border-white/10 rounded-t-[2rem] shadow-[0_-20px_50px_-20px_rgba(0,0,0,0.35)] px-10 pt-16 text-white">
+        <h2 className="font-serif text-3xl sm:text-4xl text-center max-w-lg mx-auto">
+          Curious about my creative works?
+        </h2>
+        <div className="relative mt-16 h-[420px] max-w-4xl mx-auto">
+          {scattered.map((item) => (
+            <Link
+              key={item.title + item.src}
+              href={item.href}
+              onMouseEnter={() => setCursorRich({ title: item.title, category: item.category })}
+              onMouseLeave={() => setCursorRich(null)}
+              className={`absolute drop-shadow-2xl transition-transform duration-300 hover:-translate-y-1 ${item.className}`}
+            >
+              <Image
+                src={item.src}
+                alt={item.title}
+                width={640}
+                height={640}
+                className="w-full h-auto"
+              />
+            </Link>
           ))}
         </div>
       </section>

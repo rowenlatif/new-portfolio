@@ -129,7 +129,7 @@ export default function Home() {
 
       <section
         id="featured-works"
-        className="relative z-10 isolate overflow-hidden bg-white/90 backdrop-blur-md border-t border-white/70 rounded-t-[2rem] rounded-b-[2rem] shadow-[0_-20px_40px_-20px_rgba(0,0,0,0.2),0_20px_40px_-20px_rgba(0,0,0,0.2)] px-10 pt-14 pb-24 scroll-mt-24"
+        className="relative z-10 isolate overflow-hidden bg-white border-t border-white/70 rounded-t-[2rem] rounded-b-[2rem] shadow-[0_-20px_40px_-20px_rgba(0,0,0,0.2),0_20px_40px_-20px_rgba(0,0,0,0.2)] px-10 pt-14 pb-24 scroll-mt-24"
       >
         <h2 className="font-serif text-3xl sm:text-4xl mb-6">Featured Works</h2>
         <div className="space-y-24 sm:space-y-32">
@@ -184,7 +184,7 @@ export default function Home() {
       </section>
 
       <div className="relative h-[200vh] -mt-[100vh]">
-        <section className="sticky top-0 z-0 h-screen overflow-hidden bg-olive px-10 pt-16 text-white">
+        <section className="sticky top-0 z-0 h-screen overflow-hidden bg-olive px-10 pt-28 text-white">
           <h2 className="font-serif text-3xl sm:text-4xl text-center max-w-lg mx-auto">
             Curious about my creative works?
           </h2>

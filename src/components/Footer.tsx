@@ -1,7 +1,26 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
+const LIGHT_FOOTER_ROUTES = ["/about", "/creative"];
+
 export default function Footer() {
+  const pathname = usePathname();
+  const isLight = LIGHT_FOOTER_ROUTES.includes(pathname);
+
   return (
-    <footer className="w-full bg-olive text-white px-10 py-12 mt-auto">
-      <p className="font-sans not-italic font-normal text-white text-2xl sm:text-3xl tracking-wide mb-3">
+    <footer
+      className={[
+        "w-full px-10 py-12 mt-auto",
+        isLight ? "bg-white text-neutral-900" : "bg-olive text-white",
+      ].join(" ")}
+    >
+      <p
+        className={[
+          "font-sans not-italic font-normal text-2xl sm:text-3xl tracking-wide mb-3",
+          isLight ? "text-neutral-900" : "text-white",
+        ].join(" ")}
+      >
         ─────── *ੈ✩‧₊˚✧˖*°࿐
       </p>
       <p className="font-serif text-3xl sm:text-4xl mb-2">
@@ -27,7 +46,7 @@ export default function Footer() {
           </span>
         </a>
       </div>
-      <div className="text-base text-white space-y-0.5">
+      <div className={["text-base space-y-0.5", isLight ? "text-neutral-500" : "text-white"].join(" ")}>
         <p>Rowen Latif © 2026</p>
         <p>Built with love and iced coffee</p>
       </div>

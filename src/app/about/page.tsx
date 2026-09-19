@@ -37,13 +37,8 @@ export default function AboutPage() {
 
       <div className="min-w-0">
         <section id="intro" className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-10 mb-24">
-          <div className="relative w-fit">
-            <div className="relative w-[220px] h-[280px] rounded-sm overflow-hidden">
-              <Image src="/images/about/hero.png" alt="Rowen Latif" fill className="object-cover" />
-            </div>
-            <div className="absolute -bottom-8 -right-8 w-24 h-24 rounded-full overflow-hidden shadow-lg border-4 border-white">
-              <Image src="/images/about/coffee.png" alt="Iced coffee" fill className="object-cover" />
-            </div>
+          <div className="relative w-[220px] h-[280px] rounded-2xl overflow-hidden">
+            <Image src="/images/about/hero.png" alt="Rowen Latif" fill className="object-cover" />
           </div>
           <div className="pt-2">
             <h1 className="font-serif text-3xl mb-1">
@@ -69,7 +64,7 @@ export default function AboutPage() {
 
         <section id="experience" className="mb-24">
           <h2 className="font-serif text-3xl mb-10">Experience</h2>
-          <div className="space-y-7 pl-4 sm:pl-6">
+          <div className="space-y-7 pl-20">
             {experience.map((item) => (
               <div key={item.name} className="flex items-center gap-4">
                 <div className="relative w-14 h-14 rounded-full overflow-hidden shrink-0">
@@ -96,7 +91,7 @@ export default function AboutPage() {
                 <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
                   <Image src="/images/about/logo-generate.png" alt="Generate" fill className="object-cover" />
                 </div>
-                <span className="font-sans text-2xl font-medium">Generate</span>
+                <span className="font-sans text-2xl font-normal">Generate</span>
               </div>
               <p className="text-sm text-neutral-600 leading-relaxed">
                 This is where I first got into design, where I learned Figma for the first time and truly
@@ -125,7 +120,7 @@ export default function AboutPage() {
                 <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
                   <Image src="/images/about/logo-ktp.png" alt="Kappa Theta Pi" fill className="object-cover" />
                 </div>
-                <span className="font-sans text-2xl font-medium">Kappa Theta Pi</span>
+                <span className="font-sans text-2xl font-normal">Kappa Theta Pi</span>
               </div>
               <p className="text-sm text-neutral-600 leading-relaxed">
                 I&apos;ve been in KTP since my sophomore year and have been active as VP Marketing, Design

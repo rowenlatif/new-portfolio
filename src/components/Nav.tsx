@@ -30,7 +30,7 @@ export default function Nav() {
   return (
     <header
       className={[
-        "fixed top-0 inset-x-0 z-50 w-full px-6 py-4 sm:px-10 lg:px-16 flex items-center justify-between",
+        "fixed top-0 inset-x-0 z-50 w-full px-10 py-4 flex items-center justify-between",
         "bg-white/60 backdrop-blur-md border-b border-white/70 shadow-[0_1px_0_rgba(255,255,255,0.8)]",
         "transition-transform duration-300 ease-out",
         hidden ? "-translate-y-full" : "translate-y-0",
@@ -44,7 +44,7 @@ export default function Nav() {
           <Link
             key={link.href}
             href={link.href}
-            className="transition-colors hover:font-script hover:text-olive hover:text-lg"
+            className="transition-colors hover:font-script hover:font-normal hover:text-olive"
           >
             {link.label}
           </Link>

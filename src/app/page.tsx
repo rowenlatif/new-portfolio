@@ -2,14 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import MatrixDots from "@/components/MatrixDots";
 import { setCursorLabel } from "@/components/CustomCursor";
 
 const projects = [
   {
     label: "IBM MAXIMO",
     href: "/ibm",
-    title: "AI-Driven Asset Management for Fortune 500 Companies",
+    title: (
+      <>
+        AI-Driven Asset Management for
+        <br />
+        Fortune 500 Companies
+      </>
+    ),
     description: "Coming soon!",
     tags: ["Dashboards", "Desktop"],
     image: "/images/card-ibm.png",
@@ -20,7 +25,13 @@ const projects = [
   {
     label: "SELFSERVE",
     href: "/selfserve",
-    title: "AI-Powered Operations Platform for Boutique Hotels",
+    title: (
+      <>
+        AI-Powered Operations Platform for
+        <br />
+        Boutique Hotels
+      </>
+    ),
     description:
       "Automating task routing and giving managers instant operational visibility",
     tags: ["Desktop", "Shipped"],
@@ -32,7 +43,13 @@ const projects = [
   {
     label: "CINECIRCLE",
     href: "/cinecircle",
-    title: "Designing how South Asian Audiences Express Authentic Film Discussion",
+    title: (
+      <>
+        Designing how South Asian Audiences
+        <br />
+        Express Authentic Film Discussion
+      </>
+    ),
     description: "Creating long and short forms of content",
     tags: ["Mobile", "Shipped"],
     image: "/images/card-cinecircle.png",
@@ -43,7 +60,7 @@ const projects = [
   {
     label: "PERPLEXITY",
     href: "/perplexity",
-    title: "Improving AI Adoption",
+    title: <>Improving AI Adoption</>,
     description: "Coming soon!",
     tags: ["UX Research"],
     image: "/images/perplexity-logo.png",
@@ -56,46 +73,35 @@ const projects = [
 export default function Home() {
   return (
     <main className="flex-1 flex flex-col">
-      <section className="sticky top-0 h-screen grid grid-cols-1 md:grid-cols-2 items-start px-6 sm:px-10 lg:px-16 pt-20 sm:pt-28 gap-10 bg-white overflow-hidden">
+      <section className="sticky top-0 h-[calc(100vh-120px)] grid grid-cols-1 md:grid-cols-2 items-start px-10 pt-12 sm:pt-16 gap-10 bg-white overflow-hidden">
         <div>
           <h1 className="font-serif text-3xl sm:text-4xl leading-[1.15] mb-0.5">
-            Hello, I&apos;m <span className="text-neutral-400 text-xl sm:text-2xl align-middle">. ݁₊ ୨୧˚.</span>{" "}
-            <span className="font-script text-4xl sm:text-5xl align-middle">Rowen</span>
+            Hello, I&apos;m <span className="text-neutral-900 text-xl sm:text-2xl align-middle">. ݁₊ ୨୧˚.</span>{" "}
+            <span className="font-script font-normal text-4xl sm:text-5xl align-middle">Rowen</span>
           </h1>
           <p className="font-serif text-3xl sm:text-4xl leading-[1.15] text-neutral-800 mb-6 max-w-md">
             I design products from concept to code{" "}
-            <span className="text-neutral-400 text-xl sm:text-2xl">₊.</span>
+            <span className="text-neutral-900 text-xl sm:text-2xl">₊.</span>
           </p>
           <div className="text-sm text-neutral-500 space-y-0.5">
             <p>creative technologist</p>
             <p>product designer @ IBM</p>
           </div>
         </div>
-        <div className="relative h-64 md:h-full w-full">
-          <MatrixDots />
-        </div>
+        <div className="relative h-64 md:h-full w-full" />
       </section>
 
       <section
         id="featured-works"
-        className="relative z-10 bg-white rounded-t-[2rem] shadow-[0_-30px_60px_-25px_rgba(0,0,0,0.15)] px-6 sm:px-10 lg:px-16 pt-16 pb-24 sm:pt-20"
+        className="relative z-10 bg-white rounded-t-[2rem] shadow-[0_-30px_60px_-25px_rgba(0,0,0,0.15)] px-10 pt-4 pb-24"
       >
-        <h2 className="font-serif text-3xl sm:text-4xl mb-14">Featured Works</h2>
+        <h2 className="font-serif text-3xl sm:text-4xl mb-6">Featured Works</h2>
         <div className="space-y-24 sm:space-y-32">
           {projects.map((project) => (
-            <div
-              key={project.label}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"
-              onMouseEnter={() => setCursorLabel(project.cursor)}
-              onMouseLeave={() => setCursorLabel(null)}
-            >
+            <div key={project.label} className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
               <div>
                 <p className="text-sm sm:text-base text-neutral-900 mb-3">{project.label}</p>
-                <Link href={project.href} className="group">
-                  <h3 className="text-xl sm:text-2xl font-medium leading-snug mb-2 group-hover:text-olive transition-colors">
-                    {project.title}
-                  </h3>
-                </Link>
+                <h3 className="text-xl sm:text-2xl font-medium leading-snug mb-2">{project.title}</h3>
                 <p className="text-sm sm:text-base text-neutral-900 mb-4 max-w-sm">
                   {project.description}
                 </p>
@@ -112,11 +118,13 @@ export default function Home() {
               </div>
               <Link
                 href={project.href}
+                onMouseEnter={() => setCursorLabel(project.cursor)}
+                onMouseLeave={() => setCursorLabel(null)}
                 className={`group/img relative overflow-hidden rounded-xl aspect-[16/10] flex items-center justify-center ${project.imageBg}`}
               >
                 <Image
                   src={project.image}
-                  alt={project.title}
+                  alt={typeof project.label === "string" ? project.label : "project thumbnail"}
                   fill
                   className={
                     project.isLogo

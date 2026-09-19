@@ -22,7 +22,7 @@ const garamond = localFont({
 
 const snell = localFont({
   variable: "--font-script",
-  src: "../fonts/Snell/Snell-Roundhand-Bold-Script.otf",
+  src: "../fonts/Snell/Snell-BT-Regular.otf",
   weight: "400",
   style: "normal",
 });

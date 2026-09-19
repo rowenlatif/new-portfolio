@@ -48,14 +48,13 @@ export default function AboutPage() {
               <span>PHL / NYC</span>
               <span>CS AND DESIGN @ NEU</span>
             </div>
-            <p className="text-sm leading-relaxed text-neutral-700 max-w-xl mb-4">
-              I love making things!! You can find me designing products at
-              <br />
+            <p className="text-sm leading-relaxed text-neutral-700 max-w-[372px] mb-4">
+              I love making things!! You can find me designing products at{" "}
               <a href="#communities" className="underline underline-offset-2 hover:text-neutral-400 transition-colors">Generate</a>, leading brand
               campaigns for <a href="#communities" className="underline underline-offset-2 hover:text-neutral-400 transition-colors">Kappa Theta Pi</a>,
               or hunting for the next best coffee spot in Boston.
             </p>
-            <p className="text-sm leading-relaxed text-neutral-700 max-w-xl">
+            <p className="text-sm leading-relaxed text-neutral-700 max-w-[372px]">
               When I&apos;m not spending hours on Figma, I enjoy fashion, reading, pottery, and finding hidden
               gem cafes!
             </p>

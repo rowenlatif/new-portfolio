@@ -73,7 +73,7 @@ const projects = [
 export default function Home() {
   return (
     <main className="flex-1 flex flex-col">
-      <section className="sticky top-0 grid grid-cols-1 md:grid-cols-2 items-start px-10 pt-12 sm:pt-16 pb-[20px] gap-10 bg-white overflow-hidden">
+      <section className="sticky top-0 -mt-20 grid grid-cols-1 md:grid-cols-2 items-start px-10 pt-32 sm:pt-36 pb-[20px] gap-10 bg-white overflow-hidden">
         <div>
           <h1 className="font-serif text-3xl sm:text-4xl leading-[1.15] mb-0.5">
             Hello, I&apos;m <span className="text-neutral-900 text-xl sm:text-2xl align-middle">. ݁₊ ୨୧˚.</span>{" "}

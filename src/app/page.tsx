@@ -1,69 +1,128 @@
 import Image from "next/image";
+import Link from "next/link";
+
+const projects = [
+  {
+    number: "01",
+    label: "IBM MAXIMO",
+    href: "/ibm",
+    title: "AI-Driven Asset Management for Fortune 500 Companies",
+    description: "Coming soon!",
+    tags: ["Dashboards", "Desktop"],
+    image: "/images/card-ibm.png",
+    imageBg: "bg-gradient-to-b from-sky-100 to-sky-50",
+  },
+  {
+    number: "02",
+    label: "SELFSERVE",
+    href: "/selfserve",
+    title: "AI-Powered Operations Platform for Boutique Hotels",
+    description:
+      "Automating task routing and giving managers instant operational visibility",
+    tags: ["Desktop", "Shipped"],
+    image: "/images/card-selfserve.png",
+    imageBg: "bg-gradient-to-b from-lime-100 to-olive/20",
+  },
+  {
+    number: "03",
+    label: "CINECIRCLE",
+    href: "/cinecircle",
+    title: "Designing how South Asian Audiences Express Authentic Film Discussion",
+    description: "Creating long and short forms of content",
+    tags: ["Mobile", "Shipped"],
+    image: "/images/card-cinecircle.png",
+    imageBg: "bg-gradient-to-b from-rose-100 to-rose-50",
+  },
+  {
+    number: "04",
+    label: "PERPLEXITY",
+    href: "/perplexity",
+    title: "Improving AI Adoption",
+    description: "Coming soon!",
+    tags: ["UX Research"],
+    image: "/images/perplexity-logo.png",
+    imageBg: "",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main className="flex-1">
+      <section className="grid grid-cols-1 md:grid-cols-2 items-center px-6 sm:px-10 lg:px-16 py-10 md:py-16 gap-10">
+        <div>
+          <h1 className="font-serif text-3xl sm:text-4xl leading-snug mb-2">
+            Hello, I&apos;m <span className="font-script text-4xl sm:text-5xl align-middle">Rowen</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="font-serif text-2xl sm:text-3xl text-neutral-800 mb-6 max-w-md">
+            I design products from concept to code
           </p>
+          <div className="text-sm text-neutral-500 space-y-0.5">
+            <p>creative technologist</p>
+            <p>product designer @ IBM</p>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div
+          className="h-64 md:h-96 w-full rounded-sm"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(0,0,0,0.18) 1px, transparent 1px)",
+            backgroundSize: "16px 16px",
+            maskImage:
+              "radial-gradient(ellipse at center, black 40%, transparent 75%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at center, black 40%, transparent 75%)",
+          }}
+        />
+      </section>
+
+      <hr className="border-neutral-200" />
+
+      <section id="featured-works" className="px-6 sm:px-10 lg:px-16 py-16 sm:py-20">
+        <h2 className="font-serif text-3xl sm:text-4xl mb-14">Featured Works</h2>
+        <div className="space-y-24 sm:space-y-32">
+          {projects.map((project) => (
+            <div
+              key={project.number}
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+            >
+              <div>
+                <p className="text-xs tracking-wide text-neutral-400 mb-3">
+                  {project.number} — {project.label}
+                </p>
+                <Link href={project.href} className="group">
+                  <h3 className="text-xl sm:text-2xl font-medium leading-snug mb-2 group-hover:text-olive transition-colors">
+                    {project.title}
+                  </h3>
+                </Link>
+                <p className="text-sm text-neutral-500 mb-4 max-w-sm">
+                  {project.description}
+                </p>
+                <div className="flex gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs rounded-full border border-neutral-300 px-3 py-1 text-neutral-600"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <Link
+                href={project.href}
+                className={`relative overflow-hidden rounded-xl aspect-[16/10] flex items-center justify-center ${project.imageBg}`}
+              >
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className={project.number === "04" ? "object-contain p-16" : "object-cover object-top"}
+                />
+              </Link>
+            </div>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }

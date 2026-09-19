@@ -183,30 +183,32 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative min-h-screen bg-olive px-10 pt-16 text-white">
-        <h2 className="font-serif text-3xl sm:text-4xl text-center max-w-lg mx-auto">
-          Curious about my creative works?
-        </h2>
-        <div className="relative mt-16 h-[420px] max-w-4xl mx-auto">
-          {scattered.map((item) => (
-            <Link
-              key={item.title + item.src}
-              href={item.href}
-              onMouseEnter={() => setCursorRich({ title: item.title, category: item.category })}
-              onMouseLeave={() => setCursorRich(null)}
-              className={`absolute drop-shadow-2xl transition-transform duration-300 hover:-translate-y-1 ${item.className}`}
-            >
-              <Image
-                src={item.src}
-                alt={item.title}
-                width={640}
-                height={640}
-                className="w-full h-auto"
-              />
-            </Link>
-          ))}
-        </div>
-      </section>
+      <div className="relative h-[200vh] -mt-[100vh]">
+        <section className="sticky top-0 z-0 h-screen overflow-hidden bg-olive px-10 pt-16 text-white">
+          <h2 className="font-serif text-3xl sm:text-4xl text-center max-w-lg mx-auto">
+            Curious about my creative works?
+          </h2>
+          <div className="relative mt-16 h-[420px] max-w-4xl mx-auto">
+            {scattered.map((item) => (
+              <Link
+                key={item.title + item.src}
+                href={item.href}
+                onMouseEnter={() => setCursorRich({ title: item.title, category: item.category })}
+                onMouseLeave={() => setCursorRich(null)}
+                className={`absolute drop-shadow-2xl transition-transform duration-300 hover:-translate-y-1 ${item.className}`}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.title}
+                  width={640}
+                  height={640}
+                  className="w-full h-auto"
+                />
+              </Link>
+            ))}
+          </div>
+        </section>
+      </div>
     </main>
   );
 }

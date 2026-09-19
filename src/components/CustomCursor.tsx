@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 type CursorDetail = { label: string | null };
@@ -8,6 +9,11 @@ export default function CustomCursor() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [label, setLabel] = useState<string | null>(null);
   const [enabled, setEnabled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setLabel(null);
+  }, [pathname]);
 
   useEffect(() => {
     const mq = window.matchMedia("(hover: hover) and (pointer: fine)");

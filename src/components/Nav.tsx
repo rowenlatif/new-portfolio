@@ -20,7 +20,9 @@ export default function Nav() {
     const onScroll = () => {
       const y = window.scrollY;
       const goingDown = y > lastY.current;
-      setHidden(goingDown && y > 96);
+      const nextHidden = goingDown && y > 96;
+      setHidden(nextHidden);
+      document.documentElement.style.setProperty("--sidebar-top", nextHidden ? "2.5rem" : "6rem");
       lastY.current = y;
     };
     window.addEventListener("scroll", onScroll, { passive: true });

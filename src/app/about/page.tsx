@@ -26,9 +26,9 @@ const rotations = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "-rotate-2"
 
 export default function AboutPage() {
   return (
-    <main className="flex-1 px-6 sm:px-10 lg:px-16 py-10 grid grid-cols-1 lg:grid-cols-[140px_1fr] gap-10">
+    <main className="flex-1 px-10 py-10 grid grid-cols-1 lg:grid-cols-[140px_1fr] gap-10">
       <aside className="hidden lg:block">
-        <nav className="sticky top-10 text-xs tracking-wide text-neutral-400 space-y-3">
+        <nav className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-xs tracking-wide text-neutral-400 space-y-3">
           <a href="#intro" className="block hover:text-neutral-900">INTRO</a>
           <a href="#experience" className="block hover:text-neutral-900">EXPERIENCE</a>
           <a href="#communities" className="block hover:text-neutral-900">COMMUNITIES</a>

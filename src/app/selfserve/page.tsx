@@ -76,7 +76,7 @@ export default function SelfServePage() {
   return (
     <main className="flex-1 px-6 sm:px-10 lg:px-16 py-10 grid grid-cols-1 lg:grid-cols-[140px_1fr] gap-10">
       <aside className="hidden lg:block">
-        <nav className="sticky top-10 text-xs tracking-wide text-neutral-400 space-y-3">
+        <nav className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-xs tracking-wide text-neutral-400 space-y-3">
           <p className="text-neutral-900 mb-4">CONTENTS.</p>
           {contents.map((c) => (
             <a key={c.href} href={c.href} className="block hover:text-neutral-900">

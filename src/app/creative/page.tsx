@@ -13,9 +13,9 @@ const sidebar = [
 
 export default function CreativePage() {
   return (
-    <main className="flex-1 px-6 sm:px-10 lg:px-16 py-10 grid grid-cols-1 lg:grid-cols-[160px_1fr] gap-10">
+    <main className="flex-1 px-10 py-10 grid grid-cols-1 lg:grid-cols-[160px_1fr] gap-10">
       <aside className="hidden lg:block">
-        <nav className="sticky top-10 text-[11px] tracking-wide text-neutral-400 space-y-4">
+        <nav className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-[11px] tracking-wide text-neutral-400 space-y-4">
           {sidebar.map((group) => (
             <div key={group.heading}>
               <p className="text-neutral-500 mb-1.5">{group.heading}</p>

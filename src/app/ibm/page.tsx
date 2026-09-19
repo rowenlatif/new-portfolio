@@ -9,7 +9,7 @@ export default function IbmPage() {
       <div className="w-full px-6 py-10 sm:px-10 lg:px-16 flex gap-16">
         {/* Sticky contents sidebar */}
         <aside className="hidden lg:block w-40 shrink-0">
-          <div className="sticky top-10 text-xs text-neutral-400 tracking-wide space-y-3">
+          <div className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-xs text-neutral-400 tracking-wide space-y-3">
             <p>CONTENTS.</p>
             <p>01 Outcome</p>
           </div>

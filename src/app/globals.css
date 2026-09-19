@@ -8,6 +8,7 @@ html {
   --background: #ffffff;
   --foreground: #171717;
   --color-olive: #6a7040;
+  --sidebar-top: 6rem;
 }
 
 @theme inline {

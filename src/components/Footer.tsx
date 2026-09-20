@@ -9,20 +9,19 @@ export default function Footer() {
   const isLight = LIGHT_FOOTER_ROUTES.includes(pathname);
 
   return (
-    <footer
-      className={[
-        "w-full px-10 py-12 mt-auto",
-        isLight ? "bg-white text-neutral-900" : "bg-olive text-white",
-      ].join(" ")}
-    >
-      <p
+    <footer className="w-full mt-auto">
+      <div className={isLight ? "pt-28 sm:pt-32" : "bg-olive pt-10 sm:pt-12"} aria-hidden />
+      <div
         className={[
-          "font-sans not-italic font-normal text-2xl sm:text-3xl tracking-wide mb-3",
-          isLight ? "text-neutral-900" : "text-white",
+          "w-full px-10 pb-12",
+          isLight ? "bg-white text-neutral-900" : "bg-olive text-white",
         ].join(" ")}
       >
-        ─────── *ੈ✩‧₊˚✧˖*°࿐
-      </p>
+      {isLight && (
+        <p className="font-sans not-italic font-normal text-2xl sm:text-3xl tracking-wide mb-3 text-neutral-900">
+          ─────── *ੈ✩‧₊˚✧˖*°࿐
+        </p>
+      )}
       <p className="font-serif text-2xl sm:text-3xl mb-2">
         Let&apos;s keep in
         <span className="font-script font-normal text-[30px] sm:text-[38px] ml-6">touch</span>!
@@ -52,6 +51,7 @@ export default function Footer() {
       <div className={["text-base space-y-0.5", isLight ? "text-neutral-500" : "text-white"].join(" ")}>
         <p>Rowen Latif © 2026</p>
         <p>Built with love and iced coffee</p>
+      </div>
       </div>
     </footer>
   );

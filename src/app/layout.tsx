@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { EB_Garamond } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -28,6 +29,12 @@ const snell = localFont({
   style: "normal",
 });
 
+const ebGaramond = EB_Garamond({
+  variable: "--font-serif-medium",
+  weight: ["500"],
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Rowen Latif",
   description: "Creative technologist and product designer.",
@@ -37,7 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${satoshi.variable} ${garamond.variable} ${snell.variable} h-full antialiased`}
+      className={`${satoshi.variable} ${garamond.variable} ${snell.variable} ${ebGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-neutral-900 font-sans">
         <CustomCursor />

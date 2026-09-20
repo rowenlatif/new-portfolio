@@ -37,7 +37,7 @@ export default function AboutPage() {
 
       <div className="min-w-0">
         <section id="intro" className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-10 mb-24">
-          <div className="relative w-[220px] h-[280px] rounded-2xl overflow-hidden">
+          <div className="relative w-[220px] h-[220px] rounded-2xl overflow-hidden">
             <Image src="/images/about/hero.png" alt="Rowen Latif" fill className="object-cover" />
           </div>
           <div className="pt-2">
@@ -50,7 +50,14 @@ export default function AboutPage() {
             </div>
             <p className="text-sm leading-relaxed text-neutral-700 max-w-[372px] mb-4">
               I love making things!! You can find me designing products at{" "}
-              <a href="#communities" className="underline underline-offset-2 hover:text-neutral-400 transition-colors">Generate</a>, leading brand
+              <a
+                href="https://generatenu.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-neutral-400 transition-colors"
+              >
+                Generate
+              </a>, leading brand
               campaigns for <a href="#communities" className="underline underline-offset-2 hover:text-neutral-400 transition-colors">Kappa Theta Pi</a>,
               or hunting for the next best coffee spot in Boston.
             </p>

@@ -1,18 +1,29 @@
+"use client";
+
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { ScriptAccentText, setCursorRich } from "@/components/CustomCursor";
+import InstagramEmbed from "@/components/InstagramEmbed";
 
 function IconLink({ href, label, children }: { href?: string; label: string; children: ReactNode }) {
-  const className =
-    "inline-flex items-center justify-center w-9 h-9 rounded-full bg-black text-white hover:opacity-80 transition-opacity";
   if (!href) {
     return (
-      <span className={`${className} opacity-40 cursor-default`} aria-label={`${label} (coming soon)`}>
+      <span
+        className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-black text-white opacity-40 cursor-default"
+        aria-label={`${label} (coming soon)`}
+      >
         {children}
       </span>
     );
   }
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={className}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-black text-white hover:opacity-80 transition-opacity"
+    >
       {children}
     </a>
   );
@@ -45,10 +56,18 @@ function InstagramIcon() {
   );
 }
 
+const graphicDesignPosts = [
+  "https://www.instagram.com/p/DbrXBE9EeJv/",
+  "https://www.instagram.com/p/DXdYSe1je_G/",
+  "https://www.instagram.com/p/DTRLqIFgR1p/",
+  "https://www.instagram.com/p/DcRc2rXltw9/",
+  "https://www.instagram.com/p/Dclvf8hjxED/",
+];
+
 const sidebar = [
   {
     heading: "SIDEQUESTS",
-    items: ["FASHION ARCHIVE", "NODI CAFE", "CHOP, CHOP!"],
+    items: ["FASHION ARCHIVE", "NODI CAFE"],
   },
   {
     heading: "KAPPA THETA PI",
@@ -77,17 +96,13 @@ export default function CreativePage() {
       </aside>
 
       <div>
-        <div className="text-center mb-24 sm:mb-32">
-          <p className="font-serif italic text-2xl sm:text-3xl leading-none">A Look</p>
-          <p className="text-xs text-neutral-400 tracking-wide my-1">into my</p>
-          <p className="font-serif italic text-4xl sm:text-5xl">
-            <span className="text-lg text-neutral-400 align-middle mr-1">(creative)</span>Work
-          </p>
+        <div className="relative w-full max-w-2xl mx-auto h-[160px] sm:h-[220px] mb-24 sm:mb-32">
+          <Image src="/images/creative/hero-heading.png" alt="A Look into my (creative) Work" fill className="object-contain" priority />
         </div>
 
         <section id="fashion-archive" className="mb-24">
           <h3 className="text-lg font-normal mb-2">Fashion Archive</h3>
-          <p className="text-base text-neutral-500 max-w-xl mb-4">
+          <p className="text-base text-neutral-500 max-w-md mb-4 text-pretty">
             A mini passion project I worked on while playing around with the new Claude Code and Figma MCP to
             keep track of all of my outfits, like my very own fashion diary!
           </p>
@@ -107,32 +122,40 @@ export default function CreativePage() {
             Branding a South Asian inspired coffee shop that I will be opening with my friends in Philly!
             &quot;Nodi&quot; means river in Bangla.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-[1.2fr_1fr_1fr] gap-4 items-stretch">
-            <div className="relative aspect-[3/4] rounded-lg overflow-hidden">
+          <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-6 sm:gap-8 w-full">
+            <div className="h-56 sm:h-80 w-auto aspect-[4697/6230] relative rounded-lg overflow-hidden transition-transform duration-300 ease-out hover:rotate-2">
               <Image src="/images/creative/nodi-poster.png" alt="NODI poster" fill className="object-cover" />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {["nodi-tile-1.png", "nodi-tile-2.png", "nodi-tile-3.png", "nodi-tile-4.png"].map((src) => (
-                <div key={src} className="relative aspect-square rounded-lg overflow-hidden">
+
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {[
+                { src: "nodi-tile-5.png", hover: "hover:-rotate-3" },
+                { src: "nodi-tile-2.png", hover: "hover:rotate-3" },
+                { src: "nodi-tile-1.png", hover: "hover:-rotate-3" },
+                { src: "nodi-tile-3.png", hover: "hover:rotate-3" },
+              ].map(({ src, hover }, i) => (
+                <div
+                  key={i}
+                  className={`w-32 sm:w-48 relative aspect-[3555/2032] rounded-lg overflow-hidden transition-transform duration-300 ease-out ${hover}`}
+                >
                   <Image src={`/images/creative/${src}`} alt="NODI brand detail" fill className="object-cover" />
                 </div>
               ))}
             </div>
-            <div className="relative aspect-[3/4] rounded-lg overflow-hidden">
-              <Image src="/images/creative/nodi-menu.png" alt="NODI menu design" fill className="object-cover" />
+
+            <div className="flex gap-4">
+              <div className="h-56 sm:h-80 w-auto aspect-[3558/6230] relative rounded-lg overflow-hidden transition-transform duration-300 ease-out hover:rotate-2">
+                <Image src="/images/creative/nodi-tile-4.png" alt="NODI brand illustration" fill className="object-cover" />
+              </div>
+              <div className="h-56 sm:h-80 w-auto aspect-[3558/6230] relative rounded-lg overflow-hidden transition-transform duration-300 ease-out hover:-rotate-2">
+                <Image src="/images/creative/nodi-menu.png" alt="NODI menu design" fill className="object-cover" />
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="chop-chop" className="mb-24">
-          <h3 className="text-lg font-normal mb-2">Chop, Chop!</h3>
-          <p className="text-sm text-neutral-400 italic">Coming soon!</p>
-        </section>
-
-        <hr className="border-neutral-200 mb-24" />
-
         <section id="website-redesign" className="mb-24">
-          <p className="font-serif text-2xl mb-8">Kappa Theta Pi</p>
+          <p className="font-serif text-2xl mb-2">Kappa Theta Pi</p>
           <h3 className="text-lg font-normal mb-2">Website Redesign</h3>
           <p className="text-base text-neutral-500 max-w-xl mb-4">
             As VP of Marketing, it was imperative that I refreshed our very outdated website because this was
@@ -146,8 +169,31 @@ export default function CreativePage() {
               <LinkIcon />
             </IconLink>
           </div>
-          <div className="relative w-full max-w-2xl h-64 sm:h-96">
-            <Image src="/images/creative/ktp-website.png" alt="Kappa Theta Pi website redesign" fill className="object-contain object-left" />
+          <div
+            className="relative w-full max-w-xl h-56 sm:h-72 mx-auto cursor-none"
+            onMouseEnter={() =>
+              setCursorRich({
+                title: (
+                  <ScriptAccentText
+                    text="Link Coming Soon"
+                    scriptWords={[
+                      { index: 0 },
+                      { index: 1, spaceAfter: "-0.16em" },
+                      { index: 2, spaceBefore: "0.24em", spaceAfter: "-0.1em" },
+                    ]}
+                  />
+                ),
+                category: "KTP WEBSITE REDESIGN",
+              })
+            }
+            onMouseLeave={() => setCursorRich(null)}
+          >
+            <Image
+              src="/images/creative/ktp-website.png"
+              alt="Kappa Theta Pi website redesign"
+              fill
+              className="object-contain transition-transform duration-500 ease-out hover:scale-125"
+            />
           </div>
         </section>
 
@@ -157,15 +203,32 @@ export default function CreativePage() {
             My favorite part of holding a design leadership position was creating fun, unique merch for the
             entire org and seeing it come to life!
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
-            <div className="relative aspect-square rounded-lg overflow-hidden bg-neutral-50">
-              <Image src="/images/creative/ktp-hoodie.png" alt="Kappa Theta Pi hoodie merch" fill className="object-contain" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+            <div className="w-56 sm:w-80 shrink-0 -rotate-6 transition-transform duration-300 ease-out hover:-rotate-12">
+              <Image
+                src="/images/creative/ktp-hoodie.png"
+                alt="Kappa Theta Pi hoodie merch"
+                width={441}
+                height={452}
+                className="w-full h-auto drop-shadow-xl"
+              />
             </div>
-            <div className="relative aspect-square rounded-lg overflow-hidden">
-              <Image src="/images/creative/ktp-shirts-photo.png" alt="Kappa Theta Pi members wearing merch" fill className="object-cover" />
+            <div className="relative w-40 sm:w-56 aspect-[3/4] shrink-0 rounded-lg overflow-hidden drop-shadow-2xl">
+              <Image
+                src="/images/creative/ktp-shirts-photo.png"
+                alt="Kappa Theta Pi members wearing merch"
+                fill
+                className="object-cover"
+              />
             </div>
-            <div className="relative aspect-square rounded-lg overflow-hidden bg-neutral-50">
-              <Image src="/images/creative/ktp-tee.png" alt="Kappa Theta Pi t-shirt merch" fill className="object-contain" />
+            <div className="w-36 sm:w-48 shrink-0 rotate-6 transition-transform duration-300 ease-out hover:rotate-12">
+              <Image
+                src="/images/creative/ktp-tee.png"
+                alt="Kappa Theta Pi t-shirt merch"
+                width={600}
+                height={600}
+                className="w-full h-auto drop-shadow-xl"
+              />
             </div>
           </div>
         </section>
@@ -182,9 +245,9 @@ export default function CreativePage() {
               <InstagramIcon />
             </IconLink>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="aspect-square rounded-lg border border-neutral-200" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl">
+            {graphicDesignPosts.map((url) => (
+              <InstagramEmbed key={url} url={url} />
             ))}
           </div>
         </section>

@@ -1,12 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import ScrollProgress from "@/components/ScrollProgress";
+
+const OLIVE = "#6a7040";
 
 const contents = [
-  { href: "#problem", label: "01 Problem" },
-  { href: "#solution", label: "02 Solution" },
-  { href: "#features", label: "03 Features" },
-  { href: "#outcome", label: "04 Outcome" },
-  { href: "#reflection", label: "05 Reflection" },
+  { id: "problem", href: "#problem", label: "01 Problem" },
+  { id: "solution", href: "#solution", label: "02 Solution" },
+  { id: "features", href: "#features", label: "03 Features" },
+  { id: "outcome", href: "#outcome", label: "04 Outcome" },
+  { id: "reflection", href: "#reflection", label: "05 Reflection" },
 ];
 
 const tags = ["Web / Mobile", "Case Study", "Shipped"];
@@ -20,19 +26,19 @@ const meta = [
 
 const solutionTiles = [
   {
-    title: "AI Task Creation",
-    caption: "Type naturally, skip all the fields",
-    img: "https://framerusercontent.com/images/Q1SwwjVCZk4jnsKL8ln6DZhbWM.png",
+    title: "Cross-Platform Workflows",
+    video: "/videos/selfserve/cross-platform-workflows.mp4",
+    aspect: "1422/1584",
   },
   {
     title: "Search & Filtering",
-    caption: "Find tasks fast and zero in on what matters",
-    img: "https://framerusercontent.com/images/4kAjzLHAwArOEAMloNXpe0nFXVg.png",
+    video: "/videos/selfserve/search-filtering.mp4",
+    aspect: "1266/446",
   },
   {
-    title: "Cross-Platform Workflows",
-    caption: "Staff on mobile, managers on desktop",
-    img: "https://framerusercontent.com/images/MQ3FOrGsscpi0mEQui2ZrnWEDo.png",
+    title: "AI Task Creation",
+    video: "/videos/selfserve/ai-task-creation.mp4",
+    aspect: "1430/962",
   },
 ];
 
@@ -40,19 +46,28 @@ const features = [
   {
     number: "01",
     title: "Smart Task Creation and Assignment",
-    img: null,
+    video: "https://framerusercontent.com/assets/UZjqm30TGWC36FPqD3WX4UEkHE.mp4",
+    img: null as string | null,
+    aspect: "656/418",
   },
   {
     number: "02",
     title: "Real-Time Staff Analytics",
+    video: null as string | null,
     img: "https://framerusercontent.com/images/XVyT65B5av8rAvjYxtT8gTffI.png",
+    aspect: "2880/2048",
   },
   {
-    number: "02",
+    number: "03",
     title: "Simple Filtering",
+    video: null as string | null,
     img: "https://framerusercontent.com/images/3T3y7NbgUDY0vOcKaZbCy7jPR3E.png",
+    aspect: "1440/1024",
   },
 ];
+
+const beforePoints = ["Placeholder issue one", "Placeholder issue two", "Placeholder issue three"];
+const afterPoints = ["Placeholder improvement one", "Placeholder improvement two", "Placeholder improvement three"];
 
 const reflections = [
   {
@@ -73,13 +88,42 @@ const reflections = [
 ];
 
 export default function SelfServePage() {
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const sections = contents
+      .map((c) => document.getElementById(c.id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+    );
+
+    sections.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="flex-1 px-6 sm:px-10 lg:px-16 py-10 grid grid-cols-1 lg:grid-cols-[140px_1fr] gap-10">
+      <ScrollProgress color={OLIVE} />
       <aside className="hidden lg:block">
         <nav className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-xs tracking-wide text-neutral-400 space-y-3">
           <p className="text-neutral-900 mb-4">CONTENTS.</p>
           {contents.map((c) => (
-            <a key={c.href} href={c.href} className="block hover:text-neutral-900">
+            <a
+              key={c.href}
+              href={c.href}
+              className={`block transition-colors hover:text-neutral-900 ${
+                activeSection === c.id ? "text-olive font-medium" : ""
+              }`}
+            >
               {c.label}
             </a>
           ))}
@@ -92,12 +136,13 @@ export default function SelfServePage() {
       <div id="top">
         {/* Hero banner */}
         <div className="relative w-full h-[220px] sm:h-[320px] lg:h-[420px] rounded-sm overflow-hidden bg-[#1f3a1f] mb-10">
-          <Image
-            src="https://framerusercontent.com/images/zeTGwGHTBBTm9j9ZWkX44E6w.png"
-            alt="SelfServe product screenshots"
-            fill
-            className="object-cover"
-            priority
+          <video
+            src="/videos/selfserve/header.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
 
@@ -157,7 +202,7 @@ export default function SelfServePage() {
         </section>
 
         {/* PROBLEM */}
-        <section id="problem" className="mb-24 max-w-3xl">
+        <section id="problem" className="mb-24 max-w-3xl mx-auto text-center">
           <p className="text-xs tracking-wide text-olive mb-3">PROBLEM</p>
           <h2 className="font-serif text-2xl sm:text-3xl mb-4">
             Hotel task management is outdated, slow, and clunky
@@ -180,19 +225,24 @@ export default function SelfServePage() {
             and give managers real-time visibility—enterprise-grade operations without the complexity.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {solutionTiles.map((tile) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {solutionTiles.map((tile, i) => (
               <div
                 key={tile.title}
-                className="rounded-lg bg-[#dcebe0] p-6 flex flex-col gap-4 overflow-hidden"
+                className={`rounded-lg border border-neutral-200 bg-white p-6 flex flex-col gap-4 overflow-hidden ${
+                  i === 0 ? "sm:row-span-2" : ""
+                }`}
               >
-                <div>
-                  <h3 className="font-serif text-lg mb-1">{tile.title}</h3>
-                  <p className="text-xs text-neutral-500">{tile.caption}</p>
-                </div>
-                <div className="relative w-full h-40 rounded-md overflow-hidden">
-                  <Image src={tile.img} alt={tile.title} fill className="object-cover" />
-                </div>
+                <h3 className="font-serif text-lg">{tile.title}</h3>
+                <video
+                  src={tile.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full rounded-md object-cover"
+                  style={{ aspectRatio: tile.aspect }}
+                />
               </div>
             ))}
           </div>
@@ -209,20 +259,33 @@ export default function SelfServePage() {
             the second it&apos;s resolved, built for the speed of hospitality.
           </p>
 
-          <div className="space-y-16">
+          <div className="space-y-20">
             {features.map((f) => (
               <div
                 key={f.number + f.title}
-                className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-6 items-start"
+                className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-10 items-start"
               >
-                <div className="rounded-full border border-neutral-300 px-4 py-2 text-sm text-neutral-700 w-fit">
+                <div className="rounded-lg border border-neutral-300 px-4 py-2 text-sm text-neutral-700 w-fit">
                   {f.number} {f.title}
                 </div>
-                {f.img && (
-                  <div className="relative w-full h-[260px] sm:h-[360px] rounded-md overflow-hidden border border-neutral-200 bg-neutral-50">
-                    <Image src={f.img} alt={f.title} fill className="object-contain" />
+                {f.video ? (
+                  <video
+                    src={f.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.25)] object-cover"
+                    style={{ aspectRatio: f.aspect }}
+                  />
+                ) : f.img ? (
+                  <div
+                    className="relative w-full rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.25)]"
+                    style={{ aspectRatio: f.aspect }}
+                  >
+                    <Image src={f.img} alt={f.title} fill className="object-cover" />
                   </div>
-                )}
+                ) : null}
               </div>
             ))}
           </div>
@@ -239,33 +302,57 @@ export default function SelfServePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <p className="text-xs text-neutral-400 mb-2 tracking-wide">BEFORE</p>
-              <div className="relative w-full h-[280px] sm:h-[360px] rounded-md overflow-hidden border border-neutral-200">
-                <Image
-                  src="https://framerusercontent.com/images/OC0xnGiGiRvCmAOVAnUccSKfkII.png"
-                  alt="Before redesign"
-                  fill
-                  className="object-cover"
-                />
+              <p className="text-xs text-neutral-400 mb-2 tracking-wide text-center">BEFORE</p>
+              <div className="relative w-full h-[280px] sm:h-[360px] rounded-md overflow-hidden">
+                <div className="absolute inset-x-0 top-0" style={{ height: "calc(100% + 40px)" }}>
+                  <Image
+                    src="https://framerusercontent.com/images/OC0xnGiGiRvCmAOVAnUccSKfkII.png"
+                    alt="Before redesign"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
               </div>
+              <ul className="mt-4 space-y-2">
+                {beforePoints.map((p) => (
+                  <li key={p} className="flex items-center gap-2">
+                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#E8998D] text-white text-[10px] shrink-0">
+                      ✕
+                    </span>
+                    <span className="text-base text-black">{p}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
             <div>
-              <p className="text-xs text-neutral-400 mb-2 tracking-wide">AFTER</p>
-              <div className="relative w-full h-[280px] sm:h-[360px] rounded-md overflow-hidden border border-neutral-200">
-                <Image
-                  src="https://framerusercontent.com/images/osnCfDgwg2efDTECUgMVrTHk.png"
-                  alt="After redesign"
-                  fill
-                  className="object-cover"
-                />
+              <p className="text-xs text-neutral-400 mb-2 tracking-wide text-center">AFTER</p>
+              <div className="relative w-full h-[280px] sm:h-[360px] rounded-md overflow-hidden">
+                <div className="absolute inset-x-0 top-0" style={{ height: "calc(100% + 40px)" }}>
+                  <Image
+                    src="https://framerusercontent.com/images/osnCfDgwg2efDTECUgMVrTHk.png"
+                    alt="After redesign"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
               </div>
+              <ul className="mt-4 space-y-2">
+                {afterPoints.map((p) => (
+                  <li key={p} className="flex items-center gap-2">
+                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#9CC5A1] text-white text-sm shrink-0">
+                      ✓
+                    </span>
+                    <span className="text-base text-black">{p}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
 
         {/* OUTCOME */}
-        <section id="outcome" className="mb-24 max-w-3xl">
-          <p className="text-xs tracking-wide text-olive mb-3">OUTCOMES</p>
+        <section id="outcome" className="mb-24 max-w-3xl mx-auto text-center">
+          <p className="text-xs tracking-wide text-olive mb-3">OUTCOME</p>
           <h2 className="font-serif text-2xl sm:text-3xl mb-4">
             So, what did all this work accomplish?
           </h2>
@@ -313,19 +400,31 @@ export default function SelfServePage() {
         </section>
 
         {/* NEXT */}
-        <section className="mb-10">
+        <section className="mb-10 py-10 flex justify-center">
           <Link
             href="/cinecircle"
-            className="grid grid-cols-[1fr_140px] sm:grid-cols-[1fr_180px] gap-4 items-center border border-neutral-200 rounded-lg p-5 hover:border-neutral-400 transition-colors"
+            className="group inline-flex items-stretch gap-4 w-fit rounded-[3px] border-[0.5px] border-neutral-200 bg-white pr-5 pb-3 transition-[transform,border-color] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-neutral-500 hover:rotate-1"
           >
-            <div>
-              <p className="text-xs text-neutral-400 mb-2">CINECIRCLE, 2025</p>
-              <h3 className="font-serif text-lg mb-1">
-                Designing how South Asian Audiences express film discussions
-              </h3>
+            <div className="flex flex-col justify-center gap-2 py-[60px] pl-[50px]">
+              <p className="text-xs text-neutral-400">CINECIRCLE, 2025</p>
+              <div className="relative">
+                <h3 className="font-serif text-lg text-neutral-900">
+                  Designing how South Asian Audiences
+                  <br />
+                  express film discussions
+                </h3>
+                <h3
+                  aria-hidden
+                  className="absolute inset-0 font-serif text-lg text-olive [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-out group-hover:[clip-path:inset(0_0%_0_0)]"
+                >
+                  Designing how South Asian Audiences
+                  <br />
+                  express film discussions
+                </h3>
+              </div>
               <p className="text-xs text-neutral-500">Case Study / UX</p>
             </div>
-            <div className="relative w-full h-[120px] sm:h-[150px] rounded-md overflow-hidden bg-neutral-50 border border-neutral-200">
+            <div className="relative w-[201.5px] h-[206px] shrink-0 self-center">
               <Image
                 src="https://framerusercontent.com/images/ZLt8SqQeZovOg8ivf9lrFa3RfQ.png"
                 alt="CineCircle preview"

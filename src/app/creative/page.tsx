@@ -100,7 +100,7 @@ export default function CreativePage() {
           <Image src="/images/creative/hero-heading.png" alt="A Look into my (creative) Work" fill className="object-contain" priority />
         </div>
 
-        <section id="fashion-archive" className="mb-24">
+        <section id="fashion-archive" className="mb-24 scroll-mt-24">
           <h3 className="text-lg font-normal mb-2">Fashion Archive</h3>
           <p className="text-base text-neutral-500 max-w-md mb-4 text-pretty">
             A mini passion project I worked on while playing around with the new Claude Code and Figma MCP to
@@ -116,7 +116,7 @@ export default function CreativePage() {
           </div>
         </section>
 
-        <section id="nodi-cafe" className="mb-24">
+        <section id="nodi-cafe" className="mb-24 scroll-mt-24">
           <h3 className="text-lg font-normal mb-2">NODI Cafe</h3>
           <p className="text-base text-neutral-500 max-w-xl mb-6">
             Branding a South Asian inspired coffee shop that I will be opening with my friends in Philly!
@@ -154,7 +154,7 @@ export default function CreativePage() {
           </div>
         </section>
 
-        <section id="website-redesign" className="mb-24">
+        <section id="website-redesign" className="mb-24 scroll-mt-24">
           <p className="font-serif text-2xl mb-2">Kappa Theta Pi</p>
           <h3 className="text-lg font-normal mb-2">Website Redesign</h3>
           <p className="text-base text-neutral-500 max-w-xl mb-4">
@@ -197,7 +197,7 @@ export default function CreativePage() {
           </div>
         </section>
 
-        <section id="merch-designs" className="mb-24">
+        <section id="merch-designs" className="mb-24 scroll-mt-24">
           <h3 className="text-lg font-normal mb-2">Merch Design</h3>
           <p className="text-base text-neutral-500 max-w-xl mb-6">
             My favorite part of holding a design leadership position was creating fun, unique merch for the
@@ -233,7 +233,7 @@ export default function CreativePage() {
           </div>
         </section>
 
-        <section id="graphic-design">
+        <section id="graphic-design" className="scroll-mt-24">
           <h3 className="text-lg font-normal mb-2">Graphic Design</h3>
           <p className="text-base text-neutral-500 max-w-xl mb-4">
             Social media is where I get to have the most fun with KTP&apos;s brand! I create all of our

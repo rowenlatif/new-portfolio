@@ -2,48 +2,52 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { setCursorLabel, setCursorRich, ScriptAccentText } from "@/components/CustomCursor";
 import { triggerProjectTransition } from "@/components/ProjectTransitionOverlay";
 
-const scattered = [
+const clusters = [
   {
+    id: "fashion-archive",
     href: "/creative#fashion-archive",
-    src: "/images/creative/fashion-archive.png",
     title: "Fashion Archive",
     scriptWords: [{ index: 1 }],
     category: "MY STYLE DIARY",
-    className: "left-[6%] top-2 w-40 sm:w-48 -rotate-6",
+    box: "w-40 sm:w-48",
+    images: [{ src: "/images/creative/fashion-archive.png", className: "w-full h-auto" }],
   },
   {
+    id: "website-redesign",
     href: "/creative#website-redesign",
-    src: "/images/creative/ktp-website.png",
     title: "Website Redesign",
     scriptWords: [{ index: 1, spaceBefore: "0.24em", spaceAfter: "-0.1em" }],
     category: "HIGHLIGHTING KTP CULTURE",
-    className: "right-[4%] top-0 w-64 sm:w-80 rotate-3",
+    box: "w-64 sm:w-80",
+    images: [{ src: "/images/creative/ktp-website.png", className: "w-full h-auto" }],
   },
   {
+    id: "merch-design",
     href: "/creative#merch-designs",
-    src: "/images/creative/ktp-hoodie.png",
     title: "Merch Design",
     scriptWords: [{ index: 1, spaceBefore: "0.24em", spaceAfter: "-0.1em" }],
     category: "GRAPHIC DESIGN",
-    className: "left-[30%] bottom-0 w-32 sm:w-40 -rotate-3 z-10",
-  },
-  {
-    href: "/creative#merch-designs",
-    src: "/images/creative/ktp-tee.png",
-    title: "Merch Design",
-    scriptWords: [{ index: 1, spaceBefore: "0.24em", spaceAfter: "-0.1em" }],
-    category: "GRAPHIC DESIGN",
-    className: "left-[42%] bottom-4 w-32 sm:w-40 rotate-6",
+    box: "relative w-44 sm:w-52 h-36 sm:h-44",
+    images: [
+      { src: "/images/creative/ktp-hoodie.png", className: "absolute left-0 top-6 w-28 sm:w-32 h-auto -rotate-6" },
+      { src: "/images/creative/ktp-tee.png", className: "absolute right-0 top-0 w-24 sm:w-28 h-auto rotate-6" },
+    ],
   },
 ];
+
+const ROW_LEFT = ["18%", "50%", "82%"];
+const STACK_ROTATE = [-6, 0, 6];
+const STACK_OFFSET = [-14, 0, 14];
 
 const projects = [
   {
     label: "IBM Maximo",
     href: "/ibm",
+    unlinked: true,
     title: (
       <>
         AI-Driven Asset Management for
@@ -111,6 +115,34 @@ const projects = [
 ];
 
 export default function Home() {
+  const [revealed, setRevealed] = useState(false);
+  const [settled, setSettled] = useState(false);
+  const [hoveredCluster, setHoveredCluster] = useState<string | null>(null);
+  const [hoverTilt, setHoverTilt] = useState<{ id: string; rx: number; ry: number } | null>(null);
+  const clusterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = clusterRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!revealed) return;
+    const t = setTimeout(() => setSettled(true), 900);
+    return () => clearTimeout(t);
+  }, [revealed]);
+
   return (
     <main className="flex-1 flex flex-col">
       <section className="sticky top-0 -mt-20 grid grid-cols-1 md:grid-cols-2 items-start px-10 pt-32 sm:pt-36 pb-[20px] gap-10 bg-white overflow-hidden">
@@ -144,37 +176,9 @@ export default function Home() {
       >
         <h2 className="font-serif text-3xl sm:text-4xl mb-6">Featured Works</h2>
         <div className="space-y-24 sm:space-y-32">
-            {projects.map((project) => (
-              <div key={project.label} className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <div>
-                  <p className="text-sm sm:text-base text-neutral-900 mb-3">{project.label}</p>
-                  <h3 className="text-xl sm:text-2xl font-medium leading-snug mb-2">{project.title}</h3>
-                  <p className="text-sm sm:text-base text-neutral-900 mb-4 max-w-sm">
-                    {project.description}
-                  </p>
-                  <div className="flex gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs font-serif rounded-full border border-neutral-300 px-4 py-2 text-neutral-600"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <Link
-                  href={project.href}
-                  onMouseEnter={() => setCursorLabel(project.cursor)}
-                  onMouseLeave={() => setCursorLabel(null)}
-                  onClick={(e) => {
-                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-                    e.preventDefault();
-                    setCursorLabel(null);
-                    triggerProjectTransition(e.currentTarget, project.color, project.href);
-                  }}
-                  className={`group/img relative overflow-hidden rounded-xl aspect-[16/10] flex items-center justify-center ${project.imageBg}`}
-                >
+            {projects.map((project) => {
+              const media = (
+                <>
                   <Image
                     src={project.image}
                     alt={typeof project.label === "string" ? project.label : "project thumbnail"}
@@ -188,40 +192,128 @@ export default function Home() {
                   {!project.isLogo && (
                     <div className="absolute inset-x-0 bottom-0 h-2/3 group-hover/img:h-1/4 bg-gradient-to-b from-transparent to-white transition-all duration-500 ease-out" />
                   )}
-                </Link>
-              </div>
-            ))}
+                </>
+              );
+
+              return (
+                <div key={project.label} className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                  <div>
+                    <p className="text-sm sm:text-base text-neutral-900 mb-3">{project.label}</p>
+                    <h3 className="text-xl sm:text-2xl font-medium leading-snug mb-2">{project.title}</h3>
+                    <p className="text-sm sm:text-base text-neutral-900 mb-4 max-w-sm">
+                      {project.description}
+                    </p>
+                    <div className="flex gap-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs font-serif rounded-full border border-neutral-300 px-4 py-2 text-neutral-600"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  {project.unlinked ? (
+                    <div
+                      onMouseEnter={() => setCursorLabel(project.cursor)}
+                      onMouseLeave={() => setCursorLabel(null)}
+                      className={`group/img relative overflow-hidden rounded-xl aspect-[16/10] flex items-center justify-center cursor-none ${project.imageBg}`}
+                    >
+                      {media}
+                    </div>
+                  ) : (
+                    <Link
+                      href={project.href}
+                      onMouseEnter={() => setCursorLabel(project.cursor)}
+                      onMouseLeave={() => setCursorLabel(null)}
+                      onClick={(e) => {
+                        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                        e.preventDefault();
+                        setCursorLabel(null);
+                        triggerProjectTransition(e.currentTarget, project.color, project.href);
+                      }}
+                      className={`group/img relative overflow-hidden rounded-xl aspect-[16/10] flex items-center justify-center ${project.imageBg}`}
+                    >
+                      {media}
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
         </div>
       </section>
 
       <div className="relative h-[200vh] -mt-[100vh] bg-olive">
         <section className="sticky top-0 z-0 h-screen overflow-hidden bg-olive px-10 pt-44 text-white">
-          <h2 className="font-serif text-3xl sm:text-4xl text-center max-w-lg mx-auto">
-            Curious about my creative works?
+          <h2 className="font-serif text-lg sm:text-4xl text-center whitespace-nowrap">
+            <span className="font-script font-bold" style={{ marginRight: "-0.1em" }}>
+              C
+            </span>
+            urious about my creative works?
           </h2>
-          <div className="relative mt-16 h-[420px] max-w-4xl mx-auto">
-            {scattered.map((item) => (
-              <Link
-                key={item.title + item.src}
-                href={item.href}
-                onMouseEnter={() =>
-                  setCursorRich({
-                    title: <ScriptAccentText text={item.title} scriptWords={item.scriptWords} />,
-                    category: item.category,
-                  })
-                }
-                onMouseLeave={() => setCursorRich(null)}
-                className={`absolute drop-shadow-2xl transition-transform duration-300 hover:-translate-y-1 ${item.className}`}
-              >
-                <Image
-                  src={item.src}
-                  alt={item.title}
-                  width={640}
-                  height={640}
-                  className="w-full h-auto"
-                />
-              </Link>
-            ))}
+          <div
+            ref={clusterRef}
+            className="relative mt-16 h-[420px] max-w-4xl mx-auto"
+            style={{ perspective: "1400px" }}
+          >
+            {(() => {
+              const hoveredIndex = hoveredCluster ? clusters.findIndex((c) => c.id === hoveredCluster) : -1;
+              return clusters.map((cluster, i) => {
+                const hovered = hoveredCluster === cluster.id;
+                const left = revealed ? ROW_LEFT[i] : "50%";
+                const scale = hovered ? 1.8 : 1;
+                const stackRotate = revealed ? 0 : STACK_ROTATE[i];
+                const stackOffsetX = revealed ? 0 : STACK_OFFSET[i];
+                const staggering = revealed && !settled;
+                const tilt = hovered && hoverTilt?.id === cluster.id ? hoverTilt : { rx: 0, ry: 0 };
+                const glow = hovered
+                  ? "drop-shadow(0 0 10px rgba(255,255,255,0.6)) drop-shadow(0 25px 30px rgba(0,0,0,0.35))"
+                  : "drop-shadow(0 25px 25px rgba(0,0,0,0.15))";
+                const repel =
+                  revealed && hoveredIndex !== -1 && !hovered ? (i < hoveredIndex ? -90 : i > hoveredIndex ? 90 : 0) : 0;
+
+              return (
+                <Link
+                  key={cluster.id}
+                  href={cluster.href}
+                  onMouseEnter={() => {
+                    setHoveredCluster(cluster.id);
+                    setCursorRich({
+                      title: <ScriptAccentText text={cluster.title} scriptWords={cluster.scriptWords} />,
+                      category: cluster.category,
+                    });
+                  }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const px = (e.clientX - rect.left) / rect.width - 0.5;
+                    const py = (e.clientY - rect.top) / rect.height - 0.5;
+                    setHoverTilt({ id: cluster.id, rx: py * -24, ry: px * 24 });
+                  }}
+                  onMouseLeave={() => {
+                    setHoveredCluster(null);
+                    setHoverTilt(null);
+                    setCursorRich(null);
+                  }}
+                  className="absolute top-1/2 transition-[left,transform,filter] ease-out"
+                  style={{
+                    left,
+                    transform: `translate(-50%, -50%) translateX(${stackOffsetX + repel}px) rotate(${stackRotate}deg) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) scale(${scale})`,
+                    filter: glow,
+                    transitionDuration: staggering ? "700ms" : "250ms",
+                    transitionDelay: staggering ? `${i * 90}ms` : "0ms",
+                    zIndex: hovered ? 30 : revealed ? 10 : clusters.length - i,
+                  }}
+                >
+                  <div className={cluster.box}>
+                    {cluster.images.map((img, idx) => (
+                      <Image key={idx} src={img.src} alt={cluster.title} width={640} height={640} className={img.className} />
+                    ))}
+                  </div>
+                </Link>
+              );
+            });
+            })()}
           </div>
         </section>
       </div>

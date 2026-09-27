@@ -1,5 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import CineCircleFeedScroll from "@/components/CineCircleFeedScroll";
+import ScrollProgress from "@/components/ScrollProgress";
+import CaseStudyContents from "@/components/CaseStudyContents";
+import CineCircleTickets from "@/components/CineCircleTickets";
+import CineCircleReel from "@/components/CineCircleReel";
+
+const ROSE = "var(--color-rose-600)";
 
 const toc = [
   { id: "problem", label: "01 Problem" },
@@ -9,44 +16,6 @@ const toc = [
   { id: "design", label: "05 Design" },
   { id: "reflections", label: "06 Reflections" },
   { id: "outcome", label: "07 Outcome" },
-];
-
-const painPoints = [
-  {
-    title: "Private Expression",
-    description: "Preferred group chats over online platforms",
-    icon: "https://framerusercontent.com/images/Qdv2FSGu4f32a7XAxYVgeQzGwc.png",
-  },
-  {
-    title: "Low Psychological Safety",
-    description: "Fear of backlash and harsh discourse",
-    icon: "https://framerusercontent.com/images/I5XtbR1AwxWKoq0Mo8f3RnB90zg.png",
-  },
-  {
-    title: "Repetitive Exposure",
-    description: "Same films circulated, limiting discovery",
-    icon: "https://framerusercontent.com/images/ZR7wmDnvdkRejLzyMmn67nXRc9o.png",
-  },
-  {
-    title: "Not Intuitive",
-    description: "Dense information and unintuitive interactions",
-    icon: "https://framerusercontent.com/images/iQBzR1b5hY73Km4qhtNAhJPQo.png",
-  },
-];
-
-const postExamples = [
-  {
-    caption: "…forming an opinion?",
-    image: "https://framerusercontent.com/images/8pzx1KKD5k9SK71OMklhqYpvyA.png",
-  },
-  {
-    caption: "...rating a film?",
-    image: "https://framerusercontent.com/images/gAHWfMkim47vnSQolvMOIBHeF8.png",
-  },
-  {
-    caption: "…writing reviews?",
-    image: "https://framerusercontent.com/images/eU8qxgsobv4nRAZKFvJWaGXCcpE.png",
-  },
 ];
 
 const reflections = [
@@ -64,69 +33,50 @@ const reflections = [
   },
 ];
 
-const reactions = [
-  { emoji: "🌶️", label: "Spicy", count: 824 },
-  { emoji: "✨", label: "Thought-Provoking", count: 179 },
-  { emoji: "🧠", label: "Mind-Blowing", count: 517 },
-  { emoji: "🧨", label: "Explosive", count: 68 },
-];
-
 export default function CineCirclePage() {
   return (
     <main className="flex-1 flex flex-col">
-      {/* Hero banner */}
-      <div className="w-full bg-gradient-to-b from-rose-100 to-rose-50 flex items-center justify-center px-6 py-16 sm:py-20">
-        <div className="relative w-full max-w-3xl aspect-[859/311]">
-          <Image
-            src="https://framerusercontent.com/images/IO9doX9CqvnOWmW9ReIUTtFJqAU.png"
-            alt="CineCircle post creation and review mockups"
-            fill
-            className="object-contain drop-shadow-md"
-            priority
-          />
-        </div>
-      </div>
+      <ScrollProgress color={ROSE} />
 
-      <div className="w-full px-6 py-10 sm:px-10 lg:px-16 flex gap-16">
+      <div className="w-full px-6 sm:px-10 lg:pl-24 lg:pr-20 xl:pl-32 xl:pr-28 py-10 grid grid-cols-1 lg:grid-cols-[140px_1fr] gap-10">
         {/* Sticky contents sidebar */}
-        <aside className="hidden lg:block w-40 shrink-0">
-          <div className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-xs text-neutral-400 tracking-wide space-y-3">
-            <p>CONTENTS.</p>
-            {toc.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className="block hover:text-neutral-900 transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-            <a
-              href="#top"
-              className="block pt-4 hover:text-neutral-900 transition-colors"
-            >
-              Back to the Top
-            </a>
-          </div>
+        <aside className="hidden lg:block">
+          <CaseStudyContents items={toc} activeClassName="text-rose-600 font-medium" />
         </aside>
 
         {/* Main content */}
-        <div id="top" className="flex-1 min-w-0 max-w-4xl">
-          <h1 className="font-serif text-3xl mb-4">CineCircle</h1>
+        <div id="top" className="min-w-0">
+          {/* Hero banner */}
+          <div className="w-full h-[220px] sm:h-[320px] lg:h-[420px] rounded-sm overflow-hidden bg-gradient-to-b from-rose-100 to-rose-50 flex items-center justify-center px-6 mb-10">
+            <div className="relative w-full max-w-2xl aspect-[859/311]">
+              <Image
+                src="https://framerusercontent.com/images/IO9doX9CqvnOWmW9ReIUTtFJqAU.png"
+                alt="CineCircle post creation and review mockups"
+                fill
+                className="object-contain drop-shadow-md"
+                priority
+              />
+            </div>
+          </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-            <div className="flex flex-wrap items-center gap-2">
-              {["Web / Mobile", "Case Study", "Shipped"].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-600"
-                >
-                  {tag}
-                </span>
-              ))}
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <div>
+              <h1 className="font-serif text-3xl mb-3">CineCircle</h1>
+              <div className="flex flex-wrap gap-2">
+                {["Web / Mobile", "Case Study", "Shipped"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-600"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
             <a
-              href="#"
+              href="https://github.com/GenerateNU/cinecircle"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full border border-rose-300 px-4 py-1.5 text-sm text-rose-700 hover:bg-rose-50 transition-colors"
             >
               View GitHub →
@@ -137,7 +87,7 @@ export default function CineCirclePage() {
             Designing a community space for South Asian cinema fans
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-14">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 border-t border-neutral-200 pt-8 mb-20">
             <div>
               <p className="text-xs text-neutral-400 mb-1">Role</p>
               <p className="text-sm text-neutral-700">Product Designer</p>
@@ -160,47 +110,16 @@ export default function CineCirclePage() {
             </div>
           </div>
 
-          {/* Reminder callout */}
-          <div className="border border-neutral-200 rounded-lg p-8 mb-16 flex items-center justify-between gap-6">
-            <div className="max-w-md">
-              <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
-                REMINDER
-              </p>
-              <p className="text-neutral-700 text-sm leading-relaxed">
-                This case study is currently in the process of being revamped!
-                You can keep scrolling below to view the older iteration.
-              </p>
-            </div>
-            <div className="hidden sm:flex items-center gap-2 shrink-0">
-              <div className="relative w-16 h-16">
-                <Image
-                  src="https://framerusercontent.com/images/UswEW0OLQvwuPsFn2c3omSJ9U.png"
-                  alt=""
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <div className="relative w-12 h-12">
-                <Image
-                  src="https://framerusercontent.com/images/UswEW0OLQvwuPsFn2c3omSJ9U.png"
-                  alt=""
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          </div>
-
           {/* PROBLEM */}
-          <section id="problem" className="mb-20">
+          <section id="problem" className="pt-20 sm:pt-28 mb-24 text-center max-w-3xl mx-auto">
             <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
               PROBLEM
             </p>
-            <h2 className="font-serif text-2xl mb-4 max-w-2xl">
+            <h2 className="font-serif text-2xl mb-4 text-balance">
               It&apos;s hard to sustain meaningful movie discussions on social
               platforms
             </h2>
-            <p className="text-neutral-700 text-sm leading-relaxed max-w-2xl">
+            <p className="text-neutral-700 text-sm leading-relaxed max-w-2xl mx-auto">
               Fans found themselves stuck between fragmented group chats and
               noisy comment threads, where thoughtful takes got buried and
               real conversation about the films they loved never had a place
@@ -222,34 +141,22 @@ export default function CineCirclePage() {
               designs:
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {painPoints.map((point) => (
-                <div
-                  key={point.title}
-                  className="border border-neutral-200 rounded-lg p-6"
-                >
-                  <div className="relative w-14 h-14 mb-6">
-                    <Image
-                      src={point.icon}
-                      alt=""
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  <p className="font-serif text-lg text-neutral-900 mb-1">
-                    {point.title}
-                  </p>
-                  <p className="text-sm text-neutral-500">
-                    {point.description}
-                  </p>
-                </div>
-              ))}
+            <CineCircleTickets />
+
+            <div className="mt-20">
+              <h2 className="font-serif text-2xl mb-3">Competitive Analysis</h2>
+              <p className="text-neutral-700 text-sm mb-10 max-w-2xl">
+                Fans already split their film talk across half a dozen apps — none
+                of which were built for it. I mapped where each one earns its keep,
+                and where the conversation falls through.
+              </p>
+              <CineCircleReel />
             </div>
           </section>
 
           {/* How Might We callout */}
-          <div className="rounded-lg bg-gradient-to-b from-white to-amber-50 border border-amber-100 p-10 sm:p-14 mb-20 flex items-center justify-center text-center">
-            <p className="font-serif text-xl sm:text-2xl leading-relaxed max-w-2xl text-neutral-800">
+          <div className="rounded-lg bg-gradient-to-b from-white to-amber-50 border border-amber-100 px-10 py-16 sm:px-12 sm:py-20 mb-24 max-w-2xl mx-auto flex items-center justify-center text-center">
+            <p className="font-serif text-xl sm:text-2xl leading-relaxed max-w-[32rem] text-balance text-neutral-800">
               How might we design an experience that{" "}
               <span className="italic text-orange-600">encourages</span> fans
               to <span className="italic text-orange-600">express</span> their
@@ -260,7 +167,7 @@ export default function CineCirclePage() {
           </div>
 
           {/* IDEATION */}
-          <section id="ideation" className="mb-20">
+          <section id="ideation" className="mb-24">
             <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
               IDEATING
             </p>
@@ -273,27 +180,11 @@ export default function CineCirclePage() {
               differently.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-              {postExamples.map((post) => (
-                <div key={post.caption} className="flex flex-col gap-3">
-                  <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden border border-neutral-200 bg-neutral-50">
-                    <Image
-                      src={post.image}
-                      alt={post.caption}
-                      fill
-                      className="object-cover object-top"
-                    />
-                  </div>
-                  <p className="text-sm text-neutral-500 text-center italic">
-                    {post.caption}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <CineCircleFeedScroll />
           </section>
 
           {/* SOLUTION */}
-          <section id="solution" className="mb-20">
+          <section id="solution" className="mb-24">
             <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
               SOLUTION
             </p>
@@ -332,7 +223,7 @@ export default function CineCirclePage() {
           </section>
 
           {/* DESIGN */}
-          <section id="design" className="mb-20">
+          <section id="design" className="mb-24">
             <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
               DESIGN
             </p>
@@ -347,7 +238,7 @@ export default function CineCirclePage() {
               </p>
             </div>
 
-            <div className="mb-16">
+            <div>
               <h3 className="font-serif text-2xl mb-3">Long form posts</h3>
               <p className="text-neutral-700 text-sm max-w-xl leading-relaxed">
                 For users ready to articulate more thoughtful perspectives,
@@ -356,54 +247,10 @@ export default function CineCirclePage() {
                 prefer brevity.
               </p>
             </div>
-
-            <div>
-              <h3 className="font-serif text-2xl mb-3">
-                Replacing likes with reactions
-              </h3>
-              <p className="text-neutral-700 text-sm max-w-xl leading-relaxed mb-8">
-                Instead of neutral likes, reactions such as{" "}
-                <span className="italic">Spicy</span> or{" "}
-                <span className="italic">Thought-Provoking</span> allow users
-                to convey emotional tone and cultural relevance, shifting
-                engagement from validation to expression.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-center gap-10">
-                <div className="relative w-56 h-72 shrink-0">
-                  <Image
-                    src="https://framerusercontent.com/images/s0RACLxZtEUgVxaNLPCAZpbP8.png"
-                    alt="CineCircle feed"
-                    fill
-                    className="object-contain"
-                  />
-                  <div className="absolute -bottom-4 -right-10 w-40 h-52">
-                    <Image
-                      src="https://framerusercontent.com/images/YI7b34DgWY3yTa6FMUiFjbs6NV8.png"
-                      alt="CineCircle post detail"
-                      fill
-                      className="object-contain drop-shadow-lg"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-3 sm:ml-8">
-                  {reactions.map((r) => (
-                    <span
-                      key={r.label}
-                      className="flex items-center gap-2 rounded-full border border-neutral-200 px-4 py-2 text-sm text-neutral-700"
-                      title={r.label}
-                    >
-                      <span>{r.emoji}</span>
-                      <span>{r.count}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
           </section>
 
           {/* REFLECTIONS */}
-          <section id="reflections" className="mb-20">
+          <section id="reflections" className="mb-24">
             <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
               REFLECTIONS
             </p>
@@ -429,7 +276,7 @@ export default function CineCirclePage() {
           </section>
 
           {/* OUTCOME */}
-          <section id="outcome" className="mb-20 text-center max-w-2xl mx-auto">
+          <section id="outcome" className="py-8 sm:py-12 mb-24 text-center max-w-2xl mx-auto">
             <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
               OUTCOME
             </p>
@@ -446,22 +293,37 @@ export default function CineCirclePage() {
           </section>
 
           {/* Next in collection */}
-          <Link
-            href="/perplexity"
-            className="group block border border-neutral-200 rounded-lg p-8 flex items-center justify-between gap-6 hover:border-neutral-300 transition-colors"
-          >
-            <div>
-              <p className="text-xs text-neutral-400 tracking-wide mb-3">
-                NEXT IN THE COLLECTION
-              </p>
-              <p className="text-xs text-neutral-400 mb-1">PERPLEXITY, 2026</p>
-              <h3 className="font-serif text-lg text-neutral-900 mb-1 group-hover:text-rose-600 transition-colors">
-                Improving AI Adoption
-              </h3>
-              <p className="text-xs text-neutral-400">UX Research</p>
-            </div>
-            <div className="hidden sm:block w-32 h-32 rounded-md bg-neutral-100 shrink-0" />
-          </Link>
+          <section className="mb-10 py-10 flex justify-center">
+            <Link
+              href="/perplexity"
+              className="group inline-flex items-stretch gap-4 w-fit rounded-[3px] border-[0.5px] border-neutral-200 bg-white pr-5 pb-3 transition-[transform,border-color] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-neutral-500 hover:rotate-1"
+            >
+              <div className="flex flex-col justify-center gap-2 py-[60px] pl-[50px]">
+                <p className="text-xs text-neutral-400">PERPLEXITY, 2026</p>
+                <div className="relative">
+                  <h3 className="font-serif text-lg text-neutral-900">
+                    Improving AI Adoption
+                  </h3>
+                  <h3
+                    aria-hidden
+                    className="absolute inset-0 font-serif text-lg text-rose-600 [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-out group-hover:[clip-path:inset(0_0%_0_0)]"
+                  >
+                    Improving AI Adoption
+                  </h3>
+                </div>
+                <p className="text-xs text-neutral-500">UX Research</p>
+              </div>
+              <div className="relative w-[201.5px] h-[206px] shrink-0 self-center">
+                <Image
+                  src="/images/perplexity-logo.png"
+                  alt="Perplexity preview"
+                  fill
+                  className="object-contain"
+                  loading="eager"
+                />
+              </div>
+            </Link>
+          </section>
         </div>
       </div>
     </main>

@@ -1,18 +1,16 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import ScrollProgress from "@/components/ScrollProgress";
+import CaseStudyContents from "@/components/CaseStudyContents";
 
 const OLIVE = "#6a7040";
 
 const contents = [
-  { id: "problem", href: "#problem", label: "01 Problem" },
-  { id: "solution", href: "#solution", label: "02 Solution" },
-  { id: "features", href: "#features", label: "03 Features" },
-  { id: "outcome", href: "#outcome", label: "04 Outcome" },
-  { id: "reflection", href: "#reflection", label: "05 Reflection" },
+  { id: "problem", label: "01 Problem" },
+  { id: "solution", label: "02 Solution" },
+  { id: "features", label: "03 Features" },
+  { id: "outcome", label: "04 Outcome" },
+  { id: "reflection", label: "05 Reflection" },
 ];
 
 const tags = ["Web / Mobile", "Case Study", "Shipped"];
@@ -88,49 +86,11 @@ const reflections = [
 ];
 
 export default function SelfServePage() {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-
-  useEffect(() => {
-    const sections = contents
-      .map((c) => document.getElementById(c.id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        }
-      },
-      { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
-    );
-
-    sections.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <main className="flex-1 px-6 sm:px-10 lg:px-16 py-10 grid grid-cols-1 lg:grid-cols-[140px_1fr] gap-10">
+    <main className="flex-1 px-6 sm:px-10 lg:pl-24 lg:pr-20 xl:pl-32 xl:pr-28 py-10 grid grid-cols-1 lg:grid-cols-[140px_1fr] gap-10">
       <ScrollProgress color={OLIVE} />
       <aside className="hidden lg:block">
-        <nav className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-xs tracking-wide text-neutral-400 space-y-3">
-          <p className="text-neutral-900 mb-4">CONTENTS.</p>
-          {contents.map((c) => (
-            <a
-              key={c.href}
-              href={c.href}
-              className={`block transition-colors hover:text-neutral-900 ${
-                activeSection === c.id ? "text-olive font-medium" : ""
-              }`}
-            >
-              {c.label}
-            </a>
-          ))}
-          <a href="#top" className="block pt-6 hover:text-neutral-900">
-            Back to the Top
-          </a>
-        </nav>
+        <CaseStudyContents items={contents} activeClassName="text-olive font-medium" />
       </aside>
 
       <div id="top">
@@ -162,20 +122,14 @@ export default function SelfServePage() {
                 ))}
               </div>
             </div>
-            <div className="flex gap-2">
-              <a
-                href="#"
-                className="rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-600 hover:text-neutral-900 hover:border-neutral-400 transition-colors"
-              >
-                Visit GitHub →
-              </a>
-              <a
-                href="#"
-                className="rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-600 hover:text-neutral-900 hover:border-neutral-400 transition-colors"
-              >
-                Visit Demo →
-              </a>
-            </div>
+            <a
+              href="https://github.com/GenerateNU/selfserve"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-[#6a7040]/40 px-4 py-1.5 text-sm text-olive hover:bg-[#6a7040]/10 transition-colors"
+            >
+              View GitHub →
+            </a>
           </div>
 
           <p className="text-sm text-neutral-500 leading-relaxed max-w-3xl mb-10">
@@ -202,7 +156,7 @@ export default function SelfServePage() {
         </section>
 
         {/* PROBLEM */}
-        <section id="problem" className="mb-24 max-w-3xl mx-auto text-center">
+        <section id="problem" className="pt-20 sm:pt-28 mb-24 max-w-3xl mx-auto text-center">
           <p className="text-xs tracking-wide text-olive mb-3">PROBLEM</p>
           <h2 className="font-serif text-2xl sm:text-3xl mb-4">
             Hotel task management is outdated, slow, and clunky
@@ -265,7 +219,7 @@ export default function SelfServePage() {
                 key={f.number + f.title}
                 className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-10 items-start"
               >
-                <div className="rounded-lg border border-neutral-300 px-4 py-2 text-sm text-neutral-700 w-fit">
+                <div className="rounded-lg border border-neutral-300 px-4 py-2 text-sm text-neutral-700 w-full">
                   {f.number} {f.title}
                 </div>
                 {f.video ? (
@@ -302,7 +256,7 @@ export default function SelfServePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <p className="text-xs text-neutral-400 mb-2 tracking-wide text-center">BEFORE</p>
+              <p className="text-xs text-black mb-2 tracking-wide text-center">BEFORE</p>
               <div className="relative w-full h-[280px] sm:h-[360px] rounded-md overflow-hidden">
                 <div className="absolute inset-x-0 top-0" style={{ height: "calc(100% + 40px)" }}>
                   <Image
@@ -325,7 +279,7 @@ export default function SelfServePage() {
               </ul>
             </div>
             <div>
-              <p className="text-xs text-neutral-400 mb-2 tracking-wide text-center">AFTER</p>
+              <p className="text-xs text-black mb-2 tracking-wide text-center">AFTER</p>
               <div className="relative w-full h-[280px] sm:h-[360px] rounded-md overflow-hidden">
                 <div className="absolute inset-x-0 top-0" style={{ height: "calc(100% + 40px)" }}>
                   <Image
@@ -351,7 +305,7 @@ export default function SelfServePage() {
         </section>
 
         {/* OUTCOME */}
-        <section id="outcome" className="mb-24 max-w-3xl mx-auto text-center">
+        <section id="outcome" className="py-8 sm:py-12 mb-24 max-w-3xl mx-auto text-center">
           <p className="text-xs tracking-wide text-olive mb-3">OUTCOME</p>
           <h2 className="font-serif text-2xl sm:text-3xl mb-4">
             So, what did all this work accomplish?

@@ -2,6 +2,13 @@
 
 html {
   scroll-behavior: smooth;
+  /* clip, not hidden: hidden would make this a scroll container and break
+     every position: sticky inside it. */
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
 }
 
 :root {
@@ -79,4 +86,99 @@ body {
 .intro-fade-up {
   opacity: 0;
   animation: intro-fade-up 0.4s ease-out forwards;
+}
+
+/* --- CineCircle research tickets --- */
+
+/* Concave quarter-circle bites at all four corners, which is what gives the
+   shape its ticket feel. --off shifts the arc centres outward so nested,
+   padded layers stay parallel to the outer edge. */
+.ticket-cut {
+  --cut: 8px;
+  --off: 0px;
+  --m1: radial-gradient(
+    circle var(--cut) at calc(0px - var(--off)) calc(0px - var(--off)),
+    transparent var(--cut),
+    #000 var(--cut)
+  );
+  --m2: radial-gradient(
+    circle var(--cut) at calc(100% + var(--off)) calc(0px - var(--off)),
+    transparent var(--cut),
+    #000 var(--cut)
+  );
+  --m3: radial-gradient(
+    circle var(--cut) at calc(0px - var(--off)) calc(100% + var(--off)),
+    transparent var(--cut),
+    #000 var(--cut)
+  );
+  --m4: radial-gradient(
+    circle var(--cut) at calc(100% + var(--off)) calc(100% + var(--off)),
+    transparent var(--cut),
+    #000 var(--cut)
+  );
+  -webkit-mask-image: var(--m1), var(--m2), var(--m3), var(--m4);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-composite: source-in;
+  mask-image: var(--m1), var(--m2), var(--m3), var(--m4);
+  mask-repeat: no-repeat;
+  mask-composite: intersect;
+}
+
+/* Confetti: up and out, then falling back down under its own weight. */
+@keyframes ticket-confetti {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  55% {
+    transform: translate(
+        calc(-50% + var(--tx) * 0.6),
+        calc(-50% + var(--peak))
+      )
+      scale(var(--s)) rotate(calc(var(--r) * 0.55));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)))
+      scale(calc(var(--s) * 0.85)) rotate(var(--r));
+  }
+}
+
+.ticket-confetti {
+  opacity: 0;
+  animation: ticket-confetti var(--dur, 900ms) cubic-bezier(0.15, 0.7, 0.35, 1)
+    var(--delay, 0ms) forwards;
+}
+
+/* --- CineCircle competitive analysis: slowly turning reel --- */
+@keyframes reel-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes reel-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.reel-ring {
+  animation: reel-spin 60s linear infinite;
+}
+
+/* Keeps each bubble upright while the ring turns underneath it. */
+.reel-upright {
+  animation: reel-spin-reverse 60s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticket-confetti,
+  .reel-ring,
+  .reel-upright {
+    animation: none;
+  }
 }

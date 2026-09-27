@@ -44,8 +44,17 @@ export default function ProjectTransitionOverlay() {
         });
       });
 
+      const root = document.documentElement;
+      const prevScrollBehavior = root.style.scrollBehavior;
+
       window.setTimeout(() => {
+        // The global `scroll-behavior: smooth` turns the router's scroll-to-top
+        // into an animation that gets interrupted mid-navigation, so the case
+        // study lands partway down. Pin the top instantly across the push.
+        root.style.scrollBehavior = "auto";
+        window.scrollTo(0, 0);
         router.push(href);
+        requestAnimationFrame(() => window.scrollTo(0, 0));
       }, EXPAND_MS);
 
       window.setTimeout(() => {
@@ -57,6 +66,7 @@ export default function ProjectTransitionOverlay() {
 
       window.setTimeout(() => {
         setVisible(false);
+        root.style.scrollBehavior = prevScrollBehavior;
       }, EXPAND_MS + SETTLE_MS + FADE_MS);
     };
 
@@ -67,8 +77,8 @@ export default function ProjectTransitionOverlay() {
   return (
     <div
       ref={overlayRef}
-      className="fixed top-0 left-0 z-[200] pointer-events-none"
-      style={{ width: "100vw", height: "100vh", opacity: visible ? undefined : 0 }}
+      className="fixed inset-0 z-[200] pointer-events-none"
+      style={{ opacity: visible ? undefined : 0 }}
     />
   );
 }

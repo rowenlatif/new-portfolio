@@ -102,6 +102,37 @@ export default function IbmPage() {
           </div>
         </section>
 
+        {/* Mission */}
+        <section className="py-10 sm:py-14 mb-24 flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
+          <div className="md:w-[38%] shrink-0">
+            <p className="text-xs tracking-wide text-neutral-400 mb-3">THE MISSION</p>
+            <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance">
+              Transforming Maximo Assistant from flat tables into clear visual insights that help
+              maintenance teams understand operational data faster.
+            </h2>
+          </div>
+          <div className="md:w-[48%] space-y-4 text-sm text-neutral-500 leading-relaxed text-pretty">
+            <p>
+              As the sole Product Designer on data visualization for IBM Maximo, I owned the experience
+              end to end, from early exploration through final handoff to engineering. The goal was to
+              help enterprise maintenance teams make sense of their operational data at a glance instead
+              of digging through rows of numbers to find what mattered.
+            </p>
+            <p>
+              Maximo Assistant answers questions in natural language, but its responses often came back
+              as dense tables. I designed how those answers become charts that people can open up and
+              explore, with a clear path back to the records underneath, so that AI-generated insights
+              feel trustworthy enough to act on.
+            </p>
+            <p>
+              Much of the work happened beyond individual screens. Partnering closely with engineering and
+              product, I shaped the rules behind the system itself: when an answer should become a chart
+              rather than a table, and how visualization patterns hold up as the questions and data behind
+              them change.
+            </p>
+          </div>
+        </section>
+
         {/* In progress */}
         <section className="mb-24">
           <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">

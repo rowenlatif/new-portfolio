@@ -47,7 +47,6 @@ const projects = [
   {
     label: "IBM Maximo",
     href: "/ibm",
-    unlinked: true,
     title: (
       <>
         AI-Driven Asset Management for
@@ -101,6 +100,8 @@ const projects = [
     isLogo: false,
   },
   {
+    // Hidden for now; remove `hidden` to show it again.
+    hidden: true,
     label: "Perplexity",
     href: "/perplexity",
     title: <>Improving AI Adoption</>,
@@ -145,28 +146,32 @@ export default function Home() {
 
   return (
     <main className="flex-1 flex flex-col">
-      <section className="sticky top-0 -mt-20 grid grid-cols-1 md:grid-cols-2 items-start px-10 pt-32 sm:pt-36 pb-[20px] gap-10 bg-white overflow-hidden">
-        <div>
-          <div className="intro-slide-up">
-            <h1 className="font-serif text-3xl sm:text-4xl leading-[1.15] mb-0.5">
-              <span className="intro-reveal-x inline-block" style={{ animationDelay: "0.05s" }}>
-                Hello, I&apos;m <span className="text-neutral-900 text-xl sm:text-2xl align-middle">. ݁₊ ୨୧˚.</span>{" "}
-                <span className="font-script font-normal text-4xl sm:text-5xl align-middle">Rowen</span>
-              </span>
-            </h1>
-            <p className="font-serif text-3xl sm:text-4xl leading-[1.3] text-neutral-800 mb-6 max-w-md">
-              <span className="intro-reveal-x inline-block" style={{ animationDelay: "0.18s" }}>
-                I design products from concept to code{" "}
-                <span className="text-neutral-900 text-xl sm:text-2xl">₊.</span>
-              </span>
-            </p>
-          </div>
-          <div className="intro-slide-up text-base text-neutral-500 space-y-0.5" style={{ animationDelay: "0.55s" }}>
-            <p>creative technologist</p>
-            <p>product designer @ IBM</p>
-          </div>
+      <section
+        className="sticky top-0 -mt-20 flex flex-col items-center text-center px-10 pt-28 pb-40 bg-white overflow-hidden"
+        style={{
+          backgroundImage: "radial-gradient(rgba(0, 0, 0, 0.14) 1px, transparent 1px)",
+          backgroundSize: "18px 18px",
+        }}
+      >
+        <div className="intro-slide-up flex flex-col items-center">
+          <Image src="/nav-mark.png" alt="" width={48} height={39} className="opacity-80 mb-5" priority />
+          <h1 className="font-serif text-3xl sm:text-4xl leading-[1.15] mb-0.5">
+            <span className="intro-reveal-x inline-block" style={{ animationDelay: "0.05s" }}>
+              Hello, I&apos;m <span className="text-neutral-900 text-xl sm:text-2xl align-middle">. ݁₊ ୨୧˚.</span>{" "}
+              <span className="font-script font-normal text-4xl sm:text-5xl align-middle">Rowen</span>
+            </span>
+          </h1>
+          <p className="font-serif text-3xl sm:text-4xl leading-[1.3] text-neutral-800 mb-6 max-w-md">
+            <span className="intro-reveal-x inline-block" style={{ animationDelay: "0.18s" }}>
+              I design products from concept to code{" "}
+              <span className="text-neutral-900 text-xl sm:text-2xl">₊.</span>
+            </span>
+          </p>
         </div>
-        <div className="relative h-64 md:h-96 w-full" />
+        <div className="intro-slide-up text-base text-neutral-500 space-y-0.5" style={{ animationDelay: "0.55s" }}>
+          <p>creative technologist</p>
+          <p>product designer @ IBM</p>
+        </div>
       </section>
 
       <section
@@ -176,7 +181,7 @@ export default function Home() {
       >
         <h2 className="font-serif text-3xl sm:text-4xl mb-6">Featured Works</h2>
         <div className="space-y-24 sm:space-y-32">
-            {projects.map((project) => {
+            {projects.filter((project) => !project.hidden).map((project) => {
               const media = (
                 <>
                   <Image
@@ -214,30 +219,20 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                  {project.unlinked ? (
-                    <div
-                      onMouseEnter={() => setCursorLabel(project.cursor)}
-                      onMouseLeave={() => setCursorLabel(null)}
-                      className={`group/img relative overflow-hidden rounded-xl aspect-[16/10] flex items-center justify-center cursor-none ${project.imageBg}`}
-                    >
-                      {media}
-                    </div>
-                  ) : (
-                    <Link
-                      href={project.href}
-                      onMouseEnter={() => setCursorLabel(project.cursor)}
-                      onMouseLeave={() => setCursorLabel(null)}
-                      onClick={(e) => {
-                        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-                        e.preventDefault();
-                        setCursorLabel(null);
-                        triggerProjectTransition(e.currentTarget, project.color, project.href);
-                      }}
-                      className={`group/img relative overflow-hidden rounded-xl aspect-[16/10] flex items-center justify-center ${project.imageBg}`}
-                    >
-                      {media}
-                    </Link>
-                  )}
+                  <Link
+                    href={project.href}
+                    onMouseEnter={() => setCursorLabel(project.cursor)}
+                    onMouseLeave={() => setCursorLabel(null)}
+                    onClick={(e) => {
+                      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                      e.preventDefault();
+                      setCursorLabel(null);
+                      triggerProjectTransition(e.currentTarget, project.color, project.href);
+                    }}
+                    className={`group/img relative overflow-hidden rounded-xl aspect-[16/10] flex items-center justify-center ${project.imageBg}`}
+                  >
+                    {media}
+                  </Link>
                 </div>
               );
             })}

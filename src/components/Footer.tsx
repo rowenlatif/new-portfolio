@@ -4,6 +4,9 @@ import { usePathname } from "next/navigation";
 
 const LIGHT_FOOTER_ROUTES = ["/about", "/creative"];
 
+// Big script "Rowen Latif" in the bottom right. Hidden for now; flip to bring it back.
+const SHOW_SCRIPT_NAME = false;
+
 export default function Footer() {
   const pathname = usePathname();
   const isLight = LIGHT_FOOTER_ROUTES.includes(pathname);
@@ -13,10 +16,12 @@ export default function Footer() {
       <div className={isLight ? "pt-28 sm:pt-32" : "bg-olive pt-10 sm:pt-12"} aria-hidden />
       <div
         className={[
-          "w-full px-10 pb-12",
+          "w-full px-10 pb-12 overflow-hidden",
           isLight ? "bg-white text-neutral-900" : "bg-olive text-white",
         ].join(" ")}
       >
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+      <div>
       {isLight && (
         <p className="font-sans not-italic font-normal text-2xl sm:text-3xl tracking-wide mb-3 text-neutral-900">
           ─────── *ੈ✩‧₊˚✧˖*°࿐
@@ -51,6 +56,19 @@ export default function Footer() {
       <div className={["text-base space-y-0.5", isLight ? "text-neutral-500" : "text-white"].join(" ")}>
         <p>Rowen Latif © 2026</p>
         <p>Built with love and iced coffee</p>
+      </div>
+      </div>
+      {SHOW_SCRIPT_NAME && (
+      <p
+        aria-hidden
+        className={[
+          "font-script font-normal leading-[0.8] whitespace-nowrap text-[clamp(3rem,12vw,11rem)] self-end -mr-4 -mb-[calc(3rem+0.06em)]",
+          isLight ? "text-neutral-900" : "text-white",
+        ].join(" ")}
+      >
+        Rowen Latif
+      </p>
+      )}
       </div>
       </div>
     </footer>

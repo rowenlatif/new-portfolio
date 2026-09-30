@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const links = [
@@ -17,13 +18,23 @@ function scrollToTop() {
 
 const LINK_DELAYS = ["0.5s", "0.56s", "0.62s", "0.68s"];
 
+// Pages where the nav stays visible instead of hiding on scroll down.
+const ALWAYS_SHOWN = ["/about"];
+
 export default function Nav() {
   const [hidden, setHidden] = useState(false);
   const [mounted, setMounted] = useState(false);
   const lastY = useRef(0);
+  const pathname = usePathname();
+  const alwaysShown = ALWAYS_SHOWN.includes(pathname);
 
   useEffect(() => {
     lastY.current = window.scrollY;
+    if (alwaysShown) {
+      setHidden(false);
+      document.documentElement.style.setProperty("--sidebar-top", "6rem");
+      return;
+    }
     const onScroll = () => {
       const y = window.scrollY;
       const goingDown = y > lastY.current;
@@ -34,7 +45,7 @@ export default function Nav() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [alwaysShown]);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 300);

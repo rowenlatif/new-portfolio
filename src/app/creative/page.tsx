@@ -80,8 +80,8 @@ export default function CreativePage() {
     <main className="flex-1 px-10 py-10 grid grid-cols-1 lg:grid-cols-[160px_1fr] gap-10">
       <aside className="hidden lg:block">
         <nav className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-[11px] tracking-wide text-neutral-400 space-y-4">
-          {sidebar.map((group) => (
-            <div key={group.heading}>
+          {sidebar.map((group, i) => (
+            <div key={group.heading} className="intro-fade-up" style={{ animationDelay: `${0.5 + i * 0.06}s` }}>
               <p className="text-neutral-500 mb-1.5">{group.heading}</p>
               <div className="space-y-1 pl-3">
                 {group.items.map((item) => (
@@ -96,11 +96,13 @@ export default function CreativePage() {
       </aside>
 
       <div>
-        <div className="relative w-full max-w-2xl mx-auto h-[160px] sm:h-[220px] mb-24 sm:mb-32">
-          <Image src="/images/creative/hero-heading.png" alt="A Look into my (creative) Work" fill className="object-contain" priority />
+        <div className="intro-slide-up relative w-full max-w-2xl mx-auto h-[160px] sm:h-[220px] mb-24 sm:mb-32">
+          <div className="intro-reveal-x absolute inset-0" style={{ animationDelay: "0.05s" }}>
+            <Image src="/images/creative/hero-heading.png" alt="A Look into my (creative) Work" fill className="object-contain" priority />
+          </div>
         </div>
 
-        <section id="fashion-archive" className="mb-24 scroll-mt-24">
+        <section id="fashion-archive" className="intro-slide-up mb-24 scroll-mt-24" style={{ animationDelay: "0.55s" }}>
           <h3 className="text-lg font-normal mb-2">Fashion Archive</h3>
           <p className="text-base text-neutral-500 max-w-md mb-4 text-pretty">
             A mini passion project I worked on while playing around with the new Claude Code and Figma MCP to
@@ -116,7 +118,7 @@ export default function CreativePage() {
           </div>
         </section>
 
-        <section id="nodi-cafe" className="mb-24 scroll-mt-24">
+        <section id="nodi-cafe" className="intro-slide-up mb-24 scroll-mt-24" style={{ animationDelay: "0.75s" }}>
           <h3 className="text-lg font-normal mb-2">NODI Cafe</h3>
           <p className="text-base text-neutral-500 max-w-xl mb-6">
             Branding a South Asian inspired coffee shop that I will be opening with my friends in Philly!
@@ -245,7 +247,7 @@ export default function CreativePage() {
               <InstagramIcon />
             </IconLink>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {graphicDesignPosts.map((url) => (
               <InstagramEmbed key={url} url={url} />
             ))}

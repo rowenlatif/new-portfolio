@@ -1,121 +1,139 @@
+"use client";
+
 import Image from "next/image";
+import { setCursorLabel } from "@/components/CustomCursor";
+
+const tags = ["Web / Mobile", "Case Study", "Shipped"];
+
+const meta = [
+  { label: "Role", value: ["Product Designer"] },
+  { label: "Team", value: ["Project Manager", "Design & Tech Leads", "Engineers"] },
+  { label: "Timeline", value: ["Aug 2026 – Dec 2026"] },
+  { label: "Skills", value: ["Figma", "FigmaMake"] },
+];
+
+// Overlapping two-row collage. Offsets only apply from sm up; on phones the
+// photos stack in a single column.
+const photos = [
+  {
+    src: "/images/ibm/photo-1.jpg",
+    alt: "Rowen taking a mirror selfie in an IBM office elevator",
+    caption: "Elevator selfies are mandatory",
+    position: "object-[37%_50%]",
+    className: "sm:-rotate-3 sm:hover:-rotate-5 sm:translate-x-[2%] sm:translate-y-[5%]",
+  },
+  {
+    src: "/images/ibm/photo-2.jpg",
+    alt: "Rowen with two fellow interns under the IBM sign",
+    caption: "From fellow KTP brothers to my co-op co-workers!",
+    className: "sm:rotate-2 sm:hover:rotate-4 sm:-translate-x-[1%]",
+  },
+  {
+    src: "/images/ibm/photo-3.jpg",
+    alt: "Interns eating lunch together on the office terrace",
+    caption: "Lunch breaks with the other design co-op girlies",
+    className: "sm:rotate-2 sm:hover:rotate-4 sm:translate-x-[6%] sm:translate-y-[6%]",
+  },
+  {
+    src: "/images/ibm/photo-4.jpg",
+    alt: "IBM racing simulator in front of a large track display",
+    caption: "Taking a quick break to test out the racing sim at the Innovation Studio",
+    className: "sm:-rotate-2 sm:hover:-rotate-4 sm:translate-x-[1%] sm:translate-y-[1%]",
+  },
+];
+
+// Later photos sit on top where they overlap.
+const STACK = ["z-[1]", "z-[2]", "z-[3]", "z-[4]"];
 
 export default function IbmPage() {
   return (
-    <main className="flex-1 flex flex-col">
-      {/* Hero banner — no image, project is under NDA */}
-      <div className="w-full h-64 sm:h-80 lg:h-96 bg-neutral-100" />
+    <main className="flex-1 px-6 sm:px-10 lg:pl-24 lg:pr-20 xl:pl-32 xl:pr-28 py-10 grid grid-cols-1 lg:grid-cols-[140px_1fr] gap-10">
+      {/* Empty until there are sections to list; keeps the same content width as SelfServe. */}
+      <aside className="hidden lg:block" />
 
-      <div className="w-full px-6 py-10 sm:px-10 lg:px-16 flex gap-16">
-        {/* Sticky contents sidebar */}
-        <aside className="hidden lg:block w-40 shrink-0">
-          <div className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-xs text-neutral-400 tracking-wide space-y-3">
-            <p>CONTENTS.</p>
-            <p>01 Outcome</p>
-          </div>
-        </aside>
+      <div id="top">
+        {/* Hero banner — baby blue from the homepage thumbnail */}
+        <div className="w-full h-[220px] sm:h-[320px] lg:h-[420px] rounded-sm bg-gradient-to-b from-sky-100 to-sky-50 mb-10" />
 
-        {/* Main content */}
-        <div className="flex-1 min-w-0 max-w-4xl">
-          <h1 className="font-serif text-3xl mb-4">IBM Maximo AI</h1>
-
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-            <div className="flex flex-wrap items-center gap-2">
-              {["Web / Mobile", "Case Study", "Shipped"].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-600"
-                >
-                  {tag}
-                </span>
-              ))}
+        {/* Title / meta */}
+        <section className="mb-20">
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <div>
+              <h1 className="font-serif text-3xl mb-3">IBM Maximo AI</h1>
+              <div className="flex flex-wrap gap-2">
+                {tags.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-600"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
             </div>
-            <a
-              href="#"
-              className="rounded-full border border-neutral-300 px-4 py-1.5 text-sm text-neutral-700 hover:bg-neutral-50 transition-colors"
+            <span
+              role="link"
+              aria-disabled="true"
+              onMouseEnter={() => setCursorLabel("Coming soon!")}
+              onMouseLeave={() => setCursorLabel(null)}
+              className="rounded-full border border-neutral-300 px-4 py-1.5 text-sm text-neutral-400 select-none"
             >
               Visit Demo →
-            </a>
+            </span>
           </div>
 
-          <p className="text-neutral-700 mb-10">
-            Designing agentic AI experiences for asset managment.
+          <p className="text-sm text-neutral-500 leading-relaxed max-w-3xl mb-10">
+            Designing agentic AI experiences for asset management.
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-14">
-            <div>
-              <p className="text-xs text-neutral-400 mb-1">Role</p>
-              <p className="text-sm text-neutral-700">Product Designer</p>
-            </div>
-            <div>
-              <p className="text-xs text-neutral-400 mb-1">Team</p>
-              <p className="text-sm text-neutral-700">Project Manager</p>
-              <p className="text-sm text-neutral-700">Design &amp; Tech Leads</p>
-              <p className="text-sm text-neutral-700">Engineers</p>
-            </div>
-            <div>
-              <p className="text-xs text-neutral-400 mb-1">Timeline</p>
-              <p className="text-sm text-neutral-700">Aug 2026 – Dec 2026</p>
-            </div>
-            <div>
-              <p className="text-xs text-neutral-400 mb-1">Skills</p>
-              <p className="text-sm text-neutral-700">Figma</p>
-              <p className="text-sm text-neutral-700">FigmaMake</p>
-              <p className="text-sm text-neutral-700">Adobe AfterEffects</p>
-            </div>
-          </div>
-
-          <div className="border border-neutral-200 rounded-lg p-8 mb-16 flex items-center justify-between gap-6">
-            <div className="max-w-md">
-              <p className="text-olive text-xs font-medium tracking-wide mb-3">
-                REMINDER
-              </p>
-              <p className="text-neutral-700 text-sm leading-relaxed">
-                This case study is under NDA! You can keep scrolling below to
-                view my learning outcomes. If you&apos;d like to hear more,
-                please reach out — I would love to chat.
-              </p>
-            </div>
-            <div className="hidden sm:flex items-center gap-2 shrink-0">
-              <div className="relative w-24 h-24">
-                <Image
-                  src="https://framerusercontent.com/images/UswEW0OLQvwuPsFn2c3omSJ9U.png"
-                  alt=""
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <div className="relative w-20 h-20">
-                <Image
-                  src="https://framerusercontent.com/images/UswEW0OLQvwuPsFn2c3omSJ9U.png"
-                  alt=""
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          </div>
-
-          <p className="text-olive text-xs font-medium tracking-wide mb-3">
-            REFLECTIONS
-          </p>
-          <h2 className="font-serif text-2xl mb-3">
-            Mistakes, Metrics, and Moving Forward…
-          </h2>
-          <p className="text-neutral-700 text-sm mb-8">Text</p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
-            {["01 Text", "02 Text", "03 Text"].map((label) => (
-              <div
-                key={label}
-                className="border border-neutral-200 rounded-lg p-5"
-              >
-                <p className="text-sm text-neutral-900 mb-2">{label}</p>
-                <p className="text-sm text-neutral-500">Text</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 border-t border-neutral-200 pt-8">
+            {meta.map((m) => (
+              <div key={m.label}>
+                <p className="text-xs text-neutral-400 mb-2">{m.label}</p>
+                <div className="space-y-0.5">
+                  {m.value.map((v) => (
+                    <p key={v} className="text-sm text-neutral-900">
+                      {v}
+                    </p>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
+
+        {/* In progress */}
+        <section className="mb-24">
+          <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
+            <p className="text-xs tracking-wide text-neutral-400 mb-3">IN THE WORKS</p>
+            <h2 className="font-serif text-2xl sm:text-3xl mb-4">This case study is still being written</h2>
+            <p className="text-sm text-neutral-500 leading-relaxed">
+              I&apos;m currently designing at IBM, so the full story isn&apos;t ready to share just yet.
+              In the meantime, here are a few snapshots from my time there so far!
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-x-6 sm:gap-y-4 max-w-5xl mx-auto">
+            {photos.map((photo, i) => (
+              <figure
+                key={photo.src}
+                className={`relative bg-white p-3 pb-0 rounded-md shadow-[0_12px_30px_-10px_rgba(0,0,0,0.25)] transition-[rotate] duration-300 ease-out ${STACK[i]} ${photo.className}`}
+              >
+                <div className="relative aspect-[4/3] rounded-sm overflow-hidden">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(min-width: 640px) 45vw, 90vw"
+                    className={`object-cover ${photo.position ?? "object-center"}`}
+                    priority={i < 2}
+                  />
+                </div>
+                <figcaption className="py-3 text-center text-xs text-neutral-500">{photo.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );

@@ -128,7 +128,7 @@ export default function CineCirclePage() {
           </section>
 
           {/* RESEARCH */}
-          <section id="research" className="mb-10">
+          <section id="research" className="mb-24">
             <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
               RESEARCH
             </p>
@@ -153,18 +153,6 @@ export default function CineCirclePage() {
               <CineCircleReel />
             </div>
           </section>
-
-          {/* How Might We callout */}
-          <div className="rounded-lg bg-gradient-to-b from-white to-amber-50 border border-amber-100 px-10 py-16 sm:px-12 sm:py-20 mb-24 max-w-2xl mx-auto flex items-center justify-center text-center">
-            <p className="font-serif text-xl sm:text-2xl leading-relaxed max-w-[32rem] text-balance text-neutral-800">
-              How might we design an experience that{" "}
-              <span className="italic text-orange-600">encourages</span> fans
-              to <span className="italic text-orange-600">express</span> their
-              perspectives clearly and{" "}
-              <span className="italic text-orange-600">confidently</span> in a
-              digital space?
-            </p>
-          </div>
 
           {/* IDEATION */}
           <section id="ideation" className="mb-24">
@@ -295,28 +283,32 @@ export default function CineCirclePage() {
           {/* Next in collection */}
           <section className="mb-10 py-10 flex justify-center">
             <Link
-              href="/perplexity"
+              href="/selfserve"
               className="group inline-flex items-stretch gap-4 w-fit rounded-[3px] border-[0.5px] border-neutral-200 bg-white pr-5 pb-3 transition-[transform,border-color] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-neutral-500 hover:rotate-1"
             >
               <div className="flex flex-col justify-center gap-2 py-[60px] pl-[50px]">
-                <p className="text-xs text-neutral-400">PERPLEXITY, 2026</p>
+                <p className="text-xs text-neutral-400">SELFSERVE, 2026</p>
                 <div className="relative">
                   <h3 className="font-serif text-lg text-neutral-900">
-                    Improving AI Adoption
+                    AI-Powered Operations Platform
+                    <br />
+                    for Boutique Hotels
                   </h3>
                   <h3
                     aria-hidden
                     className="absolute inset-0 font-serif text-lg text-rose-600 [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-out group-hover:[clip-path:inset(0_0%_0_0)]"
                   >
-                    Improving AI Adoption
+                    AI-Powered Operations Platform
+                    <br />
+                    for Boutique Hotels
                   </h3>
                 </div>
-                <p className="text-xs text-neutral-500">UX Research</p>
+                <p className="text-xs text-neutral-500">Case Study / UX</p>
               </div>
               <div className="relative w-[201.5px] h-[206px] shrink-0 self-center">
                 <Image
-                  src="/images/perplexity-logo.png"
-                  alt="Perplexity preview"
+                  src="/images/card-selfserve.png"
+                  alt="SelfServe preview"
                   fill
                   className="object-contain"
                   loading="eager"

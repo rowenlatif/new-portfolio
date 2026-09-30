@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { setCursorLabel, setCursorRich, ScriptAccentText } from "@/components/CustomCursor";
 import { triggerProjectTransition } from "@/components/ProjectTransitionOverlay";
+import HeroImageTrail from "@/components/HeroImageTrail";
 
 const clusters = [
   {
@@ -147,13 +148,14 @@ export default function Home() {
   return (
     <main className="flex-1 flex flex-col">
       <section
-        className="sticky top-0 -mt-20 flex flex-col items-center text-center px-10 pt-28 pb-40 bg-white overflow-hidden"
+        className="sticky top-0 -mt-20 flex flex-col items-center text-center px-10 pt-28 pb-40 bg-white overflow-hidden isolate"
         style={{
           backgroundImage: "radial-gradient(rgba(0, 0, 0, 0.14) 1px, transparent 1px)",
           backgroundSize: "18px 18px",
         }}
       >
-        <div className="intro-slide-up flex flex-col items-center">
+        <HeroImageTrail />
+        <div data-trail-exclude className="intro-slide-up relative z-10 flex flex-col items-center">
           <Image src="/nav-mark.png" alt="" width={48} height={39} className="opacity-80 mb-5" priority />
           <h1 className="font-serif text-3xl sm:text-4xl leading-[1.15] mb-0.5">
             <span className="intro-reveal-x inline-block" style={{ animationDelay: "0.05s" }}>
@@ -168,7 +170,7 @@ export default function Home() {
             </span>
           </p>
         </div>
-        <div className="intro-slide-up text-base text-neutral-500 space-y-0.5" style={{ animationDelay: "0.55s" }}>
+        <div data-trail-exclude className="intro-slide-up relative z-10 text-base text-neutral-500 space-y-0.5" style={{ animationDelay: "0.55s" }}>
           <p>creative technologist</p>
           <p>product designer @ IBM</p>
         </div>

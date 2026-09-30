@@ -12,7 +12,7 @@ const experience = [
 // Portrait photos for the intro gallery. The first two sit in view, the third
 // peeks in from the right, and the rest scroll across as the page scrolls.
 // Entries without a src render as gray placeholders.
-const introPhotos: { src?: string; alt: string; position?: string }[] = [
+export const introPhotos: { src?: string; alt: string; position?: string }[] = [
   { src: "/images/about/hero.png", alt: "Rowen by a window", position: "object-[80%_50%]" },
   { src: "/images/about/intro-2.jpg", alt: "Pizza slices with friends" },
   { src: "/images/about/intro-3.jpg", alt: "Rowen browsing a shop's shelves" },

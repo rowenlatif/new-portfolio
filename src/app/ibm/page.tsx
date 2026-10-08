@@ -103,7 +103,7 @@ export default function IbmPage() {
         </section>
 
         {/* Mission */}
-        <section className="py-10 sm:py-14 mb-24 flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
+        <section className="py-10 sm:py-14 mb-32 sm:mb-40 flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
           <div className="md:w-[38%] shrink-0">
             <p className="text-xs tracking-wide text-neutral-400 mb-3">THE MISSION</p>
             <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance">
@@ -130,6 +130,37 @@ export default function IbmPage() {
               rather than a table, and how visualization patterns hold up as the questions and data behind
               them change.
             </p>
+          </div>
+        </section>
+
+        {/* Reading */}
+        <section className="mb-32 sm:mb-40 flex flex-col md:flex-row md:items-center md:justify-between gap-10 md:gap-16">
+          <div className="md:w-[52%] max-w-md">
+            <p className="text-xs tracking-wide text-neutral-400 mb-3">ON MY DESK</p>
+            <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance mb-6">
+              Learning the language of data visualization
+            </h2>
+            <div className="space-y-4 text-sm text-neutral-500 leading-relaxed text-pretty">
+              <p>
+                I came into this role with no background in data visualization. Besides my manager and
+                everyone at IBM who&apos;s been so generous with their time, one of my biggest resources
+                has been Edward R. Tufte&apos;s <em>The Visual Display of Quantitative Information</em>.
+              </p>
+              <p>
+                It gave me the fundamentals to build on and, just as important, the vocabulary to put
+                what I was seeing into words.
+              </p>
+            </div>
+          </div>
+          <div className="md:w-[40%] flex justify-center">
+            <Image
+              src="/images/ibm/tufte-cover.jpg"
+              alt="Cover of The Visual Display of Quantitative Information by Edward R. Tufte"
+              width={407}
+              height={491}
+              sizes="(min-width: 768px) 320px, 260px"
+              className="w-[260px] md:w-[320px] h-auto rounded-lg shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)]"
+            />
           </div>
         </section>
 

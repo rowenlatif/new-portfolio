@@ -60,7 +60,7 @@ const projects = [
     image: "/images/card-ibm.png",
     imageBg: "bg-gradient-to-b from-sky-100 to-sky-50",
     color: "#e0f2fe",
-    cursor: "Coming soon!",
+    cursor: "View now",
     isLogo: false,
   },
   {

@@ -6,10 +6,10 @@ import { setCursorLabel } from "@/components/CustomCursor";
 const tags = ["Web / Mobile", "Case Study", "Shipped"];
 
 const meta = [
-  { label: "Role", value: ["Product Designer"] },
-  { label: "Team", value: ["Project Manager", "Design & Tech Leads", "Engineers"] },
+  { label: "Role", value: ["Sole Product Designer"] },
+  { label: "Team", value: ["Project Manager", "Design Lead", "Engineers"] },
   { label: "Timeline", value: ["Aug 2026 – Dec 2026"] },
-  { label: "Skills", value: ["Figma", "FigmaMake"] },
+  { label: "Skills", value: ["Figma", "FigmaMake", "BOB"] },
 ];
 
 // Overlapping two-row collage. Offsets only apply from sm up; on phones the
@@ -53,13 +53,23 @@ export default function IbmPage() {
 
       <div id="top">
         {/* Hero banner — baby blue from the homepage thumbnail */}
-        <div className="w-full h-[220px] sm:h-[320px] lg:h-[420px] rounded-sm bg-gradient-to-b from-sky-100 to-sky-50 mb-10" />
+        <div className="relative w-full h-[220px] sm:h-[320px] lg:h-[420px] rounded-sm overflow-hidden bg-gradient-to-b from-sky-100 to-sky-50 mb-10">
+          <Image
+            src="/images/ibm/dashboard.png"
+            alt="IBM Maximo operational dashboard with the Maximo Assistant panel open"
+            width={2624}
+            height={1600}
+            sizes="(min-width: 1024px) 60vw, 80vw"
+            priority
+            className="absolute left-1/2 top-[14%] -translate-x-1/2 w-[80%] sm:w-[70%] h-auto rounded-t-lg shadow-[0_8px_30px_-8px_rgba(0,0,0,0.2)]"
+          />
+        </div>
 
         {/* Title / meta */}
         <section className="mb-20">
           <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
             <div>
-              <h1 className="font-serif text-3xl mb-3">IBM Maximo AI</h1>
+              <h1 className="font-serif text-3xl mb-3">IBM Maximo AI Assistant</h1>
               <div className="flex flex-wrap gap-2">
                 {tags.map((t) => (
                   <span
@@ -103,7 +113,7 @@ export default function IbmPage() {
         </section>
 
         {/* Mission */}
-        <section className="py-10 sm:py-14 mb-32 sm:mb-40 flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
+        <section className="py-10 sm:py-14 mb-12 sm:mb-16 flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
           <div className="md:w-[38%] shrink-0">
             <p className="text-xs tracking-wide text-neutral-400 mb-3">THE MISSION</p>
             <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance">
@@ -132,6 +142,17 @@ export default function IbmPage() {
             </p>
           </div>
         </section>
+
+        <div className="mb-32 sm:mb-40 flex justify-center">
+          <Image
+            src="/images/ibm/dashboard.png"
+            alt="IBM Maximo operational dashboard with the Maximo Assistant panel open"
+            width={2624}
+            height={1600}
+            sizes="(min-width: 1024px) 70vw, 90vw"
+            className="w-full max-w-5xl h-auto rounded-xl border border-neutral-200"
+          />
+        </div>
 
         {/* Reading */}
         <section className="mb-32 sm:mb-40 flex flex-col md:flex-row md:items-center md:justify-between gap-10 md:gap-16">

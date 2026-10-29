@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 
 const links = [
   { href: "/", label: "home" },
-  { href: "/#featured-works", label: "projects" },
   { href: "/about", label: "about" },
   { href: "/creative", label: "creative" },
 ];
@@ -16,7 +15,28 @@ function scrollToTop() {
   window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 }
 
-const LINK_DELAYS = ["0.5s", "0.56s", "0.62s", "0.68s"];
+// Hover: the sans word blurs away as the script version blurs into focus in the same spot.
+// Both are stacked in one grid cell so the nav doesn't shift when the font changes.
+const DISSOLVE =
+  "col-start-1 row-start-1 transition-[opacity,filter,scale] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none";
+
+function HoverLabel({ text }: { text: string }) {
+  return (
+    <span className="inline-grid place-items-center">
+      <span aria-hidden className={`${DISSOLVE} group-hover:opacity-0 group-hover:blur-[3px] group-hover:scale-95`}>
+        {text}
+      </span>
+      <span
+        aria-hidden
+        className={`${DISSOLVE} font-script font-normal text-olive opacity-0 blur-[3px] scale-105 group-hover:opacity-100 group-hover:blur-none group-hover:scale-100`}
+      >
+        {text}
+      </span>
+    </span>
+  );
+}
+
+const LINK_DELAYS = ["0.5s", "0.56s", "0.62s"];
 
 // Pages where the nav stays visible instead of hiding on scroll down.
 const ALWAYS_SHOWN = ["/about"];
@@ -69,11 +89,12 @@ export default function Nav() {
           <Link
             key={link.href}
             href={link.href}
-            onClick={link.label === "projects" ? undefined : scrollToTop}
-            className="intro-fade-up transition-colors hover:font-script hover:font-normal hover:text-olive duration-200"
+            onClick={scrollToTop}
+            aria-label={link.label}
+            className="group intro-fade-up"
             style={{ animationDelay: LINK_DELAYS[i] }}
           >
-            {link.label}
+            <HoverLabel text={link.label} />
           </Link>
         ))}
       </nav>

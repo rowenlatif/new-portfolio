@@ -55,9 +55,10 @@ const projects = [
         Fortune 500 Companies
       </>
     ),
-    description: "Coming soon!",
+    description: "Creating data visualizations to make operational data easier to see, understand, and explore",
     tags: ["Dashboards", "Desktop"],
-    image: "/images/card-ibm.png",
+    image: "/images/ibm/dashboard.png",
+    inset: { width: 2624, height: 1600 },
     imageBg: "bg-gradient-to-b from-sky-100 to-sky-50",
     color: "#e0f2fe",
     cursor: "View now",
@@ -76,9 +77,10 @@ const projects = [
     description:
       "Automating task routing and giving managers instant operational visibility",
     tags: ["Desktop", "Shipped"],
-    image: "/images/card-selfserve.png",
-    imageBg: "bg-gradient-to-b from-lime-100 to-olive/20",
-    color: "#dfe8c4",
+    image: "/images/selfserve/thumbnail.png",
+    inset: { width: 2920, height: 2088 },
+    imageBg: "bg-[#B2BE9E]",
+    color: "#B2BE9E",
     cursor: "View now",
     isLogo: false,
   },
@@ -94,9 +96,10 @@ const projects = [
     ),
     description: "Creating long and short forms of content",
     tags: ["Mobile", "Shipped"],
-    image: "/images/card-cinecircle.png",
-    imageBg: "bg-gradient-to-b from-rose-100 to-rose-50",
-    color: "#ffe4e6",
+    image: "/images/cinecircle/thumbnail.png",
+    inset: { width: 1387, height: 866, size: "w-[85%]", hover: "group-hover/img:scale-105" },
+    imageBg: "bg-[#FCEEEB]",
+    color: "#FCEEEB",
     cursor: "View now",
     isLogo: false,
   },
@@ -184,7 +187,17 @@ export default function Home() {
         <h2 className="font-serif text-3xl sm:text-4xl mb-6">Featured Works</h2>
         <div className="space-y-24 sm:space-y-32">
             {projects.filter((project) => !project.hidden).map((project) => {
-              const media = (
+              // Inset cards show the screenshot centered on the card's background instead of filling it.
+              const media = project.inset ? (
+                <Image
+                  src={project.image}
+                  alt={typeof project.label === "string" ? project.label : "project thumbnail"}
+                  width={project.inset.width}
+                  height={project.inset.height}
+                  sizes="(min-width: 768px) 35vw, 70vw"
+                  className={`${project.inset.size ?? "w-[68%]"} h-auto rounded-md drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] scale-100 ${project.inset.hover ?? "group-hover/img:scale-115"} transition-transform duration-500 ease-out`}
+                />
+              ) : (
                 <>
                   <Image
                     src={project.image}

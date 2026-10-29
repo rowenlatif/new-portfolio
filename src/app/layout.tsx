@@ -36,6 +36,8 @@ const ebGaramond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
+  // Lets the share image (opengraph-image.png) resolve to an absolute rowenlatif.com URL.
+  metadataBase: new URL("https://rowenlatif.com"),
   title: "Rowen Latif",
   description: "Creative technologist and product designer.",
 };

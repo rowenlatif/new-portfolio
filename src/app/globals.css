@@ -199,3 +199,20 @@ iframe.instagram-media {
 .hero-trail-card {
   animation: hero-trail 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Same dot grid as the homepage hero, as a layer that fades out at its edges.
+   Sits behind content; set --dot-color for dark grounds and --dot-fade to
+   change where it dissolves. */
+.dot-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--dot-color, rgba(0, 0, 0, 0.14)) 1px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: var(--dot-fade, radial-gradient(ellipse 85% 80% at 50% 60%, black 25%, transparent 75%));
+  -webkit-mask-image: var(--dot-fade, radial-gradient(ellipse 85% 80% at 50% 60%, black 25%, transparent 75%));
+}
+
+.dot-field-light {
+  --dot-color: rgba(255, 255, 255, 0.22);
+}

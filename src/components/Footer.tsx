@@ -1,6 +1,9 @@
 "use client";
 
+import type { CSSProperties } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { HoverLabel, navLinks, scrollToTop } from "@/components/Nav";
 
 const LIGHT_FOOTER_ROUTES = ["/about", "/creative"];
 
@@ -12,12 +15,17 @@ export default function Footer() {
   const isLight = LIGHT_FOOTER_ROUTES.includes(pathname);
 
   return (
-    <footer className="w-full mt-auto">
-      <div className={isLight ? "pt-28 sm:pt-32" : "bg-olive pt-10 sm:pt-12"} aria-hidden />
+    <footer className={`relative w-full mt-auto isolate ${isLight ? "bg-white" : "bg-olive"}`}>
+      <div className={isLight ? "pt-28 sm:pt-32" : "pt-10 sm:pt-12"} aria-hidden />
+      <div
+        aria-hidden
+        className={`dot-field -z-10 ${isLight ? "" : "dot-field-light"}`}
+        style={{ "--dot-fade": "radial-gradient(ellipse 90% 100% at 50% 100%, black 15%, transparent 80%)" } as CSSProperties}
+      />
       <div
         className={[
-          "w-full px-10 pb-12 overflow-hidden",
-          isLight ? "bg-white text-neutral-900" : "bg-olive text-white",
+          "relative w-full px-10 sm:px-12 lg:px-16 pb-12 overflow-hidden",
+          isLight ? "text-neutral-900" : "text-white",
         ].join(" ")}
       >
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
@@ -58,6 +66,21 @@ export default function Footer() {
         <p>Built with love and iced coffee</p>
       </div>
       </div>
+      {/* Top-aligned with "Let's keep in touch"; on light pages that line sits below the ornament (3rem tall from sm up). */}
+      <nav aria-label="Footer" className={`md:mr-6 md:self-start ${isLight ? "md:mt-12" : ""}`}>
+        <p className={["text-xs tracking-wide mb-3", isLight ? "text-neutral-400" : "text-white/60"].join(" ")}>
+          NAVIGATION
+        </p>
+        <ul className="space-y-1 text-lg">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href} onClick={scrollToTop} aria-label={link.label} className="group inline-block">
+                <HoverLabel text={link.label} scriptClassName={isLight ? "text-olive" : "text-white"} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
       {SHOW_SCRIPT_NAME && (
       <p
         aria-hidden

@@ -57,8 +57,8 @@ const projects = [
     ),
     description: "Creating data visualizations to make operational data easier to see, understand, and explore",
     tags: ["Dashboards", "Desktop"],
-    image: "/images/ibm/dashboard.png",
-    inset: { width: 2624, height: 1600 },
+    image: "/images/ibm/eye-bee-m.gif",
+    animated: true,
     imageBg: "bg-gradient-to-b from-sky-100 to-sky-50",
     color: "#e0f2fe",
     cursor: "View now",
@@ -188,7 +188,16 @@ export default function Home() {
         <div className="space-y-24 sm:space-y-32">
             {projects.filter((project) => !project.hidden).map((project) => {
               // Inset cards show the screenshot centered on the card's background instead of filling it.
-              const media = project.inset ? (
+              // Animated cards fill the card; multiply drops the GIF's off-white ground into the card colour.
+              const media = project.animated ? (
+                <Image
+                  src={project.image}
+                  alt={typeof project.label === "string" ? project.label : "project thumbnail"}
+                  fill
+                  unoptimized
+                  className="object-cover mix-blend-multiply scale-150 group-hover/img:scale-165 transition-transform duration-500 ease-out"
+                />
+              ) : project.inset ? (
                 <Image
                   src={project.image}
                   alt={typeof project.label === "string" ? project.label : "project thumbnail"}
@@ -255,7 +264,8 @@ export default function Home() {
       </section>
 
       <div className="relative h-[200vh] -mt-[100vh] bg-olive">
-        <section className="sticky top-0 z-0 h-screen overflow-hidden bg-olive px-10 pt-44 text-white">
+        <section className="sticky top-0 z-0 h-screen overflow-hidden bg-olive px-10 pt-44 text-white isolate">
+          <div aria-hidden className="dot-field dot-field-light -z-10" />
           <h2 className="font-serif text-lg sm:text-4xl text-center whitespace-nowrap">
             <span className="font-script font-bold" style={{ marginRight: "-0.1em" }}>
               C

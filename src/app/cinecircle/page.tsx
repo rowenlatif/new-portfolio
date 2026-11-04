@@ -5,18 +5,57 @@ import ScrollProgress from "@/components/ScrollProgress";
 import CaseStudyContents from "@/components/CaseStudyContents";
 import CineCircleTickets from "@/components/CineCircleTickets";
 import CineCircleReel from "@/components/CineCircleReel";
+import CineCircleDesignShowcase from "@/components/CineCircleDesignShowcase";
 
 const ROSE = "var(--color-rose-600)";
 
-const toc = [
-  { id: "problem", label: "01 Problem" },
-  { id: "research", label: "02 Research" },
-  { id: "ideation", label: "03 Ideation" },
-  { id: "solution", label: "04 Solution" },
-  { id: "design", label: "05 Design" },
-  { id: "reflections", label: "06 Reflections" },
-  { id: "outcome", label: "07 Outcome" },
+// Design section recordings. Crops are the phone's bounds in a 600px-tall
+// frame of each recording, inset a pixel to hide the backdrop at the edges.
+// prototypeUrl takes a figma.com/proto share link.
+// Both flows start from the Home feed and branch at the Create sheet.
+const CINECIRCLE_PROTOTYPE =
+  "https://www.figma.com/proto/JHpxe4K6ejeZAkhql5cLTP/Portfolio-Stuff?node-id=539-17357&starting-point-node-id=539%3A17357";
+
+// Post tiles under each flow's copy. Hidden for now; flip to bring them back.
+const SHOW_FLOW_TILES = false;
+
+const designFlows = [
+  {
+    id: "long",
+    title: "Long form posts",
+    body: "For users ready to articulate more thoughtful perspectives, structured inputs (movie selection, rating, tagging, formatting tools) enable depth without overwhelming those who prefer brevity.",
+    video: "/videos/cinecircle/long-form.mp4",
+    crop: { frameW: 307, frameH: 600, x: 27, y: 26, w: 253, h: 555 },
+    prototypeUrl: CINECIRCLE_PROTOTYPE,
+    tile: { src: "/images/cinecircle/post-review.png", w: 393, h: 314, alt: "Long form review post with a title and rating" },
+  },
+  {
+    id: "short",
+    title: "Short form posts",
+    body: "Most users respond instinctively to films. By designing a lightweight post format (280 characters, media-only, no formatting tools), fans can quickly express initial reactions without cognitive pressure.",
+    video: "/videos/cinecircle/short-form.mp4",
+    crop: { frameW: 297, frameH: 600, x: 25, y: 27, w: 247, h: 546 },
+    prototypeUrl: CINECIRCLE_PROTOTYPE,
+    tile: { src: "/images/cinecircle/post-opinion.png", w: 393, h: 347, alt: "Short form post sharing a gut reaction to a film" },
+  },
 ];
+
+// The Solution section is hidden for now; flip to bring it back.
+const SHOW_SOLUTION = false;
+
+const sections = [
+  { id: "problem", label: "Problem" },
+  { id: "research", label: "Research" },
+  { id: "ideation", label: "Ideation" },
+  { id: "solution", label: "Solution" },
+  { id: "design", label: "Design" },
+  { id: "outcome", label: "Outcome" },
+  { id: "reflections", label: "Reflections" },
+];
+
+const toc = sections
+  .filter((s) => SHOW_SOLUTION || s.id !== "solution")
+  .map((s, i) => ({ ...s, label: `${String(i + 1).padStart(2, "0")} ${s.label}` }));
 
 const reflections = [
   {
@@ -63,7 +102,7 @@ export default function CineCirclePage() {
             <div>
               <h1 className="font-serif text-3xl mb-3">CineCircle</h1>
               <div className="flex flex-wrap gap-2">
-                {["Web / Mobile", "Case Study", "Shipped"].map((tag) => (
+                {["Mobile", "Case Study", "Shipped"].map((tag) => (
                   <span
                     key={tag}
                     className="rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-600"
@@ -172,43 +211,44 @@ export default function CineCirclePage() {
           </section>
 
           {/* SOLUTION */}
-          <section id="solution" className="mb-24">
-            <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
-              SOLUTION
-            </p>
-            <h2 className="font-serif text-2xl mb-3 max-w-2xl">
-              Designing a posting flow that adapts to different types of
-              expressions
-            </h2>
-            <p className="text-neutral-700 text-sm mb-8 max-w-2xl leading-relaxed">
-              Rather than merging post types into one editor, I separated the
-              flows to let users choose between short and long form before
-              writing. I found that asking users to select their post type
-              upfront (short or long form) made posting more intuitive and
-              efficient by aligning the interface with their intent. In early
-              prototypes, I tested a single editor for all content types.
-              During reviews, users struggled to decide how much to write
-              once already in the flow, especially when switching between
-              casual reactions and in-depth reviews.
-            </p>
+          {SHOW_SOLUTION && (
+            <section id="solution" className="mb-24">
+              <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
+                SOLUTION
+              </p>
+              <h2 className="font-serif text-2xl mb-3">
+                Designing a posting flow that adapts to different types of expressions
+              </h2>
+              <p className="text-neutral-700 text-sm mb-8 max-w-2xl leading-relaxed">
+                Rather than merging post types into one editor, I separated the
+                flows to let users choose between short and long form before
+                writing. I found that asking users to select their post type
+                upfront (short or long form) made posting more intuitive and
+                efficient by aligning the interface with their intent. In early
+                prototypes, I tested a single editor for all content types.
+                During reviews, users struggled to decide how much to write
+                once already in the flow, especially when switching between
+                casual reactions and in-depth reviews.
+              </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="border border-neutral-200 rounded-lg p-6 min-h-40">
-                <p className="text-rose-600 text-xs font-medium tracking-wide mb-2">
-                  INITIAL DESIGNS
-                </p>
-                <p className="text-neutral-800">Combined flow caused confusion</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="border border-neutral-200 rounded-lg p-6 min-h-40">
+                  <p className="text-rose-600 text-xs font-medium tracking-wide mb-2">
+                    INITIAL DESIGNS
+                  </p>
+                  <p className="text-neutral-800">Combined flow caused confusion</p>
+                </div>
+                <div className="border border-neutral-200 rounded-lg p-6 min-h-40">
+                  <p className="text-rose-600 text-xs font-medium tracking-wide mb-2">
+                    FINAL DESIGNS
+                  </p>
+                  <p className="text-neutral-800">
+                    Clear entry point showed more intentional expression
+                  </p>
+                </div>
               </div>
-              <div className="border border-neutral-200 rounded-lg p-6 min-h-40">
-                <p className="text-rose-600 text-xs font-medium tracking-wide mb-2">
-                  FINAL DESIGNS
-                </p>
-                <p className="text-neutral-800">
-                  Clear entry point showed more intentional expression
-                </p>
-              </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* DESIGN */}
           <section id="design" className="mb-24">
@@ -216,25 +256,57 @@ export default function CineCirclePage() {
               DESIGN
             </p>
 
-            <div className="mb-16">
-              <h3 className="font-serif text-2xl mb-3">Short form posts</h3>
-              <p className="text-neutral-700 text-sm max-w-xl leading-relaxed">
-                Most users respond instinctively to films. By designing a
-                lightweight post format (280 characters, media-only, no
-                formatting tools), fans can quickly express initial reactions
-                without cognitive pressure.
-              </p>
+            <div className="space-y-24">
+              {designFlows.map((flow) => (
+                <div
+                  key={flow.id}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start"
+                >
+                  <div>
+                    <h3 className="font-serif text-2xl mb-3">{flow.title}</h3>
+                    <p className="text-neutral-700 text-sm max-w-md leading-relaxed">
+                      {flow.body}
+                    </p>
+                    {SHOW_FLOW_TILES && (
+                      <div
+                        className="mt-10 w-full max-w-[340px] rounded-xl bg-white overflow-hidden shadow-[0_16px_40px_-16px_rgba(0,0,0,0.3)] ring-1 ring-black/5"
+                      >
+                        <Image
+                          src={flow.tile.src}
+                          alt={flow.tile.alt}
+                          width={flow.tile.w}
+                          height={flow.tile.h}
+                          className="w-full h-auto"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <CineCircleDesignShowcase
+                    label={flow.title}
+                    videoSrc={flow.video}
+                    crop={flow.crop}
+                    prototypeUrl={flow.prototypeUrl}
+                  />
+                </div>
+              ))}
             </div>
+          </section>
 
-            <div>
-              <h3 className="font-serif text-2xl mb-3">Long form posts</h3>
-              <p className="text-neutral-700 text-sm max-w-xl leading-relaxed">
-                For users ready to articulate more thoughtful perspectives,
-                structured inputs (movie selection, rating, tagging,
-                formatting tools) enable depth without overwhelming those who
-                prefer brevity.
-              </p>
-            </div>
+          {/* OUTCOME */}
+          <section id="outcome" className="py-8 sm:py-12 mb-24 text-center max-w-2xl mx-auto">
+            <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
+              OUTCOME
+            </p>
+            <h2 className="font-serif text-2xl mb-4">
+              So, what did all this work accomplish?
+            </h2>
+            <p className="text-neutral-700 text-sm leading-relaxed">
+              I designed CineCircle&apos;s full posting experience from 0-1 —
+              separating short and long-form flows and replacing likes with
+              expressive reactions. Early testers spent more time writing
+              thoughtful takes and reported feeling safer sharing unpopular
+              opinions, turning passive scrolling into real film discussion.
+            </p>
           </section>
 
           {/* REFLECTIONS */}
@@ -263,21 +335,32 @@ export default function CineCirclePage() {
             </div>
           </section>
 
-          {/* OUTCOME */}
-          <section id="outcome" className="py-8 sm:py-12 mb-24 text-center max-w-2xl mx-auto">
-            <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
-              OUTCOME
-            </p>
-            <h2 className="font-serif text-2xl mb-4">
-              So, what did all this work accomplish?
-            </h2>
-            <p className="text-neutral-700 text-sm leading-relaxed">
-              I designed CineCircle&apos;s full posting experience from 0-1 —
-              separating short and long-form flows and replacing likes with
-              expressive reactions. Early testers spent more time writing
-              thoughtful takes and reported feeling safer sharing unpopular
-              opinions, turning passive scrolling into real film discussion.
-            </p>
+          {/* Team — same height as SelfServe's team photo, split across two shots */}
+          <section className="mb-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="relative w-full h-[260px] sm:h-[380px] rounded-md overflow-hidden">
+              <Image
+                src="/images/cinecircle/team.jpg"
+                alt="The CineCircle team posing in front of a Generate backdrop"
+                fill
+                sizes="(min-width: 640px) 45vw, 90vw"
+                className="object-cover"
+              />
+              <p className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-white/90">
+                The CineCircle team says hello!
+              </p>
+            </div>
+            <div className="relative w-full h-[260px] sm:h-[380px] rounded-md overflow-hidden">
+              <Image
+                src="/images/cinecircle/team-dinner.jpg"
+                alt="The CineCircle team together at a food hall"
+                fill
+                sizes="(min-width: 640px) 45vw, 90vw"
+                className="object-cover"
+              />
+              <p className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-white/90">
+                &hellip;and off the clock
+              </p>
+            </div>
           </section>
 
           {/* Next in collection */}

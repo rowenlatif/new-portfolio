@@ -5,13 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-const links = [
+export const navLinks = [
   { href: "/", label: "home" },
   { href: "/about", label: "about" },
   { href: "/creative", label: "creative" },
 ];
 
-function scrollToTop() {
+export function scrollToTop() {
   window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 }
 
@@ -20,7 +20,7 @@ function scrollToTop() {
 const DISSOLVE =
   "col-start-1 row-start-1 transition-[opacity,filter,scale] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none";
 
-function HoverLabel({ text }: { text: string }) {
+export function HoverLabel({ text, scriptClassName = "text-olive" }: { text: string; scriptClassName?: string }) {
   return (
     <span className="inline-grid place-items-center">
       <span aria-hidden className={`${DISSOLVE} group-hover:opacity-0 group-hover:blur-[3px] group-hover:scale-95`}>
@@ -28,7 +28,7 @@ function HoverLabel({ text }: { text: string }) {
       </span>
       <span
         aria-hidden
-        className={`${DISSOLVE} font-script font-normal text-olive opacity-0 blur-[3px] scale-105 group-hover:opacity-100 group-hover:blur-none group-hover:scale-100`}
+        className={`${DISSOLVE} font-script font-normal ${scriptClassName} opacity-0 blur-[3px] scale-105 group-hover:opacity-100 group-hover:blur-none group-hover:scale-100`}
       >
         {text}
       </span>
@@ -85,7 +85,7 @@ export default function Nav() {
         <Image src="/nav-mark.png" alt="Rowen Latif" width={56} height={45} className="opacity-80" />
       </Link>
       <nav className="flex items-center gap-6 sm:gap-10 text-base text-neutral-500">
-        {links.map((link, i) => (
+        {navLinks.map((link, i) => (
           <Link
             key={link.href}
             href={link.href}

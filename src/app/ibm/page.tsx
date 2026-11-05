@@ -31,25 +31,21 @@ const photos = [
     alt: "Rowen taking a mirror selfie in an IBM office elevator",
     caption: "Elevator selfies are mandatory",
     position: "object-[37%_50%]",
-    className: "sm:hover:-rotate-2",
   },
   {
     src: "/images/ibm/photo-2.jpg",
     alt: "Rowen with two fellow interns under the IBM sign",
     caption: "From fellow KTP brothers to my co-op co-workers!",
-    className: "sm:hover:rotate-2",
   },
   {
     src: "/images/ibm/photo-3.jpg",
     alt: "Interns eating lunch together on the office terrace",
     caption: "Lunch breaks with the other design co-op girlies",
-    className: "sm:hover:rotate-2",
   },
   {
     src: "/images/ibm/photo-4.jpg",
     alt: "IBM racing simulator in front of a large track display",
     caption: "Taking a quick break to test out the racing sim at the Innovation Studio",
-    className: "sm:hover:-rotate-2",
   },
 ];
 
@@ -360,23 +356,23 @@ export default function IbmPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          {/* Same tile size as the SelfServe and CineCircle team photos, two rows of two */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {photos.map((photo, i) => (
-              <figure
-                key={photo.src}
-                className={`relative bg-white p-3 pb-0 rounded-md shadow-[0_12px_30px_-10px_rgba(0,0,0,0.25)] transition-[rotate] duration-300 ease-out ${photo.className}`}
-              >
-                <div className="relative aspect-[4/3] rounded-sm overflow-hidden">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    sizes="(min-width: 640px) 45vw, 90vw"
-                    className={`object-cover ${photo.position ?? "object-center"}`}
-                    priority={i < 2}
-                  />
-                </div>
-                <figcaption className="py-3 text-center text-xs text-neutral-500">{photo.caption}</figcaption>
+              <figure key={photo.src} className="relative w-full h-[260px] sm:h-[380px] rounded-md overflow-hidden">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(min-width: 640px) 45vw, 90vw"
+                  className={`object-cover ${photo.position ?? "object-center"}`}
+                  priority={i < 2}
+                />
+                {/* Keeps the white caption legible on bright shots */}
+                <div aria-hidden className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent" />
+                <figcaption className="absolute bottom-3 inset-x-4 text-center text-xs text-white/90">
+                  {photo.caption}
+                </figcaption>
               </figure>
             ))}
           </div>

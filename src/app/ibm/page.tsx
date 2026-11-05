@@ -9,6 +9,7 @@ import IbmTableToChart from "@/components/IbmTableToChart";
 import IbmMissionCards from "@/components/IbmMissionCards";
 import IbmPlaybackStats, { TeamReaction } from "@/components/IbmPlaybackStats";
 import IbmBookshelf from "@/components/IbmBookshelf";
+import BlueSweepText from "@/components/BlueSweepText";
 
 // IBM's brand blue; the next-project hover uses it too (text-[#0f62fe]).
 const IBM_BLUE = "#0f62fe";
@@ -217,7 +218,10 @@ export default function IbmPage() {
               <p className="text-xs tracking-wide text-[#0f62fe] mb-3">THE MISSION</p>
               <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance">
                 Transforming Maximo Assistant from flat tables into clear visual insights that help
-                maintenance teams understand operational data faster.
+                maintenance teams understand operational data{" "}
+                <BlueSweepText>faster</BlueSweepText>,{" "}
+                <BlueSweepText delay={450}>easier</BlueSweepText>, and more{" "}
+                <BlueSweepText delay={900}>efficiently</BlueSweepText>.
               </h2>
             </div>
             {/* Tables into charts, illustrated with made-up data in Carbon's style.

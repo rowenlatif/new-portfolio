@@ -5,6 +5,9 @@ import CaseStudyContents from "@/components/CaseStudyContents";
 
 const OLIVE = "#6a7040";
 
+// The Ideation (before/after) section is hidden for now; flip to bring it back.
+const SHOW_IDEATION = false;
+
 const contents = [
   { id: "problem", label: "01 Problem" },
   { id: "solution", label: "02 Solution" },
@@ -246,63 +249,65 @@ export default function SelfServePage() {
         </section>
 
         {/* IDEATION */}
-        <section id="ideation" className="mb-24">
-          <p className="text-xs tracking-wide text-olive mb-3">IDEATION</p>
-          <h2 className="font-serif text-2xl sm:text-3xl mb-4">Design is an iterative process</h2>
-          <p className="text-sm text-neutral-500 leading-relaxed max-w-2xl mb-10">
-            I moved from manual bulk task creation to AI-assisted chat with live preview, allowing
-            managers describe tasks conversationally and see results generate instantly.
-          </p>
+        {SHOW_IDEATION && (
+          <section id="ideation" className="mb-24">
+            <p className="text-xs tracking-wide text-olive mb-3">IDEATION</p>
+            <h2 className="font-serif text-2xl sm:text-3xl mb-4">Design is an iterative process</h2>
+            <p className="text-sm text-neutral-500 leading-relaxed max-w-2xl mb-10">
+              I moved from manual bulk task creation to AI-assisted chat with live preview, allowing
+              managers describe tasks conversationally and see results generate instantly.
+            </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <p className="text-xs text-black mb-2 tracking-wide text-center">BEFORE</p>
-              <div className="relative w-full h-[280px] sm:h-[360px] rounded-md overflow-hidden">
-                <div className="absolute inset-x-0 top-0" style={{ height: "calc(100% + 40px)" }}>
-                  <Image
-                    src="https://framerusercontent.com/images/OC0xnGiGiRvCmAOVAnUccSKfkII.png"
-                    alt="Before redesign"
-                    fill
-                    className="object-cover object-top"
-                  />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <p className="text-xs text-black mb-2 tracking-wide text-center">BEFORE</p>
+                <div className="relative w-full h-[280px] sm:h-[360px] rounded-md overflow-hidden">
+                  <div className="absolute inset-x-0 top-0" style={{ height: "calc(100% + 40px)" }}>
+                    <Image
+                      src="https://framerusercontent.com/images/OC0xnGiGiRvCmAOVAnUccSKfkII.png"
+                      alt="Before redesign"
+                      fill
+                      className="object-cover object-top"
+                    />
+                  </div>
                 </div>
+                <ul className="mt-4 space-y-2">
+                  {beforePoints.map((p) => (
+                    <li key={p} className="flex items-center gap-2">
+                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#E8998D] text-white text-[10px] shrink-0">
+                        ✕
+                      </span>
+                      <span className="text-base text-black">{p}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="mt-4 space-y-2">
-                {beforePoints.map((p) => (
-                  <li key={p} className="flex items-center gap-2">
-                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#E8998D] text-white text-[10px] shrink-0">
-                      ✕
-                    </span>
-                    <span className="text-base text-black">{p}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs text-black mb-2 tracking-wide text-center">AFTER</p>
-              <div className="relative w-full h-[280px] sm:h-[360px] rounded-md overflow-hidden">
-                <div className="absolute inset-x-0 top-0" style={{ height: "calc(100% + 40px)" }}>
-                  <Image
-                    src="https://framerusercontent.com/images/osnCfDgwg2efDTECUgMVrTHk.png"
-                    alt="After redesign"
-                    fill
-                    className="object-cover object-top"
-                  />
+              <div>
+                <p className="text-xs text-black mb-2 tracking-wide text-center">AFTER</p>
+                <div className="relative w-full h-[280px] sm:h-[360px] rounded-md overflow-hidden">
+                  <div className="absolute inset-x-0 top-0" style={{ height: "calc(100% + 40px)" }}>
+                    <Image
+                      src="https://framerusercontent.com/images/osnCfDgwg2efDTECUgMVrTHk.png"
+                      alt="After redesign"
+                      fill
+                      className="object-cover object-top"
+                    />
+                  </div>
                 </div>
+                <ul className="mt-4 space-y-2">
+                  {afterPoints.map((p) => (
+                    <li key={p} className="flex items-center gap-2">
+                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#9CC5A1] text-white text-sm shrink-0">
+                        ✓
+                      </span>
+                      <span className="text-base text-black">{p}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="mt-4 space-y-2">
-                {afterPoints.map((p) => (
-                  <li key={p} className="flex items-center gap-2">
-                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#9CC5A1] text-white text-sm shrink-0">
-                      ✓
-                    </span>
-                    <span className="text-base text-black">{p}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* OUTCOME */}
         <section id="outcome" className="py-8 sm:py-12 mb-24 max-w-3xl mx-auto text-center">

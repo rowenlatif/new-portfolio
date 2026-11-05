@@ -41,7 +41,7 @@ export default function Footer() {
       </p>
       <div className="flex items-center gap-2.5 text-lg mb-10">
         <a
-          href="mailto:latif.f@northeastern.edu"
+          href="mailto:rowenlatif@gmail.com"
           className={`group inline-flex items-center transition-colors ${isLight ? "hover:text-olive" : ""}`}
         >
           <span>Email</span>

@@ -1,8 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { setCursorLabel } from "@/components/CustomCursor";
+import ScrollProgress from "@/components/ScrollProgress";
+
+// IBM's brand blue; the next-project hover uses it too (text-[#0f62fe]).
+const IBM_BLUE = "#0f62fe";
 
 const tags = ["Web / Mobile", "Case Study", "Shipped"];
 
@@ -43,22 +48,52 @@ const photos = [
   },
 ];
 
-// Opens a pre-filled email rather than posting anywhere; there's no backend.
+// Web3Forms emails each submission to rowenlatif@gmail.com. The access key is
+// public by design; it can only send to that inbox.
+const WEB3FORMS_KEY = "ce3054e0-d8c0-47a7-b16a-fb3b9ff4b686";
+
 function AccessRequestForm() {
   const [email, setEmail] = useState("");
+  const [note, setNote] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  if (status === "sent") {
+    return (
+      <p className="text-sm text-neutral-800">
+        Thanks! I&apos;ll be in touch soon.
+      </p>
+    );
+  }
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        const subject = encodeURIComponent("IBM case study walkthrough");
-        const body = encodeURIComponent(
-          `Hi Rowen,\n\nI'd love to hear more about your work on IBM Maximo. You can reach me at ${email}.\n`,
-        );
-        window.location.href = `mailto:latif.f@northeastern.edu?subject=${subject}&body=${body}`;
+        setStatus("sending");
+        try {
+          const res = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({
+              access_key: WEB3FORMS_KEY,
+              subject: "IBM case study walkthrough request",
+              from_name: "rowenlatif.com",
+              email,
+              replyto: email,
+              message: `${email} would like a walkthrough of the IBM Maximo case study.\n\n${note.trim() || "No note"}`,
+              botcheck: (e.currentTarget.elements.namedItem("botcheck") as HTMLInputElement | null)?.checked ?? false,
+            }),
+          });
+          const data = await res.json();
+          setStatus(data.success ? "sent" : "error");
+        } catch {
+          setStatus("error");
+        }
       }}
-      className="flex flex-col sm:flex-row gap-2"
+      className="flex flex-col gap-2"
     >
+      {/* Honeypot: hidden from people, ticked by bots, rejected by Web3Forms */}
+      <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
       <label htmlFor="access-email" className="sr-only">
         Your email
       </label>
@@ -69,14 +104,35 @@ function AccessRequestForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@company.com"
-        className="flex-1 min-w-0 rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 outline-none focus:border-neutral-600 transition-colors"
+        className="w-full rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 outline-none focus:border-neutral-600 transition-colors"
+      />
+      <label htmlFor="access-note" className="sr-only">
+        Add a note (optional)
+      </label>
+      <textarea
+        id="access-note"
+        rows={2}
+        value={note}
+        onChange={(e) => setNote(e.target.value)}
+        placeholder="Add a note (optional)"
+        className="w-full resize-none rounded-2xl border border-neutral-300 bg-white px-4 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 outline-none focus:border-neutral-600 transition-colors"
       />
       <button
         type="submit"
-        className="rounded-full bg-neutral-900 px-5 py-2 text-sm text-white hover:bg-neutral-700 transition-colors"
+        disabled={status === "sending"}
+        className="self-center rounded-full bg-neutral-900 px-5 py-2 text-sm text-white hover:bg-neutral-700 disabled:opacity-60 transition-colors"
       >
-        Request access
+        {status === "sending" ? "Sending…" : "Request access"}
       </button>
+      {status === "error" && (
+        <p className="text-xs text-neutral-600">
+          Something went wrong. You can email me directly at{" "}
+          <a href="mailto:rowenlatif@gmail.com" className="underline">
+            rowenlatif@gmail.com
+          </a>
+          .
+        </p>
+      )}
     </form>
   );
 }
@@ -85,6 +141,7 @@ function AccessRequestForm() {
 export default function IbmPage() {
   return (
     <main className="flex-1 px-6 sm:px-10 lg:pl-24 lg:pr-20 xl:pl-32 xl:pr-28 py-10">
+      <ScrollProgress color={IBM_BLUE} />
 
       {/* Inset by the width of the contents column other case studies have (140px + 40px gap), on both sides */}
       <div id="top" className="lg:px-[180px]">
@@ -211,8 +268,8 @@ export default function IbmPage() {
 
         {/* Locked preview — the real work stays private until we talk */}
         <section className="mb-32 sm:mb-40">
-          {/* min-h keeps room for the form on phones, where the image alone is too short */}
-          <div className="relative w-full max-w-5xl mx-auto min-h-[440px] sm:min-h-0 sm:aspect-[2624/1600] rounded-xl border border-neutral-200 overflow-hidden">
+          {/* min-h keeps room for the form wherever the image's own ratio is too short for it */}
+          <div className="relative w-full max-w-5xl mx-auto min-h-[520px] sm:aspect-[2624/1600] rounded-xl border border-neutral-200 overflow-hidden">
             <Image
               src="/images/ibm/dashboard.png"
               alt=""
@@ -241,8 +298,8 @@ export default function IbmPage() {
                 </div>
                 <h2 className="font-serif text-2xl sm:text-3xl mb-4">Want the full walkthrough?</h2>
                 <p className="text-sm text-neutral-600 leading-relaxed mb-5">
-                  This work is locked for now. Leave your email and I&apos;ll get back to you to set up a
-                  time to talk through it.
+                  This work is locked for now. Leave your email if you&apos;d like to hear more, and
+                  I&apos;d be happy to walk you through everything.
                 </p>
                 <AccessRequestForm />
               </div>
@@ -281,6 +338,43 @@ export default function IbmPage() {
               </figure>
             ))}
           </div>
+        </section>
+
+        {/* Next in collection */}
+        <section className="mb-10 py-10 flex justify-center">
+          <Link
+            href="/selfserve"
+            className="group inline-flex items-stretch gap-4 w-fit rounded-[3px] border-[0.5px] border-neutral-200 bg-white pr-5 pb-3 transition-[transform,border-color] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-neutral-500 hover:rotate-1"
+          >
+            <div className="flex flex-col justify-center gap-2 py-[60px] pl-[50px]">
+              <p className="text-xs text-neutral-400">SELFSERVE, 2026</p>
+              <div className="relative">
+                <h3 className="font-serif text-lg text-neutral-900">
+                  AI-Powered Operations Platform
+                  <br />
+                  for Boutique Hotels
+                </h3>
+                <h3
+                  aria-hidden
+                  className="absolute inset-0 font-serif text-lg text-[#0f62fe] [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-out group-hover:[clip-path:inset(0_0%_0_0)]"
+                >
+                  AI-Powered Operations Platform
+                  <br />
+                  for Boutique Hotels
+                </h3>
+              </div>
+              <p className="text-xs text-neutral-500">Case Study / UX</p>
+            </div>
+            <div className="relative w-[201.5px] h-[206px] shrink-0 self-center">
+              <Image
+                src="/images/card-selfserve.png"
+                alt="SelfServe preview"
+                fill
+                className="object-contain"
+                loading="eager"
+              />
+            </div>
+          </Link>
         </section>
       </div>
     </main>

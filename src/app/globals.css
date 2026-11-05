@@ -216,3 +216,19 @@ iframe.instagram-media {
 .dot-field-light {
   --dot-color: rgba(255, 255, 255, 0.22);
 }
+
+/* --- IBM bookshelf: Tufte's vocabulary drifting above the books --- */
+@keyframes tufte-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
+}
+
+.tufte-float {
+  animation: tufte-float 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tufte-float {
+    animation: none;
+  }
+}

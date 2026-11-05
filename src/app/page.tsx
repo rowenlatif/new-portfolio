@@ -48,14 +48,7 @@ const projects = [
   {
     label: "IBM Maximo",
     href: "/ibm",
-    title: (
-      <>
-        AI-Driven Asset Management for
-        <br />
-        Fortune 500 Companies
-      </>
-    ),
-    description: "Creating data visualizations to make operational data easier to see, understand, and explore",
+    title: <>AI Data Visualizations for Fortune 500 Asset Management</>,
     tags: ["Dashboards", "Desktop"],
     image: "/images/ibm/eye-bee-m.gif",
     animated: true,
@@ -67,18 +60,10 @@ const projects = [
   {
     label: "SelfServe",
     href: "/selfserve",
-    title: (
-      <>
-        AI-Powered Operations Platform for
-        <br />
-        Boutique Hotels
-      </>
-    ),
-    description:
-      "Automating task routing and giving managers instant operational visibility",
+    title: <>AI-Powered Operations Platform for Boutique Hotels</>,
     tags: ["Desktop", "Shipped"],
-    image: "/images/selfserve/thumbnail.png",
-    inset: { width: 2920, height: 2088 },
+    image: "/images/selfserve/staff-analytics.png",
+    inset: { width: 2880, height: 2048 },
     imageBg: "bg-[#B2BE9E]",
     color: "#B2BE9E",
     cursor: "View now",
@@ -87,14 +72,7 @@ const projects = [
   {
     label: "CineCircle",
     href: "/cinecircle",
-    title: (
-      <>
-        Designing how South Asian Audiences
-        <br />
-        Express Authentic Film Discussion
-      </>
-    ),
-    description: "Creating long and short forms of content",
+    title: <>Expressing Authentic Film Discussions for South Asian Audiences</>,
     tags: ["Mobile", "Shipped"],
     image: "/images/cinecircle/thumbnail.png",
     inset: { width: 1387, height: 866, size: "w-[85%]", hover: "group-hover/img:scale-105" },
@@ -109,7 +87,6 @@ const projects = [
     label: "Perplexity",
     href: "/perplexity",
     title: <>Improving AI Adoption</>,
-    description: "Coming soon!",
     tags: ["UX Research"],
     image: "/images/perplexity-logo.png",
     imageBg: "",
@@ -185,7 +162,7 @@ export default function Home() {
         style={{ animationDelay: "0.75s" }}
       >
         <h2 className="font-serif text-3xl sm:text-4xl mb-6">Featured Works</h2>
-        <div className="space-y-24 sm:space-y-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 sm:gap-y-20">
             {projects.filter((project) => !project.hidden).map((project) => {
               // Inset cards show the screenshot centered on the card's background instead of filling it.
               // Animated cards fill the card; multiply drops the GIF's off-white ground into the card colour.
@@ -203,7 +180,7 @@ export default function Home() {
                   alt={typeof project.label === "string" ? project.label : "project thumbnail"}
                   width={project.inset.width}
                   height={project.inset.height}
-                  sizes="(min-width: 768px) 35vw, 70vw"
+                  sizes="(min-width: 768px) 30vw, 70vw"
                   className={`${project.inset.size ?? "w-[68%]"} h-auto rounded-md drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] scale-100 ${project.inset.hover ?? "group-hover/img:scale-115"} transition-transform duration-500 ease-out`}
                 />
               ) : (
@@ -224,25 +201,9 @@ export default function Home() {
                 </>
               );
 
+              // Image on top, details underneath; two projects to a row from md up.
               return (
-                <div key={project.label} className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                  <div>
-                    <p className="text-sm sm:text-base text-neutral-900 mb-3">{project.label}</p>
-                    <h3 className="text-xl sm:text-2xl font-medium leading-snug mb-2">{project.title}</h3>
-                    <p className="text-sm sm:text-base text-neutral-900 mb-4 max-w-sm">
-                      {project.description}
-                    </p>
-                    <div className="flex gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs font-serif rounded-full border border-neutral-300 px-4 py-2 text-neutral-600"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                <div key={project.label} className="flex flex-col gap-6">
                   <Link
                     href={project.href}
                     onMouseEnter={() => setCursorLabel(project.cursor)}
@@ -257,6 +218,23 @@ export default function Home() {
                   >
                     {media}
                   </Link>
+                  <div>
+                    {/* Name on the left, tags pushed to the far right of the same row */}
+                    <div className="flex items-center justify-between gap-4 mb-2">
+                      <p className="text-sm sm:text-base text-neutral-900">{project.label}</p>
+                      <div className="flex gap-2 shrink-0">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs font-serif rounded-full border border-neutral-300 px-4 py-2 text-neutral-600"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-medium leading-snug">{project.title}</h3>
+                  </div>
                 </div>
               );
             })}

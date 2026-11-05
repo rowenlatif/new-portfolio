@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { setCursorLabel } from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
+import IbmTableToChart from "@/components/IbmTableToChart";
+import IbmMissionCards from "@/components/IbmMissionCards";
+import IbmBookshelf from "@/components/IbmBookshelf";
 
 // IBM's brand blue; the next-project hover uses it too (text-[#0f62fe]).
 const IBM_BLUE = "#0f62fe";
@@ -205,65 +208,41 @@ export default function IbmPage() {
         </section>
 
         {/* Mission */}
-        <section className="py-10 sm:py-14 mb-12 sm:mb-16 flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
-          <div className="md:w-[38%] shrink-0">
-            <p className="text-xs tracking-wide text-neutral-400 mb-3">THE MISSION</p>
-            <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance">
-              Transforming Maximo Assistant from flat tables into clear visual insights that help
-              maintenance teams understand operational data faster.
-            </h2>
+        <section className="pt-10 sm:pt-14 mb-32 sm:mb-40">
+          <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-16 mb-12">
+            <div className="md:w-[44%] shrink-0">
+              <p className="text-xs tracking-wide text-[#0f62fe] mb-3">THE MISSION</p>
+              <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance">
+                Transforming Maximo Assistant from flat tables into clear visual insights that help
+                maintenance teams understand operational data faster.
+              </h2>
+            </div>
+            {/* Tables into charts, illustrated with made-up data in Carbon's style.
+                md:pt-7 clears THE MISSION label so it starts level with the heading. */}
+            <div className="md:w-[48%] md:pt-7">
+              <IbmTableToChart />
+            </div>
           </div>
-          <div className="md:w-[48%] space-y-4 text-sm text-neutral-500 leading-relaxed text-pretty">
-            <p>
-              As the sole Product Designer on data visualization for IBM Maximo, I owned the experience
-              end to end, from early exploration through final handoff to engineering. The goal was to
-              help enterprise maintenance teams make sense of their operational data at a glance instead
-              of digging through rows of numbers to find what mattered.
-            </p>
-            <p>
-              Maximo Assistant answers questions in natural language, but its responses often came back
-              as dense tables. I designed how those answers become charts that people can open up and
-              explore, with a clear path back to the records underneath, so that AI-generated insights
-              feel trustworthy enough to act on.
-            </p>
-            <p>
-              Much of the work happened beyond individual screens. Partnering closely with engineering and
-              product, I shaped the rules behind the system itself: when an answer should become a chart
-              rather than a table, and how visualization patterns hold up as the questions and data behind
-              them change.
-            </p>
-          </div>
+
+          <IbmMissionCards />
         </section>
 
         {/* Reading */}
-        <section className="mb-32 sm:mb-40 flex flex-col md:flex-row md:items-center md:justify-between gap-10 md:gap-16">
-          <div className="md:w-[52%] max-w-md">
-            <p className="text-xs tracking-wide text-neutral-400 mb-3">ON MY DESK</p>
+        <section className="mb-32 sm:mb-40">
+          <div className="max-w-2xl mb-10">
+            <p className="text-xs tracking-wide text-[#0f62fe] mb-3">ON MY DESK</p>
             <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance mb-6">
               Learning the language of data visualization
             </h2>
-            <div className="space-y-4 text-sm text-neutral-500 leading-relaxed text-pretty">
-              <p>
-                I came into this role with no background in data visualization. Besides my manager and
-                everyone at IBM who&apos;s been so generous with their time, one of my biggest resources
-                has been Edward R. Tufte&apos;s <em>The Visual Display of Quantitative Information</em>.
-              </p>
-              <p>
-                It gave me the fundamentals to build on and, just as important, the vocabulary to put
-                what I was seeing into words.
-              </p>
-            </div>
+            <p className="text-sm text-neutral-500 leading-relaxed text-pretty">
+              I came into this role with no background in data visualization. Alongside my manager and
+              everyone at IBM who&apos;s been so generous with their time, Edward R. Tufte&apos;s{" "}
+              <em>The Visual Display of Quantitative Information</em> gave me the fundamentals, and the
+              vocabulary to put what I was seeing into words.
+            </p>
           </div>
-          <div className="md:w-[40%] flex justify-center">
-            <Image
-              src="/images/ibm/tufte-cover.jpg"
-              alt="Cover of The Visual Display of Quantitative Information by Edward R. Tufte"
-              width={407}
-              height={491}
-              sizes="(min-width: 768px) 320px, 260px"
-              className="w-[260px] md:w-[320px] h-auto rounded-lg shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)]"
-            />
-          </div>
+
+          <IbmBookshelf />
         </section>
 
         {/* Locked preview — the real work stays private until we talk */}
@@ -310,7 +289,7 @@ export default function IbmPage() {
         {/* In progress */}
         <section className="mb-24">
           <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-            <p className="text-xs tracking-wide text-neutral-400 mb-3">IN THE WORKS</p>
+            <p className="text-xs tracking-wide text-[#0f62fe] mb-3">IN THE WORKS</p>
             <h2 className="font-serif text-2xl sm:text-3xl mb-4">A look inside my time at IBM</h2>
             <p className="text-sm text-neutral-500 leading-relaxed">
               The full case study is still in progress while my work at IBM continues. In the meantime,

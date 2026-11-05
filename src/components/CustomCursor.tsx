@@ -118,7 +118,7 @@ export default function CustomCursor() {
       />
       <div
         className={[
-          "absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 h-10 rounded-xl bg-black text-white",
+          "absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 h-10 rounded-md bg-black text-white",
           "flex items-center justify-center whitespace-nowrap px-4 font-sans text-base",
           "transition-[opacity,transform] duration-150 ease-out will-change-[opacity,transform]",
           label ? "opacity-100 scale-100" : "opacity-0 scale-75",

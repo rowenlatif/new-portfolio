@@ -188,7 +188,9 @@ export default function IbmPage() {
           </div>
 
           <p className="text-sm text-neutral-500 leading-relaxed max-w-3xl mb-10">
-            Designing agentic AI experiences for asset management.
+            Designing agentic AI experiences for asset management. As the sole Product Designer on data
+            visualization for IBM Maximo, I owned the experience from early exploration through final
+            handoff to engineering.
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 border-t border-neutral-200 pt-8">
@@ -209,7 +211,7 @@ export default function IbmPage() {
 
         {/* Mission */}
         <section className="pt-10 sm:pt-14 mb-32 sm:mb-40">
-          <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-16 mb-12">
+          <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
             <div className="md:w-[44%] shrink-0">
               <p className="text-xs tracking-wide text-[#0f62fe] mb-3">THE MISSION</p>
               <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance">
@@ -223,8 +225,6 @@ export default function IbmPage() {
               <IbmTableToChart />
             </div>
           </div>
-
-          <IbmMissionCards />
         </section>
 
         {/* Reading */}
@@ -247,40 +247,52 @@ export default function IbmPage() {
 
         {/* Locked preview — the real work stays private until we talk */}
         <section className="mb-32 sm:mb-40">
-          {/* min-h keeps room for the form wherever the image's own ratio is too short for it */}
-          <div className="relative w-full max-w-5xl mx-auto min-h-[520px] sm:aspect-[2624/1600] rounded-xl border border-neutral-200 overflow-hidden">
-            <Image
-              src="/images/ibm/dashboard.png"
-              alt=""
-              aria-hidden
-              fill
-              sizes="(min-width: 1024px) 70vw, 90vw"
-              className="object-cover blur-xl scale-110 select-none pointer-events-none"
-            />
-            <div className="absolute inset-0 bg-white/50 flex items-center justify-center px-6">
-              <div className="w-full max-w-md text-center">
-                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white/90 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.25)] ring-1 ring-black/5">
-                  <svg
-                    aria-hidden
-                    viewBox="0 0 24 24"
-                    className="h-7 w-7 text-neutral-800"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={1.6}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect x="4.5" y="10.5" width="15" height="10" rx="2" />
-                    <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
-                    <circle cx="12" cy="15.5" r="1.2" fill="currentColor" stroke="none" />
-                  </svg>
+          <div className="max-w-2xl mb-10">
+            <p className="text-xs tracking-wide text-[#0f62fe] mb-3">UNDER WRAPS</p>
+            <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance mb-6">
+              Want the full walkthrough?
+            </h2>
+            <p className="text-sm text-neutral-500 leading-relaxed text-pretty">
+              This work is locked for now. Leave your email if you&apos;d like to hear more, and
+              I&apos;d be happy to walk you through everything.
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* The rest of the mission, stacked beside the lock */}
+            <div className="md:w-[44%] shrink-0 flex flex-col">
+              <IbmMissionCards />
+            </div>
+            {/* Stretches to the cards' height; min-h keeps room for the form */}
+            <div className="relative flex-1 min-h-[520px] rounded-xl border border-neutral-200 overflow-hidden">
+              <Image
+                src="/images/ibm/dashboard.png"
+                alt=""
+                aria-hidden
+                fill
+                sizes="(min-width: 1024px) 70vw, 90vw"
+                className="object-cover blur-xl scale-110 select-none pointer-events-none"
+              />
+              <div className="absolute inset-0 bg-white/50 flex items-center justify-center px-6">
+                <div className="w-full max-w-md text-center">
+                  <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white/90 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.25)] ring-1 ring-black/5">
+                    <svg
+                      aria-hidden
+                      viewBox="0 0 24 24"
+                      className="h-7 w-7 text-neutral-800"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={1.6}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect x="4.5" y="10.5" width="15" height="10" rx="2" />
+                      <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+                      <circle cx="12" cy="15.5" r="1.2" fill="currentColor" stroke="none" />
+                    </svg>
+                  </div>
+                  <AccessRequestForm />
                 </div>
-                <h2 className="font-serif text-2xl sm:text-3xl mb-4">Want the full walkthrough?</h2>
-                <p className="text-sm text-neutral-600 leading-relaxed mb-5">
-                  This work is locked for now. Leave your email if you&apos;d like to hear more, and
-                  I&apos;d be happy to walk you through everything.
-                </p>
-                <AccessRequestForm />
               </div>
             </div>
           </div>

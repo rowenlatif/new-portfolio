@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-/* The mission, split into four landscape cards, each with a technical line
+/* Three parts of the mission, stacked as landscape cards, each with a technical line
    drawing in the spirit of a spec sheet. Lines share the table-to-chart
    animation's light grays. */
 
@@ -28,42 +28,7 @@ function GraphPaper({ step = 12.5 }: { step?: number }) {
   );
 }
 
-/* 1 · Growing circles along a rising line: exploration through handoff */
-function EndToEnd() {
-  const stages = [
-    { r: 14, name: "EXPLORE" },
-    { r: 18, name: "DEFINE" },
-    { r: 27, name: "DESIGN" },
-    { r: 38, name: "HANDOFF" },
-  ];
-  let cx = 6;
-  const circles = stages.map((s, i) => {
-    cx += (i ? stages[i - 1].r : 0) + s.r;
-    return { ...s, cx, cy: 192 - s.r };
-  });
-  return (
-    <>
-      <GraphPaper />
-      <g fill="none" stroke={LINE} strokeWidth={1}>
-        <line x1={6} y1={192} x2={194} y2={10} />
-        <path d="M6 192 C 90 180, 150 120, 194 10" strokeDasharray="3 3" />
-        {circles.map((c) => (
-          <circle key={c.name} cx={c.cx} cy={c.cy} r={c.r} fill="white" />
-        ))}
-      </g>
-      {circles.map((c) => (
-        <text key={c.name} x={c.cx} y={c.cy + 2.5} {...label} fontSize={c.r < 15 ? 5 : 7.5}>
-          {c.name}
-        </text>
-      ))}
-      <text x={180} y={12} {...label}>
-        SHIPPED
-      </text>
-    </>
-  );
-}
-
-/* 2 · Concentric rings: rows, records, and the insight at the centre */
+/* 1 · Concentric rings: rows, records, and the insight at the centre */
 function AtAGlance() {
   return (
     <>
@@ -88,7 +53,7 @@ function AtAGlance() {
   );
 }
 
-/* 3 · Isometric layers: the chart sits over the records it came from */
+/* 2 · Isometric layers: the chart sits over the records it came from */
 function isoPlane(cy: number, divisions: number, bothWays: boolean) {
   const A = [20, cy];
   const B = [100, cy - 42];
@@ -148,7 +113,7 @@ function TablesIntoCharts() {
   );
 }
 
-/* 4 · Thresholds and a changing signal: when an answer becomes a chart */
+/* 3 · Thresholds and a changing signal: when an answer becomes a chart */
 function TheRules() {
   return (
     <>
@@ -192,12 +157,6 @@ function TheRules() {
 
 const cards: { title: string; body: ReactNode; art: ReactNode; alt: string }[] = [
   {
-    title: "Sole designer, exploration to handoff",
-    body: "As the sole Product Designer on data visualization for IBM Maximo, I owned the experience from early exploration through final handoff to engineering.",
-    art: <EndToEnd />,
-    alt: "Circles growing along a rising line, labelled explore, define, design and handoff",
-  },
-  {
     title: "Insight over rows of numbers",
     body: "The goal was to help enterprise maintenance teams make sense of their operational data at a glance, instead of digging through rows to find what mattered.",
     art: <AtAGlance />,
@@ -219,10 +178,10 @@ const cards: { title: string; body: ReactNode; art: ReactNode; alt: string }[] =
 
 export default function IbmMissionCards() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="flex-1 flex flex-col justify-between gap-4">
       {cards.map((c) => (
         <div key={c.title} className="flex flex-col sm:flex-row rounded-xl border border-[#e0e0e0] bg-white overflow-hidden">
-          <div className="sm:w-[36%] shrink-0 p-3 flex items-center justify-center">
+          <div className="sm:w-[28%] shrink-0 p-3 flex items-center justify-center">
             <svg viewBox="0 0 200 200" role="img" aria-label={c.alt} className="w-full max-w-[180px] sm:max-w-none aspect-square">
               {c.art}
             </svg>

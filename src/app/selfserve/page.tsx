@@ -368,17 +368,17 @@ export default function SelfServePage() {
               <p className="text-xs text-neutral-400">CINECIRCLE, 2025</p>
               <div className="relative">
                 <h3 className="font-serif text-lg text-neutral-900">
-                  Designing how South Asian Audiences
+                  Expressing Authentic Film Discussions
                   <br />
-                  express film discussions
+                  for South Asian Audiences
                 </h3>
                 <h3
                   aria-hidden
                   className="absolute inset-0 font-serif text-lg text-olive [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-out group-hover:[clip-path:inset(0_0%_0_0)]"
                 >
-                  Designing how South Asian Audiences
+                  Expressing Authentic Film Discussions
                   <br />
-                  express film discussions
+                  for South Asian Audiences
                 </h3>
               </div>
               <p className="text-xs text-neutral-500">Case Study / UX</p>

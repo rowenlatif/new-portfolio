@@ -163,7 +163,7 @@ export default function IbmBookshelf() {
         {words.map((w, i) => (
           <span
             key={w.t}
-            className="absolute rounded-full border border-[#e0e0e0] bg-white px-3 py-1 text-xs text-neutral-600 whitespace-nowrap tufte-float"
+            className="absolute rounded-full border border-[#d0e2ff] bg-[#edf5ff] px-3 py-1 text-xs text-[#0f62fe] whitespace-nowrap tufte-float"
             style={{
               left: `${w.x}%`,
               top: `${w.y}%`,

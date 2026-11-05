@@ -227,8 +227,20 @@ iframe.instagram-media {
   animation: tufte-float 5s ease-in-out infinite;
 }
 
+/* Ink spreading out from where the IBM stamp lands; invisible until it plays */
+@keyframes stamp-ring {
+  from { opacity: 0.5; scale: 0.8; }
+  to { opacity: 0; scale: 1.7; }
+}
+
+.stamp-ring {
+  opacity: 0;
+  animation: stamp-ring 700ms ease-out forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .tufte-float {
+  .tufte-float,
+  .stamp-ring {
     animation: none;
   }
 }

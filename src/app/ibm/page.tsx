@@ -7,6 +7,7 @@ import { setCursorLabel } from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import IbmTableToChart from "@/components/IbmTableToChart";
 import IbmMissionCards from "@/components/IbmMissionCards";
+import IbmPlaybackStats, { TeamReaction } from "@/components/IbmPlaybackStats";
 import IbmBookshelf from "@/components/IbmBookshelf";
 
 // IBM's brand blue; the next-project hover uses it too (text-[#0f62fe]).
@@ -247,37 +248,48 @@ export default function IbmPage() {
 
         {/* Business impact */}
         <section className="mb-32 sm:mb-40">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 md:gap-16 mb-10">
-            <div className="max-w-2xl">
-              <p className="text-xs tracking-wide text-[#0f62fe] mb-3">BUSINESS IMPACT</p>
-              <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance mb-6">
-                Exactly what customers had been asking for
-              </h2>
-              <p className="text-sm text-neutral-500 leading-relaxed text-pretty">
-                At a mid-project Playback, I presented the work to 80+ people across the AI team, VPs
-                included. It was one of the most visible moments of my time at IBM, and afterwards the
-                team asked for a copy of my slide decks. The feedback that came back said it best: this
-                was exactly what a big university client, and other customers, had been asking for.
-              </p>
-            </div>
-            {/* The team's reaction, beside the copy that describes it */}
-            <Image
-              src="/images/ibm/customer-feedback.png"
-              alt="Slack message: “this is great! this is exactly what big university client (and other) customers have been asking for!” with two heart reactions"
-              width={572}
-              height={122}
-              className="w-full max-w-[380px] h-auto rounded-xl shrink-0"
-            />
+          <div className="max-w-2xl mb-10">
+            <p className="text-xs tracking-wide text-[#0f62fe] mb-3">BUSINESS IMPACT</p>
+            <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance mb-6">
+              Exactly what customers had been asking for
+            </h2>
+            <p className="text-sm text-neutral-500 leading-relaxed text-pretty">
+              At a mid-project Playback, I presented the work to 80+ people across the AI team, VPs
+              included. It was one of the most visible moments of my time at IBM, and afterwards the
+              team asked for a copy of my slide decks. The feedback that came back said it best: this
+              was exactly what a big university client, and other customers, had been asking for.
+            </p>
           </div>
 
-          <Image
-            src="/images/ibm/playback-cover-blurred.png"
-            alt="Playback cover slide: Data visualization for Maximo Assistant, a mid-project check-in on making operational patterns easier to see, understand, and explore"
-            width={1333}
-            height={747}
-            sizes="(min-width: 1024px) 80vw, 90vw"
-            className="w-full h-auto rounded-xl border border-neutral-200"
-          />
+          {/* The Playback at a glance */}
+          <IbmPlaybackStats />
+
+          {/* The team's reaction */}
+          <div className="py-16 sm:py-20">
+            <TeamReaction>
+              <Image
+                src="/images/ibm/team-feedback.png"
+                alt="Slack message: “this is great! this is exactly what big university client (and other) customers have been asking for!” with two heart reactions"
+                width={572}
+                height={122}
+                className="w-full h-auto rounded-xl"
+              />
+            </TeamReaction>
+          </div>
+
+          <figure>
+            <Image
+              src="/images/ibm/playback-cover-blurred.png"
+              alt="Playback cover slide: Data visualization for Maximo Assistant, a mid-project check-in on making operational patterns easier to see, understand, and explore"
+              width={1333}
+              height={747}
+              sizes="(min-width: 1024px) 80vw, 90vw"
+              className="w-full h-auto rounded-xl border border-neutral-200"
+            />
+            <figcaption className="py-3 text-center text-xs text-neutral-500">
+              The cover of my Playback deck, presented November 2
+            </figcaption>
+          </figure>
         </section>
 
         {/* Locked preview — the real work stays private until we talk */}

@@ -6,6 +6,8 @@ import CaseStudyContents from "@/components/CaseStudyContents";
 import CineCircleTickets from "@/components/CineCircleTickets";
 import CineCircleReel from "@/components/CineCircleReel";
 import CineCircleDesignShowcase from "@/components/CineCircleDesignShowcase";
+import FlipBook from "@/components/FlipBook";
+import { cineCircleBrandbook } from "@/components/brandbooks";
 
 const ROSE = "var(--color-rose-600)";
 
@@ -51,6 +53,7 @@ const sections = [
   { id: "design", label: "Design" },
   { id: "outcome", label: "Outcome" },
   { id: "reflections", label: "Reflections" },
+  { id: "brandbook", label: "Brandbook" },
 ];
 
 const toc = sections
@@ -361,6 +364,20 @@ export default function CineCirclePage() {
                 &hellip;and off the clock
               </p>
             </div>
+          </section>
+
+          {/* BRANDBOOK */}
+          <section id="brandbook" className="mb-24 pt-10">
+            <div className="max-w-2xl mb-12">
+              <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
+                WAIT, BEFORE YOU GO…
+              </p>
+              <h2 className="font-serif text-2xl mb-3">Here&apos;s our brandbook</h2>
+              <p className="text-neutral-700 text-sm">
+                Flip through with the arrows, or click a page for a closer look.
+              </p>
+            </div>
+            <FlipBook pages={cineCircleBrandbook} alt="CineCircle brandbook" />
           </section>
 
           {/* Next in collection */}

@@ -4,6 +4,8 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { ScriptAccentText, setCursorRich } from "@/components/CustomCursor";
 import InstagramEmbed from "@/components/InstagramEmbed";
+import FlipBook from "@/components/FlipBook";
+import { cineCircleBrandbook, selfServeBrandbook } from "@/components/brandbooks";
 
 function IconLink({ href, label, children }: { href?: string; label: string; children: ReactNode }) {
   if (!href) {
@@ -70,6 +72,10 @@ const sidebar = [
     items: ["FASHION ARCHIVE", "NODI CAFE"],
   },
   {
+    heading: "BRANDBOOKS",
+    items: ["CINECIRCLE", "SELFSERVE"],
+  },
+  {
     heading: "KAPPA THETA PI",
     items: ["WEBSITE REDESIGN", "MERCH DESIGNS", "GRAPHIC DESIGN"],
   },
@@ -92,10 +98,17 @@ export default function CreativePage() {
               </div>
             </div>
           ))}
+          <a
+            href="#top"
+            className="block pt-4 intro-fade-up hover:text-neutral-900"
+            style={{ animationDelay: `${0.5 + sidebar.length * 0.06}s` }}
+          >
+            BACK TO THE TOP
+          </a>
         </nav>
       </aside>
 
-      <div>
+      <div id="top" className="scroll-mt-24">
         <div className="intro-slide-up relative w-full max-w-2xl mx-auto h-[160px] sm:h-[220px] mb-24 sm:mb-32">
           <div className="intro-reveal-x absolute inset-0" style={{ animationDelay: "0.05s" }}>
             <Image src="/images/creative/hero-heading.png" alt="A Look into my (creative) Work" fill className="object-contain" priority />
@@ -154,6 +167,23 @@ export default function CreativePage() {
               </div>
             </div>
           </div>
+        </section>
+
+        <section id="cinecircle" className="pt-16 mb-24 scroll-mt-24">
+          <p className="font-serif text-2xl mb-2">Brandbooks</p>
+          <h3 className="text-lg font-normal mb-2">CineCircle</h3>
+          <p className="text-base text-neutral-500 max-w-xl mb-8">
+            The visual identity for CineCircle, a social app for Indian cinema fans.
+          </p>
+          <FlipBook pages={cineCircleBrandbook} alt="CineCircle brandbook" />
+        </section>
+
+        <section id="selfserve" className="mb-24 scroll-mt-24">
+          <h3 className="text-lg font-normal mb-2">SelfServe</h3>
+          <p className="text-base text-neutral-500 max-w-xl mb-8">
+            Brand guidelines for SelfServe, an AI-powered operations platform for boutique hotels.
+          </p>
+          <FlipBook pages={selfServeBrandbook} alt="SelfServe brandbook" />
         </section>
 
         <section id="website-redesign" className="mb-24 scroll-mt-24">

@@ -136,7 +136,6 @@ export default function Home() {
       >
         <HeroImageTrail />
         <div data-trail-exclude className="intro-slide-up relative z-10 flex flex-col items-center">
-          <Image src="/nav-mark.png" alt="" width={48} height={39} className="opacity-80 mb-5" priority />
           <h1 className="font-serif text-3xl sm:text-4xl leading-[1.15] mb-0.5">
             <span className="intro-reveal-x inline-block" style={{ animationDelay: "0.05s" }}>
               Hello, I&apos;m <span className="text-neutral-900 text-xl sm:text-2xl align-middle">. ݁₊ ୨୧˚.</span>{" "}
@@ -150,9 +149,27 @@ export default function Home() {
             </span>
           </p>
         </div>
-        <div data-trail-exclude className="intro-slide-up relative z-10 text-base text-neutral-500 space-y-0.5" style={{ animationDelay: "0.55s" }}>
-          <p>creative technologist</p>
-          <p>product designer @ IBM</p>
+        <div data-trail-exclude className="intro-slide-up relative z-10 mt-5 text-base text-neutral-500 space-y-3" style={{ animationDelay: "0.55s" }}>
+          <p>
+            product designer @{" "}
+            <span className="group relative inline-block rounded-md bg-neutral-100 px-1.5 text-neutral-900 cursor-default">
+              IBM
+              <span aria-hidden className="site-preview pointer-events-none absolute left-1/2 bottom-full mb-1 w-16">
+                <Image src="/images/ibm-bee.webp" alt="" width={200} height={130} unoptimized className="w-full h-auto" />
+              </span>
+            </span>
+          </p>
+          <p>
+            cs and design @{" "}
+            <span className="group inline-flex rounded-md bg-neutral-100 px-1.5 text-neutral-900 cursor-default whitespace-nowrap">
+              <span className="overflow-hidden max-w-[3em] group-hover:max-w-0 group-hover:opacity-0 transition-all duration-300 ease-out">
+                NEU
+              </span>
+              <span className="overflow-hidden max-w-0 opacity-0 group-hover:max-w-[12em] group-hover:opacity-100 transition-all duration-300 ease-out">
+                Northeastern University
+              </span>
+            </span>
+          </p>
         </div>
       </section>
 

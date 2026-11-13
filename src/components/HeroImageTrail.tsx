@@ -7,7 +7,7 @@ import { introPhotos } from "@/components/AboutIntro";
 // Small cards that pop in along the cursor path and fade away. Attaches to its
 // parent element, so drop it inside the area that should have the effect, and
 // mark anything that should be left alone (like the hero text) with
-// data-trail-exclude. Uses the About intro photos, picked at random.
+// data-trail-exclude (cards never land on or near it). Uses the About intro photos, picked at random.
 const SHAPES = [
   { w: 88, h: 112 },
   { w: 120, h: 84 },
@@ -20,6 +20,7 @@ const SPAWN_DISTANCE = 170; // px of cursor travel between cards
 const TOP_CLEARANCE = 112; // keep cards clear of the fixed nav bar (80px) with some room
 const LIFETIME_MS = 1100;
 const MAX_CARDS = 10;
+const EXCLUDE_MARGIN = 16; // px of clear space kept around excluded content
 
 const PHOTOS = introPhotos.filter((p): p is typeof p & { src: string } => Boolean(p.src));
 
@@ -51,6 +52,19 @@ export default function HeroImageTrail() {
       if (last && Math.hypot(x - last.x, y - last.y) < SPAWN_DISTANCE) return;
       const shape = SHAPES[shapeIndex % SHAPES.length];
       if (y - shape.h / 2 < TOP_CLEARANCE) return;
+      // Skip cards that would land on or near excluded content (the hero text and tags).
+      const overlapsExcluded = Array.from(area.querySelectorAll("[data-trail-exclude]")).some((el) => {
+        const r = el.getBoundingClientRect();
+        const cx = e.clientX;
+        const cy = e.clientY;
+        return (
+          cx + shape.w / 2 + EXCLUDE_MARGIN > r.left &&
+          cx - shape.w / 2 - EXCLUDE_MARGIN < r.right &&
+          cy + shape.h / 2 + EXCLUDE_MARGIN > r.top &&
+          cy - shape.h / 2 - EXCLUDE_MARGIN < r.bottom
+        );
+      });
+      if (overlapsExcluded) return;
       last = { x, y };
       shapeIndex++;
 

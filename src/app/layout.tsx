@@ -54,6 +54,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Nav />
         <div className="pt-20 flex flex-col flex-1">{children}</div>
         <Footer />
+        {/* Soft blur along the bottom edge of the viewport. */}
+        <div aria-hidden className="bottom-blur" />
       </body>
     </html>
   );

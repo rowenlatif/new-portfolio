@@ -211,17 +211,17 @@ export default function IbmPage() {
         <section className="pt-10 sm:pt-14 mb-32 sm:mb-40">
           <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
             <div className="md:w-[44%] shrink-0">
-              <p className="text-xs tracking-wide text-[#0f62fe] mb-3">THE MISSION</p>
+              <p className="text-xs tracking-wide text-[#0f62fe] mb-3">THE PROBLEM</p>
               <h2 className="font-serif text-2xl sm:text-3xl leading-snug text-balance">
-                Transforming Maximo Assistant from flat tables into clear visual insights that help
-                maintenance teams understand operational data{" "}
-                <BlueSweepText>faster</BlueSweepText>,{" "}
-                <BlueSweepText delay={450}>easier</BlueSweepText>, and more{" "}
-                <BlueSweepText delay={900}>efficiently</BlueSweepText>.
+                Maximo Assistant answered in flat tables, leaving maintenance teams to dig through
+                operational data that was{" "}
+                <BlueSweepText>slow</BlueSweepText> to scan,{" "}
+                <BlueSweepText delay={450}>hard</BlueSweepText> to compare, and{" "}
+                <BlueSweepText delay={900}>inefficient</BlueSweepText> to act on.
               </h2>
             </div>
             {/* Tables into charts, illustrated with made-up data in Carbon's style.
-                md:pt-7 clears THE MISSION label so it starts level with the heading. */}
+                md:pt-7 clears THE PROBLEM label so it starts level with the heading. */}
             <div className="md:w-[48%] md:pt-7">
               <IbmTableToChart />
             </div>

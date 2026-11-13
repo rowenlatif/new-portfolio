@@ -20,7 +20,12 @@ export default function Footer() {
       <div
         aria-hidden
         className={`dot-field -z-10 ${isLight ? "" : "dot-field-light"}`}
-        style={{ "--dot-fade": "radial-gradient(ellipse 90% 100% at 50% 100%, black 15%, transparent 80%)" } as CSSProperties}
+        style={
+          {
+            "--dot-color": isLight ? "rgba(0, 0, 0, 0.24)" : "rgba(255, 255, 255, 0.34)",
+            "--dot-fade": "radial-gradient(ellipse 90% 100% at 50% 100%, black 25%, transparent 85%)",
+          } as CSSProperties
+        }
       />
       <div
         className={[

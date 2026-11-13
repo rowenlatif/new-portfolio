@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 const experience = [
   { logo: "/images/about/logo-ibm.png", name: "IBM", role: "Product Designer", year: "2026" },
   { logo: "/images/about/logo-blackrock.png", name: "BlackRock", role: "Visual Designer", year: "2025" },
-  { logo: "/images/about/logo-perplexity.png", name: "Perplexity", role: "UX Researcher", year: "2025" },
 ];
 
 // Portrait photos for the intro gallery. The first two sit in view, the third
@@ -109,11 +108,12 @@ export default function AboutIntro() {
               href="https://generatenu.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline underline-offset-2 hover:text-neutral-400 transition-colors"
+              className="group relative underline underline-offset-2 hover:text-neutral-400 transition-colors"
             >
               Generate
+              <span aria-hidden className="site-preview pointer-events-none absolute left-1/2 bottom-full mb-2 w-56 aspect-[16/9] rounded-xl overflow-hidden bg-neutral-200 shadow-xl ring-1 ring-black/10"><Image src="/images/about/preview-generate.png" alt="" fill sizes="224px" className="object-cover object-top" /></span>
             </a>, leading brand
-            campaigns for <a href="#communities" className="underline underline-offset-2 hover:text-neutral-400 transition-colors">Kappa Theta Pi</a>,
+            campaigns for <a href="#communities" className="group relative underline underline-offset-2 hover:text-neutral-400 transition-colors">Kappa Theta Pi<span aria-hidden className="site-preview pointer-events-none absolute left-1/2 bottom-full mb-2 w-56 aspect-[16/9] rounded-xl overflow-hidden bg-neutral-200 shadow-xl ring-1 ring-black/10"><Image src="/images/about/preview-ktp.png" alt="" fill sizes="224px" className="object-cover object-top" /></span></a>,
             or hunting for the next best coffee spot in Boston.
           </p>
           <p className="intro-slide-up text-sm leading-relaxed text-neutral-700 max-w-[372px]" style={{ animationDelay: "0.55s" }}>

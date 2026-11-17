@@ -51,9 +51,9 @@ const projects = [
     href: "/ibm",
     title: <>AI Data Visualizations for Fortune 500 Asset Management</>,
     tags: ["Dashboards", "Desktop"],
-    image: "/images/ibm/eye-bee-m.gif",
+    image: "/images/ibm/eye-bee-m-blue.gif",
     animated: true,
-    imageBg: "bg-gradient-to-b from-sky-100 to-sky-50",
+    imageBg: "bg-[#bbe6fe]",
     color: "#e0f2fe",
     cursor: "View now",
     isLogo: false,
@@ -192,14 +192,14 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 sm:gap-y-20">
             {projects.filter((project) => !project.hidden).map((project) => {
               // Inset cards show the screenshot centered on the card's background instead of filling it.
-              // Animated cards fill the card; multiply drops the GIF's off-white ground into the card colour.
+              // Animated cards fill the card; the card colour matches the GIF's own sky-blue ground.
               const media = project.animated ? (
                 <Image
                   src={project.image}
                   alt={typeof project.label === "string" ? project.label : "project thumbnail"}
                   fill
                   unoptimized
-                  className="object-cover mix-blend-multiply scale-150 group-hover/img:scale-165 transition-transform duration-500 ease-out"
+                  className="object-cover group-hover/img:scale-110 transition-transform duration-500 ease-out"
                 />
               ) : project.inset ? (
                 <Image

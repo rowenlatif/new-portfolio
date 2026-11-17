@@ -14,9 +14,9 @@ const contents = [
   { id: "problem", label: "01 Problem" },
   { id: "solution", label: "02 Solution" },
   { id: "features", label: "03 Features" },
-  { id: "outcome", label: "04 Outcome" },
-  { id: "reflection", label: "05 Reflection" },
-  { id: "brandbook", label: "06 Brandbook" },
+  { id: "brandbook", label: "04 Brandbook" },
+  { id: "outcome", label: "05 Outcome" },
+  { id: "reflection", label: "06 Reflection" },
 ];
 
 const tags = ["Web / Mobile", "Case Study", "Shipped"];
@@ -312,6 +312,20 @@ export default function SelfServePage() {
           </section>
         )}
 
+        {/* BRANDBOOK */}
+        <section id="brandbook" className="mb-24 pt-10">
+          <div className="max-w-2xl mb-12">
+            <p className="text-xs tracking-wide text-olive mb-3">BRANDBOOK</p>
+            <h2 className="font-serif text-2xl sm:text-3xl mb-4">The visual language behind SelfServe</h2>
+            <p className="text-sm text-neutral-500 leading-relaxed">
+              I took a lot of ownership over these pages, though like everything on SelfServe it was a
+              collaborative effort with the rest of our designers. Flip through with the arrows, or click a
+              page for a closer look.
+            </p>
+          </div>
+          <FlipBook pages={selfServeBrandbook} alt="SelfServe brandbook" />
+        </section>
+
         {/* OUTCOME */}
         <section id="outcome" className="py-8 sm:py-12 mb-24 max-w-3xl mx-auto text-center">
           <p className="text-xs tracking-wide text-olive mb-3">OUTCOME</p>
@@ -359,18 +373,6 @@ export default function SelfServePage() {
               The SelfServe team says hello!
             </p>
           </div>
-        </section>
-
-        {/* BRANDBOOK */}
-        <section id="brandbook" className="mb-24 pt-10">
-          <div className="max-w-2xl mb-12">
-            <p className="text-xs tracking-wide text-olive mb-3">WAIT, BEFORE YOU GO…</p>
-            <h2 className="font-serif text-2xl sm:text-3xl mb-4">Here&apos;s our brandbook</h2>
-            <p className="text-sm text-neutral-500 leading-relaxed">
-              Flip through with the arrows, or click a page for a closer look.
-            </p>
-          </div>
-          <FlipBook pages={selfServeBrandbook} alt="SelfServe brandbook" />
         </section>
 
         {/* NEXT */}

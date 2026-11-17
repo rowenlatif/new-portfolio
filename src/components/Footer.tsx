@@ -3,7 +3,7 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HoverLabel, navLinks, scrollToTop } from "@/components/Nav";
+import { HoverLabel, navLinks, useNavClick } from "@/components/Nav";
 
 const LIGHT_FOOTER_ROUTES = ["/about", "/creative"];
 
@@ -12,6 +12,7 @@ const SHOW_SCRIPT_NAME = false;
 
 export default function Footer() {
   const pathname = usePathname();
+  const navClick = useNavClick();
   const isLight = LIGHT_FOOTER_ROUTES.includes(pathname);
 
   return (
@@ -79,7 +80,7 @@ export default function Footer() {
         <ul className="space-y-1 text-lg">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <Link href={link.href} onClick={scrollToTop} aria-label={link.label} className="group inline-block">
+              <Link href={link.href} onClick={navClick(link.href)} aria-label={link.label} className="group inline-block">
                 <HoverLabel text={link.label} scriptClassName={isLight ? "text-olive" : "text-white"} />
               </Link>
             </li>

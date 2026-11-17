@@ -166,7 +166,7 @@ export default function FlipBook({ pages, alt }: Props) {
             type="button"
             onClick={() => go(-1)}
             disabled={turned === 0}
-            className="h-9 w-10 flex items-center justify-center rounded-l-full transition-colors hover:text-neutral-900 disabled:opacity-30 disabled:hover:text-neutral-500"
+            className="h-9 w-10 flex items-center justify-center rounded-l-full transition-colors hover:text-neutral-900 disabled:text-neutral-400 disabled:hover:text-neutral-400 disabled:cursor-default"
             aria-label="Previous page"
           >
             ←
@@ -176,7 +176,7 @@ export default function FlipBook({ pages, alt }: Props) {
             type="button"
             onClick={() => go(1)}
             disabled={turned === total}
-            className="h-9 w-10 flex items-center justify-center rounded-r-full transition-colors hover:text-neutral-900 disabled:opacity-30 disabled:hover:text-neutral-500"
+            className="h-9 w-10 flex items-center justify-center rounded-r-full transition-colors hover:text-neutral-900 disabled:text-neutral-400 disabled:hover:text-neutral-400 disabled:cursor-default"
             aria-label="Next page"
           >
             →

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { setCursorLabel, setCursorRich, ScriptAccentText } from "@/components/CustomCursor";
 import { triggerProjectTransition } from "@/components/ProjectTransitionOverlay";
 import HeroImageTrail from "@/components/HeroImageTrail";
+import { CASE_STUDIES_ID } from "@/components/Nav";
 
 const clusters = [
   {
@@ -119,6 +120,15 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  // Arriving from the "case studies" nav link on another page: glide down once the intro has played.
+  useEffect(() => {
+    if (window.location.hash !== `#${CASE_STUDIES_ID}`) return;
+    const t = setTimeout(() => {
+      document.getElementById(CASE_STUDIES_ID)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 500);
+    return () => clearTimeout(t);
+  }, []);
+
   useEffect(() => {
     if (!revealed) return;
     const t = setTimeout(() => setSettled(true), 900);
@@ -174,11 +184,11 @@ export default function Home() {
       </section>
 
       <section
-        id="featured-works"
+        id={CASE_STUDIES_ID}
         className="intro-slide-up relative z-10 isolate overflow-hidden bg-white border-t border-white/70 rounded-t-[2rem] rounded-b-[2rem] shadow-[0_-20px_40px_-20px_rgba(0,0,0,0.2),0_20px_40px_-20px_rgba(0,0,0,0.2)] px-10 pt-14 pb-24 scroll-mt-24"
         style={{ animationDelay: "0.75s" }}
       >
-        <h2 className="font-serif text-3xl sm:text-4xl mb-6">Featured Works</h2>
+        <h2 className="font-serif text-3xl sm:text-4xl mb-6">Product Design Case Studies</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 sm:gap-y-20">
             {projects.filter((project) => !project.hidden).map((project) => {
               // Inset cards show the screenshot centered on the card's background instead of filling it.

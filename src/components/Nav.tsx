@@ -2,17 +2,41 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export const navLinks = [
   { href: "/", label: "home" },
+  { href: "/#case-studies", label: "case studies" },
   { href: "/about", label: "about" },
   { href: "/creative", label: "creative" },
 ];
 
 export function scrollToTop() {
   window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+}
+
+export const CASE_STUDIES_ID = "case-studies";
+
+// Nav/footer clicks. "case studies" smooth-scrolls to the projects on the home page;
+// from any other page it opens home at the top and the home page glides down (see page.tsx).
+export function useNavClick() {
+  const pathname = usePathname();
+  const router = useRouter();
+  return (href: string) => (e: React.MouseEvent) => {
+    if (!href.includes("#")) {
+      scrollToTop();
+      return;
+    }
+    e.preventDefault();
+    if (pathname === "/") {
+      document.getElementById(CASE_STUDIES_ID)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.replaceState(null, "", href);
+    } else {
+      scrollToTop();
+      router.push(href, { scroll: false });
+    }
+  };
 }
 
 // Hover: the sans word blurs away as the script version blurs into focus in the same spot.
@@ -36,7 +60,7 @@ export function HoverLabel({ text, scriptClassName = "text-olive" }: { text: str
   );
 }
 
-const LINK_DELAYS = ["0.5s", "0.56s", "0.62s"];
+const LINK_DELAYS = ["0.5s", "0.56s", "0.62s", "0.68s"];
 
 // Pages where the nav stays visible instead of hiding on scroll down.
 const ALWAYS_SHOWN = ["/about"];
@@ -46,6 +70,7 @@ export default function Nav() {
   const [mounted, setMounted] = useState(false);
   const lastY = useRef(0);
   const pathname = usePathname();
+  const navClick = useNavClick();
   const alwaysShown = ALWAYS_SHOWN.includes(pathname);
 
   useEffect(() => {
@@ -89,7 +114,7 @@ export default function Nav() {
           <Link
             key={link.href}
             href={link.href}
-            onClick={scrollToTop}
+            onClick={navClick(link.href)}
             aria-label={link.label}
             className="group intro-fade-up"
             style={{ animationDelay: LINK_DELAYS[i] }}

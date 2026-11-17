@@ -51,9 +51,9 @@ const sections = [
   { id: "ideation", label: "Ideation" },
   { id: "solution", label: "Solution" },
   { id: "design", label: "Design" },
+  { id: "brandbook", label: "Brandbook" },
   { id: "outcome", label: "Outcome" },
   { id: "reflections", label: "Reflections" },
-  { id: "brandbook", label: "Brandbook" },
 ];
 
 const toc = sections
@@ -295,6 +295,22 @@ export default function CineCirclePage() {
             </div>
           </section>
 
+          {/* BRANDBOOK */}
+          <section id="brandbook" className="mb-24 pt-10">
+            <div className="max-w-2xl mb-12">
+              <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
+                BRANDBOOK
+              </p>
+              <h2 className="font-serif text-2xl mb-3">The visual language behind CineCircle</h2>
+              <p className="text-neutral-700 text-sm">
+                I took a lot of ownership over these pages, though like everything on CineCircle it was a
+                collaborative effort with the rest of our designers. Flip through with the arrows, or click a
+                page for a closer look.
+              </p>
+            </div>
+            <FlipBook pages={cineCircleBrandbook} alt="CineCircle brandbook" />
+          </section>
+
           {/* OUTCOME */}
           <section id="outcome" className="py-8 sm:py-12 mb-24 text-center max-w-2xl mx-auto">
             <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
@@ -364,20 +380,6 @@ export default function CineCirclePage() {
                 &hellip;and off the clock
               </p>
             </div>
-          </section>
-
-          {/* BRANDBOOK */}
-          <section id="brandbook" className="mb-24 pt-10">
-            <div className="max-w-2xl mb-12">
-              <p className="text-rose-600 text-xs font-medium tracking-wide mb-3">
-                WAIT, BEFORE YOU GO…
-              </p>
-              <h2 className="font-serif text-2xl mb-3">Here&apos;s our brandbook</h2>
-              <p className="text-neutral-700 text-sm">
-                Flip through with the arrows, or click a page for a closer look.
-              </p>
-            </div>
-            <FlipBook pages={cineCircleBrandbook} alt="CineCircle brandbook" />
           </section>
 
           {/* Next in collection */}

@@ -6,12 +6,13 @@ import { ScriptAccentText, setCursorRich } from "@/components/CustomCursor";
 import InstagramEmbed from "@/components/InstagramEmbed";
 import FlipBook from "@/components/FlipBook";
 import { cineCircleBrandbook, selfServeBrandbook } from "@/components/brandbooks";
+import { useLightbox, ZoomTrigger, type LightboxImage } from "@/components/Lightbox";
 
 function IconLink({ href, label, children }: { href?: string; label: string; children: ReactNode }) {
   if (!href) {
     return (
       <span
-        className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-black text-white opacity-40 cursor-default"
+        className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-neutral-500 text-white cursor-default"
         aria-label={`${label} (coming soon)`}
       >
         {children}
@@ -66,6 +67,33 @@ const graphicDesignPosts = [
   "https://www.instagram.com/p/Dclvf8hjxED/",
 ];
 
+const img = (src: string, alt: string, width: number, height: number): LightboxImage => ({
+  src: `/images/creative/${src}`,
+  alt,
+  width,
+  height,
+});
+
+const fashionImages = [img("fashion-archive.png", "Fashion Archive app mockup", 836, 1099)];
+
+// Reading order in the lightbox: poster, the four tiles, then the tall illustration and menu.
+const nodiImages = [
+  img("nodi-poster.png", "NODI poster", 4697, 6230),
+  img("nodi-tile-5.png", "NODI brand detail", 3555, 2032),
+  img("nodi-tile-2.png", "NODI brand detail", 3555, 2032),
+  img("nodi-tile-1.png", "NODI brand detail", 3555, 2032),
+  img("nodi-tile-3.png", "NODI brand detail", 3555, 2032),
+  img("nodi-tile-4.png", "NODI brand illustration", 3558, 6230),
+  img("nodi-menu.png", "NODI menu design", 3558, 6230),
+];
+const NODI_TILE_HOVERS = ["hover:-rotate-3", "hover:rotate-3", "hover:-rotate-3", "hover:rotate-3"];
+
+const merchImages = [
+  img("ktp-hoodie.png", "Kappa Theta Pi hoodie merch", 441, 452),
+  img("ktp-shirts-photo.png", "Kappa Theta Pi members wearing merch", 1458, 1454),
+  img("ktp-tee.png", "Kappa Theta Pi t-shirt merch", 5708, 5708),
+];
+
 const sidebar = [
   {
     heading: "SIDEQUESTS",
@@ -82,13 +110,17 @@ const sidebar = [
 ];
 
 export default function CreativePage() {
+  const fashion = useLightbox(fashionImages);
+  const nodi = useLightbox(nodiImages);
+  const merch = useLightbox(merchImages);
+
   return (
     <main className="flex-1 px-10 py-10 grid grid-cols-1 lg:grid-cols-[160px_1fr] gap-10">
       <aside className="hidden lg:block">
-        <nav className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-[11px] tracking-wide text-neutral-400 space-y-4">
+        <nav className="sticky top-[var(--sidebar-top)] transition-[top] duration-300 ease-out text-[11px] tracking-wide text-neutral-500 space-y-4">
           {sidebar.map((group, i) => (
             <div key={group.heading} className="intro-fade-up" style={{ animationDelay: `${0.5 + i * 0.06}s` }}>
-              <p className="text-neutral-500 mb-1.5">{group.heading}</p>
+              <p className="text-neutral-800 mb-1.5">{group.heading}</p>
               <div className="space-y-1 pl-3">
                 {group.items.map((item) => (
                   <a key={item} href={`#${item.toLowerCase().replace(/[^a-z]+/g, "-")}`} className="block hover:text-neutral-900">
@@ -126,9 +158,10 @@ export default function CreativePage() {
               <GithubIcon />
             </IconLink>
           </div>
-          <div className="relative w-full max-w-md h-72 sm:h-96">
-            <Image src="/images/creative/fashion-archive.png" alt="Fashion Archive app mockup" fill className="object-contain object-left" />
-          </div>
+          <ZoomTrigger onOpen={() => fashion.open(0)} label={fashionImages[0].alt} className="relative w-full max-w-md h-72 sm:h-96">
+            <Image src={fashionImages[0].src} alt={fashionImages[0].alt} fill className="object-contain object-left" />
+          </ZoomTrigger>
+          {fashion.element}
         </section>
 
         <section id="nodi-cafe" className="intro-slide-up mb-24 scroll-mt-24" style={{ animationDelay: "0.75s" }}>
@@ -138,35 +171,41 @@ export default function CreativePage() {
             &quot;Nodi&quot; means river in Bangla.
           </p>
           <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-6 sm:gap-8 w-full">
-            <div className="h-56 sm:h-80 w-auto aspect-[4697/6230] relative rounded-lg overflow-hidden transition-transform duration-300 ease-out hover:rotate-2">
-              <Image src="/images/creative/nodi-poster.png" alt="NODI poster" fill className="object-cover" />
-            </div>
+            <ZoomTrigger
+              onOpen={() => nodi.open(0)}
+              label={nodiImages[0].alt}
+              className="h-56 sm:h-80 w-auto aspect-[4697/6230] relative rounded-lg overflow-hidden transition-transform duration-300 ease-out hover:rotate-2"
+            >
+              <Image src={nodiImages[0].src} alt={nodiImages[0].alt} fill className="object-cover" />
+            </ZoomTrigger>
 
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {[
-                { src: "nodi-tile-5.png", hover: "hover:-rotate-3" },
-                { src: "nodi-tile-2.png", hover: "hover:rotate-3" },
-                { src: "nodi-tile-1.png", hover: "hover:-rotate-3" },
-                { src: "nodi-tile-3.png", hover: "hover:rotate-3" },
-              ].map(({ src, hover }, i) => (
-                <div
-                  key={i}
-                  className={`w-32 sm:w-48 relative aspect-[3555/2032] rounded-lg overflow-hidden transition-transform duration-300 ease-out ${hover}`}
+              {nodiImages.slice(1, 5).map((image, i) => (
+                <ZoomTrigger
+                  key={image.src}
+                  onOpen={() => nodi.open(i + 1)}
+                  label={image.alt}
+                  className={`w-32 sm:w-48 relative aspect-[3555/2032] rounded-lg overflow-hidden transition-transform duration-300 ease-out ${NODI_TILE_HOVERS[i]}`}
                 >
-                  <Image src={`/images/creative/${src}`} alt="NODI brand detail" fill className="object-cover" />
-                </div>
+                  <Image src={image.src} alt={image.alt} fill className="object-cover" />
+                </ZoomTrigger>
               ))}
             </div>
 
             <div className="flex gap-4">
-              <div className="h-56 sm:h-80 w-auto aspect-[3558/6230] relative rounded-lg overflow-hidden transition-transform duration-300 ease-out hover:rotate-2">
-                <Image src="/images/creative/nodi-tile-4.png" alt="NODI brand illustration" fill className="object-cover" />
-              </div>
-              <div className="h-56 sm:h-80 w-auto aspect-[3558/6230] relative rounded-lg overflow-hidden transition-transform duration-300 ease-out hover:-rotate-2">
-                <Image src="/images/creative/nodi-menu.png" alt="NODI menu design" fill className="object-cover" />
-              </div>
+              {nodiImages.slice(5).map((image, i) => (
+                <ZoomTrigger
+                  key={image.src}
+                  onOpen={() => nodi.open(i + 5)}
+                  label={image.alt}
+                  className={`h-56 sm:h-80 w-auto aspect-[3558/6230] relative rounded-lg overflow-hidden transition-transform duration-300 ease-out ${i === 0 ? "hover:rotate-2" : "hover:-rotate-2"}`}
+                >
+                  <Image src={image.src} alt={image.alt} fill className="object-cover" />
+                </ZoomTrigger>
+              ))}
             </div>
           </div>
+          {nodi.element}
         </section>
 
         <section id="cinecircle" className="pt-16 mb-24 scroll-mt-24">
@@ -236,33 +275,41 @@ export default function CreativePage() {
             entire org and seeing it come to life!
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
-            <div className="w-56 sm:w-80 shrink-0 -rotate-6 transition-transform duration-300 ease-out hover:-rotate-12">
+            <ZoomTrigger
+              onOpen={() => merch.open(0)}
+              label={merchImages[0].alt}
+              className="w-56 sm:w-80 shrink-0 -rotate-6 transition-transform duration-300 ease-out hover:-rotate-12"
+            >
               <Image
-                src="/images/creative/ktp-hoodie.png"
-                alt="Kappa Theta Pi hoodie merch"
+                src={merchImages[0].src}
+                alt={merchImages[0].alt}
                 width={441}
                 height={452}
                 className="w-full h-auto drop-shadow-xl"
               />
-            </div>
-            <div className="relative w-40 sm:w-56 aspect-[3/4] shrink-0 rounded-lg overflow-hidden drop-shadow-2xl">
+            </ZoomTrigger>
+            <ZoomTrigger
+              onOpen={() => merch.open(1)}
+              label={merchImages[1].alt}
+              className="relative w-40 sm:w-56 aspect-[3/4] shrink-0 rounded-lg overflow-hidden drop-shadow-2xl"
+            >
+              <Image src={merchImages[1].src} alt={merchImages[1].alt} fill className="object-cover" />
+            </ZoomTrigger>
+            <ZoomTrigger
+              onOpen={() => merch.open(2)}
+              label={merchImages[2].alt}
+              className="w-36 sm:w-48 shrink-0 rotate-6 transition-transform duration-300 ease-out hover:rotate-12"
+            >
               <Image
-                src="/images/creative/ktp-shirts-photo.png"
-                alt="Kappa Theta Pi members wearing merch"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="w-36 sm:w-48 shrink-0 rotate-6 transition-transform duration-300 ease-out hover:rotate-12">
-              <Image
-                src="/images/creative/ktp-tee.png"
-                alt="Kappa Theta Pi t-shirt merch"
+                src={merchImages[2].src}
+                alt={merchImages[2].alt}
                 width={600}
                 height={600}
                 className="w-full h-auto drop-shadow-xl"
               />
-            </div>
+            </ZoomTrigger>
           </div>
+          {merch.element}
         </section>
 
         <section id="graphic-design" className="scroll-mt-24">

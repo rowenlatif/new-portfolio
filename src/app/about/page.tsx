@@ -17,6 +17,8 @@ const ktpPhotos = [
   { src: "/images/about/ktp-5.jpg", ratio: 198 / 243, caption: "Relaxing retreat" },
 ];
 
+// Below md the row scrolls sideways; from md up each frame flex-grows by its aspect ratio,
+// so the row fills the width exactly with every photo at the same height.
 const rotations = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "-rotate-2"];
 
 export default function AboutPage() {
@@ -42,12 +44,12 @@ export default function AboutPage() {
                 my closest friends here!
               </p>
             </div>
-            <div className="flex gap-6 pb-4 overflow-x-auto">
+            <div className="flex gap-6 pb-4 overflow-x-auto md:overflow-visible">
               {generatePhotos.map((photo, i) => (
                 <div
                   key={photo.src}
-                  className={`group relative shrink-0 h-48 sm:h-56 bg-white p-2 pb-6 rounded-sm shadow-md ${rotations[i % rotations.length]}`}
-                  style={{ aspectRatio: photo.ratio }}
+                  className={`group relative shrink-0 h-48 sm:h-56 md:h-auto md:shrink md:min-w-0 md:[flex:var(--r)_1_0%] bg-white p-2 pb-6 rounded-sm shadow-md ${rotations[i % rotations.length]}`}
+                  style={{ aspectRatio: photo.ratio, "--r": photo.ratio } as React.CSSProperties}
                 >
                   <div className="relative w-full h-full rounded-[2px] overflow-hidden">
                     <Image src={photo.src} alt="Generate memory" fill className="object-cover" />
@@ -74,12 +76,12 @@ export default function AboutPage() {
                 mentor and instructor now.
               </p>
             </div>
-            <div className="flex gap-6 pb-4 overflow-x-auto">
+            <div className="flex gap-6 pb-4 overflow-x-auto md:overflow-visible">
               {ktpPhotos.map((photo, i) => (
                 <div
                   key={photo.src}
-                  className={`group relative shrink-0 h-48 sm:h-56 bg-white p-2 pb-6 rounded-sm shadow-md ${rotations[i % rotations.length]}`}
-                  style={{ aspectRatio: photo.ratio }}
+                  className={`group relative shrink-0 h-48 sm:h-56 md:h-auto md:shrink md:min-w-0 md:[flex:var(--r)_1_0%] bg-white p-2 pb-6 rounded-sm shadow-md ${rotations[i % rotations.length]}`}
+                  style={{ aspectRatio: photo.ratio, "--r": photo.ratio } as React.CSSProperties}
                 >
                   <div className="relative w-full h-full rounded-[2px] overflow-hidden">
                     <Image src={photo.src} alt="Kappa Theta Pi memory" fill className="object-cover" />

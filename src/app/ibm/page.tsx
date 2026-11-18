@@ -146,10 +146,10 @@ export default function IbmPage() {
 
       {/* Inset by the width of the contents column other case studies have (140px + 40px gap), on both sides */}
       <div id="top" className="lg:px-[180px]">
-        {/* Hero banner — the GIF carries its own sky-blue ground; the box matches it so no seam shows while it loads */}
-        <div className="relative w-full h-[220px] sm:h-[320px] lg:h-[420px] rounded-sm overflow-hidden bg-[#bbe6fe] mb-10">
+        {/* Hero banner — the GIF carries its own light-blue ground; the box matches it so no seam shows while it loads */}
+        <div className="relative w-full h-[220px] sm:h-[320px] lg:h-[420px] rounded-sm overflow-hidden bg-[#e0f2fe] mb-10">
           <Image
-            src="/images/ibm/eye-bee-m-blue.gif"
+            src="/images/ibm/eye-bee-m-sky.gif"
             alt="Animated IBM logo drawn as an eye, a bee and the letter M"
             fill
             unoptimized
